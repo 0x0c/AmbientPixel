@@ -1,3 +1,7 @@
+#include <StandardCplusplus.h>
+#include <system_configuration.h>
+#include <unwind-cxx.h>
+#include <utility.h>
 #include <skInfraredCOM.h>
 #include <AmbientPixel.h>
 

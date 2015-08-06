@@ -2,7 +2,6 @@
 #include <system_configuration.h>
 #include <unwind-cxx.h>
 #include <utility.h>
-#include <vector>
 #include <skInfraredCOM.h>
 
 namespace AmbientPixel
