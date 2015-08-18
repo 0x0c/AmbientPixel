@@ -22,5 +22,5 @@ SmartPixelはすでに同じ名前のサービスがあったのでAmbientPixel�
 Arduinoで動作するプログラムを開発する前に幾つか追加しなければならないライブラリがある。
 
 1. `StandartCplusplus`と`skInfraredCOM`、`Adafruit_NeoPixel`をArduinoのライブラリに追加する
-2. cloneしたディレクトリをArduinoのライブラリに追加する
+2. `AmbientPixel`のリポジトリをcloneし、Arduinoのライブラリに追加する
 
