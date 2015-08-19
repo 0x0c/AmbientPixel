@@ -24,3 +24,14 @@ Arduinoで動作するプログラムを開発する前に幾つか追加しな�
 1. `StandartCplusplus`と`skInfraredCOM`、`Adafruit_NeoPixel`をArduinoのライブラリに追加する
 2. `AmbientPixel`のリポジトリをcloneし、Arduinoのライブラリに追加する
 
+## Hardwar
+###　プロトタイプ1号
+![](https://raw.githubusercontent.com/0x0c/AmbientPixel/master/Asset/Image/p1-1.jpg?token=AAJa196Pg--TfIaPiPlLZ4o6D-owqrLdks5V3VkGwA%3D%3D)
+![](https://raw.githubusercontent.com/0x0c/AmbientPixel/master/Asset/Image/p1-2.jpg?token=AAJa1zghC-jrMf7iGu76KpIgHkY2N7V2ks5V3VkiwA%3D%3D)
+縦にした時、Arduino Pro Miniが地面につく辺を基準とする。
+LEDが付いている方を正面とする。
+
+- ピン配置(PIO)
+	- 赤外線LED→基準から右回りで2, 3, 4
+	- 受信モジュール→基準から右回りで11, 12, 13
+	- LEDのデータ線→10
