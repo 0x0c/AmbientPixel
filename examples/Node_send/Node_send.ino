@@ -5,7 +5,7 @@
 #include <skInfraredCOM.h>
 #include <AmbientPixel.h>
 
-AmbientPixel::Pixel pixel(0x01);
+AmbientPixel::Pixel pixel(0x01, AmbientPixel::Pixel::Vertex::Triangle);
 void setup()
 {
  	// put your setup code here, to run once:
@@ -14,10 +14,8 @@ void setup()
 
 void loop()
 {
-	// put your main code here, to run repeatedly:
-	int i;
-	for (i = 0x30 ; i < 0x7b ; i++) {
-		pixel.send((unsigned char)i, spx_send_broadcast);
-		delay(10);
-	}
+	unsigned char data[16] = {0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e, 0x3f};
+	AmbientPixel::Packet packet(pixel.packet_id(), data, 16, AmbientPixel::Packet::Dest::Broadcast);
+	pixel.send(0, packet);
+	delay(1000);
 }

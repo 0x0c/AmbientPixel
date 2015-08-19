@@ -15,8 +15,10 @@ void setup()
 void loop()
 {
 	// put your main code here, to run repeatedly:
-	unsigned char data = pixel.receive();
-	if (data != 0) {
-		Serial.println(data, DEC);
+	AmbientPixel::Packet packet = pixel.receive();
+	if (packet != NULL) {
+		Serial.println(packet.id, DEC);
+		Serial.println(packet.data, DEC);
+		Serial.println("---");
 	}
 }
