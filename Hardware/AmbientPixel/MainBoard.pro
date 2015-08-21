@@ -2,14 +2,14 @@ EAGLE AutoRouter Statistics:
 
 Job           : /Users/Akira/Documents/eagle/projects/AmbientPixel/MainBoard.brd
 
-Start at      : 19:33:44 (8/21/15)
-End at        : 19:34:01 (8/21/15)
+Start at      : 22:44:48 (8/21/15)
+End at        : 22:44:50 (8/21/15)
 Elapsed time  : 
 
-Signals       :     9   RoutingGrid: 9 mil  Layers: 2
-Connections   :    20   predefined:  20 ( 1 Vias )
+Signals       :    10   RoutingGrid: 9 mil  Layers: 2
+Connections   :    20   predefined:  0 ( 0 Vias )
 
-Router memory :   303260
+Router memory :   303104
 
 Passname          : TopRouter     Route Optimize1 Optimize2 Optimize3 Optimize4
 
@@ -18,8 +18,8 @@ Number of Ripups  :         0         0         0         0         0         0
 max. Level        :         0         0         0         0         0         0
 max. Total        :         0         0         0         0         0         0
 
-Routed            :         0         0         0         0         0         0
+Routed            :        12        20        20        20        20        20
 Vias              :         0         0         0         0         0         0
-Resolution        :   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
+Resolution        :    60.0 %   100.0 %   100.0 %   100.0 %   100.0 %   100.0 %
 
-Final             : 
+Final             : 100.0% finished
