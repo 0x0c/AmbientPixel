@@ -1,0 +1,9 @@
+digraph {
+	Waiting -> Receiving
+	Running -> Waiting
+	Receiving -> Running
+	Waiting -> Interactive
+	Interactive -> Waiting
+	Running -> Interactive
+	Interactive -> Running
+}
