@@ -104,6 +104,7 @@ namespace AmbientPixel
 		void _operation(AmbientPixel::Packet::Type op) {
 			// 他ノードから送られてきたデータに応じて処理を実行する
 			// op(命令)は事前に定義する
+			// ステートマシンの処理はここに実装する
 		}
 
 		void _send(uint8_t port_no, uint8_t data, uint8_t send_to) {
@@ -114,6 +115,9 @@ namespace AmbientPixel
 			if (this->block) {
 				return 0;
 			}
+			// 受信したデータを_operationに応じてステートマシンを動かす
+			// this->_operation();
+
 			// return this->ir_port->Recive(this->device_id);
 			return 0;
 		}
@@ -171,7 +175,7 @@ namespace AmbientPixel
 			// パターンデータの受信待ち
 		}
 
-		// パターンデータを伝搬させる
+		// パケットをフォワードする
 		void forward(uint8_t port_no, Packet p) {
 			// パケットをport_noの辺からデータを送信する
 		}
