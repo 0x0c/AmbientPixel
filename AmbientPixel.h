@@ -16,33 +16,61 @@ namespace AmbientPixel
 				Broadcast = 255,
 			};
 		};
-		// 送信元デバイスID
-		unsigned char from;
-		// 送信先デバイスID
-		unsigned char dest;
-		// パケットID
-		unsigned char id;
-		// データ
-		unsigned char *data;
-		// データ長
-		int length;
+		struct Type {
+			enum {
+				Echo	= 0,
+				Pattern = 1,
+				Data	= 3,
+				Run		= 6,
+				Reset	= 7
+			};
+		};
 
-		Packet(unsigned char id, unsigned char *data, int length, unsigned char dest) {
+		// 送信元デバイスID
+		uint8_t from;
+		// 送信先デバイスID
+		uint8_t dest;
+		// パケットID
+		uint8_t id;
+		// パケットタイプ
+		AmbientPixel::Packet::Type type;
+		// データ
+		uint8_t *data;
+		// データ長
+		uint8_t length;
+
+		Packet(uint8_t id, AmbientPixel::Packet::Type type, uint8_t *data, int length, uint8_t dest) {
 			this->id = id;
+			this->type = type;
 			this->data = data;
 			this->length = length;
 			this->dest = dest;
 		};
-		
-		void append(unsigned char *data, unsigned char length) {
-			// パケットのデータ部にデータを追加する
-			this->length += length;
+
+		uint8_t head()
+		{
+			return (uint8_t)(this->type << 5 | this->length)
 		}
+	};
+
+	class Pattern
+	{
+	public:
+		Pattern();
+		~Pattern();
 	};
 
 	class Pixel
 	{
 	private:
+		enum State {
+			Run,
+			Wait
+		};
+		// 状態
+		AmbientPixel::Pixel::State state;
+		// パターンストア
+		std::vector<Pattern> pattern_store;
 		// Masterの方向のポート
 		// このポートをたどるとMasterへたどり着く
 		char master_port;
@@ -51,13 +79,13 @@ namespace AmbientPixel
 		// 送信・受信ポート
 		std::vector<skInfraredCOM *> ports;
 		// ポートに対応するデバイスID
-		std::vector<unsigned char> port_device_id;
+		std::vector<uint8_t> port_device_id;
 		// パケットの受信数
-		unsigned char packet_sequence_count;
+		uint8_t packet_sequence_count;
 		// デバイスID
-		unsigned char device_id;
+		uint8_t device_id;
 		// 頂点数
-		unsigned char number_of_vertex;
+		uint8_t number_of_vertex;
 		// ロック用変数
 		bool block;
 
@@ -71,16 +99,16 @@ namespace AmbientPixel
 			this->block = false;
 		}
 
-		void operation(unsigned char op) {
+		void operation(AmbientPixel::Packet::Type op) {
 			// 他ノードから送られてきたデータに応じて処理を実行する
 			// op(命令)は事前に定義する
 		}
 
-		void send(unsigned char port_no, unsigned char data, unsigned char send_to) {
+		void _send(uint8_t port_no, uint8_t data, uint8_t send_to) {
 			this->ports[port_no]->Send(send_to, data);
 		}
 
-		unsigned char _receive() {
+		uint8_t _receive() {
 			if (this->block) {
 				return 0;
 			}
@@ -95,43 +123,41 @@ namespace AmbientPixel
 				// Rectangle = 4,
 				// Pentagon = 5,
 				// Hexagon = 6,
-				NumberOfMaximumVertex = 3,
 			};
 		};
 
-		Pixel(unsigned char device_id, unsigned char number_of_vertex) {
-			if (number_of_vertex <= AmbientPixel::Pixel::Vertex::NumberOfMaximumVertex) {
-				for (int i = 0; i < number_of_vertex; ++i) {
-					this->ports.push_back(new skInfraredCOM(i * 2, i * 2 + 1));
-				}
-				this->packet_sequence_count = 0;
-				this->device_id = device_id;
-				if (this->device_id == 0) {
-					this->master_port = -1;
-				}
-				this->number_of_vertex = number_of_vertex;
-				this->led = = Adafruit_NeoPixel(1, 13, NEO_GRB + NEO_KHZ800);
+		Pixel(uint8_t device_id, uint8_t number_of_vertex) {
+			this->state = AmbientPixel::Pixel::State::Wait;
+			for (uint8_t i = 0; i < number_of_vertex; ++i) {
+				this->ports.push_back(new skInfraredCOM(i * 2, i * 2 + 1));
 			}
+			this->packet_sequence_count = 0;
+			this->device_id = device_id;
+			if (this->device_id == 0) {
+				this->master_port = -1;
+			}
+			this->number_of_vertex = number_of_vertex;
+			this->led = Adafruit_NeoPixel(1, 13, NEO_GRB + NEO_KHZ800);
 		}
 
 		// データを送信する
-		void send(unsigned char port_no, Packet packet) {
+		void send(uint8_t port_no, Packet packet) {
 			if (port_no < this->number_of_vertex) {
 				this->port_close();
-				// 最初にパケットの情報をおくる必要がある？
-				for (int i = 0; i < packet.length; ++i) {
-					this->send(port_no, packet.data[i], packet.dest);
+				// Baseパケットの送信
+				this->_send(port_no, packet.head(), packet.dest);
+				delay(10);
+				// Dataパケットの送信
+				for (uint8_t i = 0; i < packet.length * 2; ++i) {
+					// データの前後を分割して送信
+					uint8_t d = (AmbientPixel::Packet::Type::Data << 5) | (packet.data[i / 2] >> (4 * (i % 2);
+					this->_send(port_no, d, packet.dest);
 					// 10msだけ待機が必要
 					delay(10);
 				}
 				this->port_open();
 			}
 		}
-
-		// データを受信する
-		// Packet receive() {
-		// 	return NULL;
-		// }
 
 		// 実行状態へ移行
 		void start() {
@@ -144,11 +170,11 @@ namespace AmbientPixel
 		}
 
 		// パターンデータを伝搬させる
-		void forward(unsigned char port_no, Packet p) {
+		void forward(uint8_t port_no, Packet p) {
 			// パケットをport_noの辺からデータを送信する
 		}
 
-		unsigned char packet_id() {
+		uint8_t packet_id() {
 			return this->packet_sequence_count++;
 		}
 	};
