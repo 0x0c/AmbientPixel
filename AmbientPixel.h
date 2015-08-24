@@ -47,6 +47,12 @@ namespace AmbientPixel
 			this->dest = dest;
 		};
 
+		Packet(AmbientPixel::Packet::Type type, uint8_t length) {
+			this->type = type;
+			this->data = malloc(sizeof(uint8_t * length));
+			this->length = length;
+		}
+
 		// ヘッダデータ(Baseパケット)の生成
 		uint8_t head() {
 			return (uint8_t)(this->type << 5 | this->length)
@@ -60,6 +66,23 @@ namespace AmbientPixel
 		~Pattern();
 	};
 
+	class Port
+	{
+	public:
+		Port(uint8_t port_no, uint8_t send_pin_no, uint8_t receive_pin_no) {
+			this->port_no = port_no;
+			this->interface = skInfraredCOM(send_pin_no, receive_pin_no);
+		}
+		~Port();
+
+		skInfraredCOM interface;
+		uint8_t port_no;
+
+		void send(Packet packet) {
+			
+		}
+	};
+
 	class Pixel
 	{
 	private:
@@ -71,20 +94,27 @@ namespace AmbientPixel
 		};
 		// 状態
 		AmbientPixel::Pixel::State state;
+		// 受信したデータ
+		// ここにReceiving時に受け取ったデータを格納していく
+		// ポートごとに保持
+		std::vector<AmbientPixel::Packet *>received_packet;
+
 		// パターンストア
 		std::vector<Pattern> pattern_store;
 		// Masterの方向のポート
 		// このポートをたどるとMasterへたどり着く
-		char master_port;
+		uint8_t master_port;
 		// フルカラーLED制御用変数
 		Adafruit_NeoPixel led;
+		
 		// 送信・受信ポート
 		std::vector<skInfraredCOM *> ports;
+
 		// ポートに対応するデバイスID
+		// 実際に必要か謎
 		std::vector<uint8_t> port_device_id;
-		// パケットの受信数
-		uint8_t packet_sequence_count;
-		// デバイスID
+
+		// 自分のデバイスID
 		uint8_t device_id;
 		// 頂点数
 		uint8_t number_of_vertex;
@@ -166,7 +196,7 @@ namespace AmbientPixel
 		}
 
 		// 実行状態へ移行
-		void start() {
+		void run() {
 			// パターンデータからLEDを点灯させる
 		}
 
@@ -175,13 +205,15 @@ namespace AmbientPixel
 			// パターンデータの受信待ち
 		}
 
+		// 状態をリセット
+		void teadown() {
+			// ステータはWaiting
+			// 受信中のパケットは破棄
+		}
+
 		// パケットをフォワードする
 		void forward(uint8_t port_no, Packet p) {
 			// パケットをport_noの辺からデータを送信する
-		}
-
-		uint8_t packet_id() {
-			return this->packet_sequence_count++;
 		}
 	};
 }
