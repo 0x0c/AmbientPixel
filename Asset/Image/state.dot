@@ -6,5 +6,4 @@ digraph {
 	Waiting -> Interactive
 	Interactive -> Waiting
 	Running -> Interactive
-	Interactive -> Running
 }
