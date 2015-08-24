@@ -58,7 +58,8 @@ LEDが付いている方を正面とする。
 	- ストアに保持しているパターンを順次実行
 - インタラクティブ（Interactive）
 	- 受け取ったパターンを即時実行
-![](https://raw.githubusercontent.com/0x0c/AmbientPixel/master/Asset/Image/p1-1.png?token=AAJa196Pg--TfIaPiPlLZ4o6D-owqrLdks5V3VkGwA%3D%3D)
+	
+![](https://raw.githubusercontent.com/0x0c/AmbientPixel/feature/routing/Asset/Image/state.png?token=AAJa1zFFj1_y7HsZ_tm2x_kOhzt3PqwHks5V4-K4wA%3D%3D)
 
 
 ### パケットのデータ構造
