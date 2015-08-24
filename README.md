@@ -53,12 +53,15 @@ LEDが付いている方を正面とする。
 	- データの受信待ち
 - 受信状態（Receiving）
 	- データを受信中。
+	- Waiting状態時にpatternパケットを受け取った時に遷移する。
 	- 待機状態中に受け取った最初のパケットから、データ長回だけ受信を行う。
+	- 受信し終わったらWaitingへ遷移する。
 - 実行状態（Running）
 	- ストアに保持しているパターンを順次実行
+	- runパケットを受け取った時に遷移する。
 - インタラクティブ（Interactive）
 	- 受け取ったパターンを即時実行
-	
+
 ![](https://raw.githubusercontent.com/0x0c/AmbientPixel/feature/routing/Asset/Image/state.png?token=AAJa1zFFj1_y7HsZ_tm2x_kOhzt3PqwHks5V4-K4wA%3D%3D)
 
 

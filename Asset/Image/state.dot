@@ -1,7 +1,8 @@
 digraph {
 	Waiting -> Receiving
+	Waiting -> Running
 	Running -> Waiting
-	Receiving -> Running
+	Receiving -> Waiting
 	Waiting -> Interactive
 	Interactive -> Waiting
 	Running -> Interactive
