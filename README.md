@@ -2,6 +2,8 @@
 SmartPixelはすでに同じ名前のサービスがあったのでAmbientPixelに改名
 ピクセルのメタファを持ち合わせる三角形のデバイス
 
+**Version 0.0.1**
+
 ## Requirements
 
 - Arduino
