@@ -13,7 +13,7 @@ namespace AmbientPixel
 	public:
 		struct Dest {
 			enum {
-				Broadcast = 255,
+				Broadcast	= 255,
 			};
 		};
 		struct Type {
@@ -21,7 +21,7 @@ namespace AmbientPixel
 				Echo	= 0,
 				Pattern = 1,
 				Data	= 3,
-				Run		= 6,
+				Run 	= 6,
 				Reset	= 7
 			};
 		};
@@ -47,8 +47,8 @@ namespace AmbientPixel
 			this->dest = dest;
 		};
 
-		uint8_t head()
-		{
+		// ヘッダデータ(Baseパケット)の生成
+		uint8_t head() {
 			return (uint8_t)(this->type << 5 | this->length)
 		}
 	};
@@ -64,8 +64,10 @@ namespace AmbientPixel
 	{
 	private:
 		enum State {
-			Run,
-			Wait
+			Running		= 0,
+			Waiting		= 1,
+			Receiving	= 2,
+			Interactive	= 3
 		};
 		// 状態
 		AmbientPixel::Pixel::State state;
@@ -89,17 +91,17 @@ namespace AmbientPixel
 		// ロック用変数
 		bool block;
 
-		void port_close() {
+		void _port_close() {
 			// 隣り合う受信モジュールで受信しないようにロックを掛ける
 			this->block = true;
 		}
 
-		void port_open() {
+		void _port_open() {
 			// 受信モジュールでデータを受信できるようにロックを解除
 			this->block = false;
 		}
 
-		void operation(AmbientPixel::Packet::Type op) {
+		void _operation(AmbientPixel::Packet::Type op) {
 			// 他ノードから送られてきたデータに応じて処理を実行する
 			// op(命令)は事前に定義する
 		}
@@ -143,7 +145,7 @@ namespace AmbientPixel
 		// データを送信する
 		void send(uint8_t port_no, Packet packet) {
 			if (port_no < this->number_of_vertex) {
-				this->port_close();
+				this->_port_close();
 				// Baseパケットの送信
 				this->_send(port_no, packet.head(), packet.dest);
 				delay(10);
@@ -155,7 +157,7 @@ namespace AmbientPixel
 					// 10msだけ待機が必要
 					delay(10);
 				}
-				this->port_open();
+				this->_port_open();
 			}
 		}
 
