@@ -53,7 +53,7 @@ void setup() {
   pixels.begin(); // This initializes the NeoPixel library.
   pixels.setBrightness(50);
 
-  rainbow(1, 2, 3, 4);
+  rainbow(4, 7, 3, 4);
 }
 
 void loop() {
@@ -67,18 +67,44 @@ void rainbow(int st, int en, int playtime, int repeat){
 
   switch(st){
     case 1:
+    //red
       str = 100;
       stg = 0;
       stb = 0;
       break;
+    //green
     case 2:
       str = 0;
       stg = 100;
       stb = 0;
       break;
+    //blue
     case 3:
       str = 0;
       stg = 0;
+      stb = 100;
+      break;
+    case 4:
+    //orange
+      str = 100;
+      stg = 50;
+      stb = 0;
+      break;
+    //yellow
+    case 5:
+      str = 100;
+      stg = 100;
+      stb = 0;
+      break;
+    //perple
+    case 6:
+      str = 100;
+      stg = 0;
+      stb = 100;
+      break;
+    case 7:
+      str = 0;
+      stg = 50;
       stb = 100;
       break;
     default:
@@ -87,18 +113,44 @@ void rainbow(int st, int en, int playtime, int repeat){
 
   switch(en){
     case 1:
+    //red
       enr = 100;
       eng = 0;
       enb = 0;
       break;
+    //green
     case 2:
       enr = 0;
       eng = 100;
       enb = 0;
       break;
+    //blue
     case 3:
       enr = 0;
       eng = 0;
+      enb = 100;
+      break;
+    case 4:
+    //orange
+      enr = 100;
+      eng = 50;
+      enb = 0;
+      break;
+    //yellow
+    case 5:
+      enr = 100;
+      eng = 100;
+      enb = 0;
+      break;
+    //perple
+    case 6:
+      enr = 100;
+      eng = 0;
+      enb = 100;
+      break;
+    case 7:
+      enr = 0;
+      eng = 50;
       enb = 100;
       break;
     default:
