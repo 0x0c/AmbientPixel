@@ -164,8 +164,40 @@ namespace AmbientPixel
 			this->led = Adafruit_NeoPixel(1, 13, NEO_GRB + NEO_KHZ800);
 		}
 
+		// LEDを点灯させる
+		struct ColorAttr {
+			uint8_t red;
+			uint8_t green;
+			uint8_t blue;
+		};
+#define Red		{100, 0, 0}
+#define Green	{0, 100, 0}
+#define Blue	{0, 0, 100}
+#define Orange	{100, 50, 0}
+#define Yellow	{100, 100, 0}
+#define Perple	{100, 0, 100}
+#define Indigo	{0, 50, 100}
+		void transform_color(AmbientPixel::Pixel::ColorAttr start_color, AmbientPixel::Pixel::ColorAttr end_color, uint8_t duration, uint8_t repeat_count) {
+			float pt = duration / 255.0 * 1000;
+			float dr = (end_color.red - start_color.red) / 255.0;
+			float dg = (end_color.green - start_color.green) / 255.0;
+			float db = (end_color.blue - start_color.blue) / 255.0;
+
+			for(uint8_t j = 0; j < repeat_count; j++){
+				for(uint8_t i = 0; i < 255; i++){
+					float r = start_color.red + (dr * i);
+					float g = start_color.green + (dg * i);
+					float b = start_color.blue + (db * i);
+
+					pixels.setPixelColor(0, r, g, b);
+					pixels.show();
+					delay(pt);
+				}
+			}
+		}
+
 		// データを送信する
-		void send(uint8_t port_no, Packet packet) {
+		void send_packet(uint8_t port_no, Packet packet) {
 			if (port_no < this->number_of_vertex) {
 				// Baseパケットの送信
 				this->_send(port_no, packet.head(), packet.dest);
