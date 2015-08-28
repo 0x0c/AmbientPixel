@@ -51,16 +51,23 @@ void setup() {
   // End of trinket special code
 
   pixels.begin(); // This initializes the NeoPixel library.
-  pixels.setBrightness(50);
+  pixels.setBrightness(200);
 
-  rainbow(4, 7, 3, 4);
 }
 
 void loop() {
+  // st:開始の色 en:終了の色 playtime:再生時間(s) repeat:繰り返し回数
+  // 色 1:red,2:green,3:blue,4:orange,5:yellow,6:perple,7:indigo
+  rainbow(1,2,2,5);//赤→緑
+  rainbow(2,6,2,5);//緑→紫
+  rainbow(6,2,2,5);//紫→緑
+  //delay(5000);
+  
 }
 
 
 // switch版
+// st:開始の色 en:終了の色 playtime:再生時間(s) repeat:繰り返し回数
 void rainbow(int st, int en, int playtime, int repeat){
   float str, stg, stb;
   float enr, eng, enb;
@@ -102,6 +109,7 @@ void rainbow(int st, int en, int playtime, int repeat){
       stg = 0;
       stb = 100;
       break;
+    //indigo
     case 7:
       str = 0;
       stg = 50;
@@ -160,23 +168,20 @@ void rainbow(int st, int en, int playtime, int repeat){
 
   float dr, dg, db;
   float pt = 1000*playtime/255;
-  int count = 0;
 
 //
   dr = (enr - str)/255;
   dg = (eng - stg)/255;
   db = (enb - stb)/255;
   
-  for(int j=0; j<=repeat; j++){
+  for(int j=0; j<repeat; j++){
     for(int i=0; i <255; i++){
-      count++;
 
-      float r = str + (dr*count);
-      float g = stg + (dg*count);
-      float b = stb + (db*count);
+      float r = str + (dr*i);
+      float g = stg + (dg*i);
+      float b = stb + (db*i);
 
       pixels.setPixelColor(0, r, g, b);
-//pixels.setPixelColor(0, 0, dg*count, 0);
       pixels.show();
       delay(pt);
     }
