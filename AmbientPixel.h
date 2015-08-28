@@ -118,18 +118,6 @@ namespace AmbientPixel
 		uint8_t device_id;
 		// 頂点数
 		uint8_t number_of_vertex;
-		// ロック用変数
-		bool block;
-
-		void _port_close() {
-			// 隣り合う受信モジュールで受信しないようにロックを掛ける
-			this->block = true;
-		}
-
-		void _port_open() {
-			// 受信モジュールでデータを受信できるようにロックを解除
-			this->block = false;
-		}
 
 		void _operation(AmbientPixel::Packet::Type op) {
 			// 他ノードから送られてきたデータに応じて処理を実行する
@@ -179,7 +167,6 @@ namespace AmbientPixel
 		// データを送信する
 		void send(uint8_t port_no, Packet packet) {
 			if (port_no < this->number_of_vertex) {
-				this->_port_close();
 				// Baseパケットの送信
 				this->_send(port_no, packet.head(), packet.dest);
 				delay(10);
@@ -191,7 +178,6 @@ namespace AmbientPixel
 					// 10msだけ待機が必要
 					delay(10);
 				}
-				this->_port_open();
 			}
 		}
 
