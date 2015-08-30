@@ -217,19 +217,19 @@ namespace AmbientPixel
 		void perform() {
 			// 状態に応じて処理を実行する。
 			// loop関数内で呼び出す
-			if (this->state == Running) {
+			if (this->state == Pixel::Running) {
 				for (int i = 0; i < this->pattern_store.size(); ++i) {
 					Pattern p = this->pattern_store.at(i);
 					this->exec_pattern(p);
 				}
 			}
-			else if (this->state == Waiting) {
+			else if (this->state == Pixel::Waiting) {
 				this->_operation((Packet::Type)Packet::parseType(this->_receive()));
 			}
-			else if (this->state == Receiving) {
+			else if (this->state == Pixel::Receiving) {
 
 			}
-			else if (this->state == Interactive) {
+			else if (this->state == Pixel::Interactive) {
 
 			}
 		}
