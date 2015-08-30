@@ -3,6 +3,7 @@
 #include <unwind-cxx.h>
 #include <utility.h>
 #include <skInfraredCOM.h>
+#include <Adafruit_NeoPixel.h>
 #include <AmbientPixel.h>
 
 AmbientPixel::Pixel pixel(0x01);

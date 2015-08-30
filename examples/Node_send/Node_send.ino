@@ -3,6 +3,7 @@
 #include <unwind-cxx.h>
 #include <utility.h>
 #include <skInfraredCOM.h>
+#include <Adafruit_NeoPixel.h>
 #include <AmbientPixel.h>
 
 using namespace AmbientPixel;
@@ -18,10 +19,10 @@ void setup()
 void loop()
 {
 	// uint8_t data[16] = {0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e, 0x3f};
-	Packet echo_packet(pixel.packet_id(), Packet::Type::Echo, NULL, 0, Packet::Dest::Broadcast);
+	Packet echo_packet(Packet::Echo, NULL, 0, Packet::Dest::Broadcast);
 
 	uint8_t port_no = 0;
-	pixel.send(port_no, echo_packet);
+	pixel.send_packet(port_no, echo_packet);
 	
 	delay(1000);
 }

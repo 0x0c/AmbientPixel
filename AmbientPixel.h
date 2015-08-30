@@ -1,3 +1,5 @@
+#pragma once
+
 #include <StandardCplusplus.h>
 #include <system_configuration.h>
 #include <unwind-cxx.h>
@@ -8,6 +10,21 @@
 
 namespace AmbientPixel
 {
+	struct ColorAttr
+	{
+		uint8_t red;
+		uint8_t green;
+		uint8_t blue;
+	};
+
+#define AmbientPixelColorAttrRed	{100, 0, 0}
+#define AmbientPixelColorAttrGreen	{0, 100, 0}
+#define AmbientPixelColorAttrBlue	{0, 0, 100}
+#define AmbientPixelColorAttrOrange	{100, 50, 0}
+#define AmbientPixelColorAttrYellow	{100, 100, 0}
+#define AmbientPixelColorAttrPerple	{100, 0, 100}
+#define AmbientPixelColorAttrIndigo	{0, 50, 100}
+
 	class Packet
 	{
 	public:
@@ -16,15 +33,19 @@ namespace AmbientPixel
 				Broadcast	= 255,
 			};
 		};
-		struct Type {
-			enum {
-				Echo	= 0,
-				Pattern = 1,
-				Data	= 3,
-				Run 	= 6,
-				Reset	= 7
-			};
+
+		// struct Type {
+		enum Type : uint8_t {
+			Echo		= 0,
+			Pattern 	= 1,
+			// 2 は未定義
+			Data		= 3,
+			Int			= 4,
+			Int_Cast	= 5,
+			Run 		= 6,
+			Reset		= 7
 		};
+		// };
 
 		// 送信元デバイスID
 		uint8_t from;
@@ -33,14 +54,13 @@ namespace AmbientPixel
 		// パケットID
 		uint8_t id;
 		// パケットタイプ
-		AmbientPixel::Packet::Type type;
+		Packet::Type type;
 		// データ
 		uint8_t *data;
 		// データ長
 		uint8_t length;
 
-		Packet(uint8_t id, AmbientPixel::Packet::Type type, uint8_t *data, int length, uint8_t dest) {
-			this->id = id;
+		Packet(AmbientPixel::Packet::Type type, uint8_t *data, int length, uint8_t dest) {
 			this->type = type;
 			this->data = data;
 			this->length = length;
@@ -54,36 +74,22 @@ namespace AmbientPixel
 		}
 
 		// ヘッダデータ(Baseパケット)の生成
-		uint8_t head() {
+		uint8_t packet_header() {
 			// TODO:
-			// return (uint8_t)(this->type << 5 | this->length);
-			return 0;
+			return (uint8_t)(this->type << 5 | this->length);
+		}
+
+		static uint8_t parseType(uint8_t data) {
+			return data >> 5;
 		}
 	};
 
-	// TODO:
-	class Pattern
+	struct Pattern
 	{
-	public:
-		Pattern() {};
-		~Pattern() {};
-	};
-
-	class Port
-	{
-	public:
-		// skInfraredCOM interface;
-		uint8_t port_no;
-
-		Port(uint8_t port_no, int send_pin_no, int receive_pin_no) {
-			this->port_no = port_no;
-			// this->interface = skInfraredCOM(send_pin_no, receive_pin_no);
-		};
-		~Port();
-
-		void send(Packet packet) {
-			
-		}
+		ColorAttr start_color;
+		ColorAttr end_color;
+		uint8_t duration;
+		uint8_t repeat_count;
 	};
 
 	class Pixel
@@ -101,7 +107,7 @@ namespace AmbientPixel
 		// 受信したデータ
 		// ここにReceiving時に受け取ったデータを格納していく
 		// ポートごとに保持
-		std::vector<AmbientPixel::Packet *>received_packet;
+		std::vector<Packet *>received_packet;
 
 		// パターンストア
 		std::vector<Pattern> pattern_store;
@@ -110,7 +116,7 @@ namespace AmbientPixel
 		uint8_t master_port;
 		// フルカラーLED制御用変数
 		Adafruit_NeoPixel led;
-		
+
 		// 送信・受信ポート
 		std::vector<skInfraredCOM *> ports;
 
@@ -123,12 +129,6 @@ namespace AmbientPixel
 		// 頂点数
 		uint8_t number_of_vertex;
 
-		void _operation(AmbientPixel::Packet::Type op) {
-			// 他ノードから送られてきたデータに応じて処理を実行する
-			// op(命令)は事前に定義する
-			// ステートマシンの処理はここに実装する
-		}
-
 		void _send(uint8_t port_no, uint8_t data, uint8_t send_to) {
 			this->ports[port_no]->Send(send_to, data);
 		}
@@ -136,10 +136,14 @@ namespace AmbientPixel
 		uint8_t _receive() {
 			// TODO:
 			// 受信したデータを_operationに応じてステートマシンを動かす
-			// this->_operation();
-
 			// return this->ir_port->Recive(this->device_id);
 			return 0;
+		}
+
+		void _operation(Packet::Type op) {
+			// 他ノードから送られてきたデータに応じて処理を実行する
+			// op(命令)は事前に定義する
+			// ステートマシンの処理はここに実装する
 		}
 
 	public:
@@ -168,20 +172,7 @@ namespace AmbientPixel
 		}
 
 		// LEDを点灯させる
-		struct ColorAttr {
-			uint8_t red;
-			uint8_t green;
-			uint8_t blue;
-		};
-
-#define AmbientPixelColorAttrRed	{100, 0, 0}
-#define AmbientPixelColorAttrGreen	{0, 100, 0}
-#define AmbientPixelColorAttrBlue	{0, 0, 100}
-#define AmbientPixelColorAttrOrange	{100, 50, 0}
-#define AmbientPixelColorAttrYellow	{100, 100, 0}
-#define AmbientPixelColorAttrPerple	{100, 0, 100}
-#define AmbientPixelColorAttrIndigo	{0, 50, 100}
-		void transform_color(AmbientPixel::Pixel::ColorAttr start_color, AmbientPixel::Pixel::ColorAttr end_color, uint8_t duration, uint8_t repeat_count) {
+		void transform_color(AmbientPixel::ColorAttr start_color, AmbientPixel::ColorAttr end_color, uint8_t duration, uint8_t repeat_count) {
 			float pt = duration / 255.0 * 1000;
 			float dr = (end_color.red - start_color.red) / 255.0;
 			float dg = (end_color.green - start_color.green) / 255.0;
@@ -200,20 +191,46 @@ namespace AmbientPixel
 			}
 		}
 
+		void exec_pattern(AmbientPixel::Pattern pattern) {
+			this->transform_color(pattern.start_color, pattern.end_color, pattern.duration, pattern.repeat_count);
+		}
+
 		// データを送信する
 		void send_packet(uint8_t port_no, Packet packet) {
 			if (port_no < this->number_of_vertex) {
+				packet.from = this->device_id;
 				// Baseパケットの送信
-				this->_send(port_no, packet.head(), packet.dest);
+				this->_send(port_no, packet.packet_header(), packet.dest);
 				delay(10);
 				// Dataパケットの送信
 				for (uint8_t i = 0; i < packet.length * 2; ++i) {
 					// データの前後を分割して送信
-					uint8_t d = (AmbientPixel::Packet::Type::Data << 5) | (packet.data[i / 2] >> (4 * (i % 2)));
+					uint8_t d = (Packet::Data << 5) | (packet.data[i / 2] >> (4 * (i % 2)));
 					this->_send(port_no, d, packet.dest);
 					// 10msだけ待機が必要
 					delay(10);
 				}
+			}
+		}
+
+		// TODO:
+		void perform() {
+			// 状態に応じて処理を実行する。
+			// loop関数内で呼び出す
+			if (this->state == Running) {
+				for (int i = 0; i < this->pattern_store.size(); ++i) {
+					Pattern p = this->pattern_store.at(i);
+					this->exec_pattern(p);
+				}
+			}
+			else if (this->state == Waiting) {
+				this->_operation((Packet::Type)Packet::parseType(this->_receive()));
+			}
+			else if (this->state == Receiving) {
+
+			}
+			else if (this->state == Interactive) {
+
 			}
 		}
 
@@ -225,7 +242,7 @@ namespace AmbientPixel
 
 		// TODO:
 		// 待機状態へ移行
-		void wait() {	
+		void wait() {
 			// パターンデータの受信待ち
 		}
 
