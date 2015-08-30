@@ -79,6 +79,7 @@ namespace AmbientPixel
 			return (uint8_t)(this->type << 5 | this->length);
 		}
 
+		// パケットタイプを抽出
 		static uint8_t parse_type(uint8_t data) {
 			return data >> 5;
 		}
@@ -140,12 +141,46 @@ namespace AmbientPixel
 			return 0;
 		}
 
-		void _operation(Packet::Type op) {
-			// 他ノードから送られてきたデータに応じて処理を実行する
-			// op(命令)は事前に定義する
-			// ステートマシンの処理はここに実装する
+		void _stack() {
+
 		}
 
+		void _operation(Packet::Type op) {
+		// 他ノードから送られてきたデータに応じて処理を実行する
+		// op(命令)は事前に定義する
+		// ステートマシンの処理はここに実装する
+		switch (op) {
+			case Packet::Echo : {
+				// this->forward();
+			}
+				break;
+			case Packet::Pattern : {
+				
+			}
+				break;
+			case Packet::Data : {
+
+			}
+				break;
+			case Packet::Int : {
+				this->interactive();
+			}
+				break;
+			case Packet::Int_Cast : {
+				this->interactive();
+				// this->forward();
+			}
+				break;
+			case Packet::Run : {
+				this->run();
+			}
+				break;
+			case Packet::Reset : {
+				this->wait();
+			}
+				break;
+		}
+	}
 	public:
 		struct Vertex {
 			enum {
@@ -178,11 +213,11 @@ namespace AmbientPixel
 			float dg = (end_color.green - start_color.green) / 255.0;
 			float db = (end_color.blue - start_color.blue) / 255.0;
 
-			for(uint8_t j = 0; j < repeat_count; j++){
-				for(uint8_t i = 0; i < 255; i++){
-					float r = start_color.red + (dr * i);
-					float g = start_color.green + (dg * i);
-					float b = start_color.blue + (db * i);
+			for(uint8_t i = 0; i < repeat_count; i++) {
+				for(uint8_t j = 0; j < 255; j++) {
+					float r = start_color.red + (dr * j);
+					float g = start_color.green + (dg * j);
+					float b = start_color.blue + (db * j);
 
 					this->led.setPixelColor(0, r, g, b);
 					this->led.show();
@@ -191,6 +226,7 @@ namespace AmbientPixel
 			}
 		}
 
+		// パターンに応じて点灯させる
 		void exec_pattern(AmbientPixel::Pattern pattern) {
 			this->transform_color(pattern.start_color, pattern.end_color, pattern.duration, pattern.repeat_count);
 		}
@@ -213,24 +249,25 @@ namespace AmbientPixel
 			}
 		}
 
-		// TODO:
+		// 状態に応じて処理を実行する。
+		// loop関数内で呼び出す
 		void perform() {
-			// 状態に応じて処理を実行する。
-			// loop関数内で呼び出す
-			if (this->state == Pixel::Running) {
-				for (int i = 0; i < this->pattern_store.size(); ++i) {
-					Pattern p = this->pattern_store.at(i);
-					this->exec_pattern(p);
+			switch (this->state) {
+				case Pixel::Running : {
+					for (int i = 0; i < this->pattern_store.size(); ++i) {
+						Pattern p = this->pattern_store.at(i);
+						this->exec_pattern(p);
+					}
 				}
-			}
-			else if (this->state == Pixel::Waiting) {
-				this->_operation((Packet::Type)Packet::parse_type(this->_receive()));
-			}
-			else if (this->state == Pixel::Receiving) {
+					break;
+				case Pixel::Waiting : {
+					this->_operation((Packet::Type)Packet::parse_type(this->_receive()));
+				}
+					break;
+				case Pixel::Interactive : {
 
-			}
-			else if (this->state == Pixel::Interactive) {
-
+				}
+					break;
 			}
 		}
 
@@ -238,12 +275,20 @@ namespace AmbientPixel
 		// 実行状態へ移行
 		void run() {
 			// パターンデータからLEDを点灯させる
+			this->state = Running;
 		}
 
 		// TODO:
 		// 待機状態へ移行
 		void wait() {
 			// パターンデータの受信待ち
+			this->state = Waiting;
+		}
+
+		// TODO:
+		// インタラクティブ状態へ移行
+		void interactive() {
+			this->state = Interactive;
 		}
 
 		// TODO:
@@ -251,6 +296,7 @@ namespace AmbientPixel
 		void teadown() {
 			// ステータはWaiting
 			// 受信中のパケットは破棄
+			this->state = Waiting;
 		}
 
 		// TODO:

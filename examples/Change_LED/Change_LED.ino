@@ -7,15 +7,16 @@
 #include <AmbientPixel.h>
 
 uint8_t device_id = 0x01;
-AmbientPixel::Pixel pixel(device_id, AmbientPixel::Pixel::Vertex::Triangle);
+AmbientPixel::Pixel node(device_id, AmbientPixel::Pixel::Vertex::Triangle);
+
 void setup()
 {
-  // put your setup code here, to run once:
+	// put your setup code here, to run once:
 }
 
 void loop()
 {
-  // put your main code here, to run repeatedly:
-  pixel.transform_color(AmbientPixelColorAttrRed, AmbientPixelColorAttrBlue, 5, 1);
-  delay(1000);
+	// put your main code here, to run repeatedly:
+ 	node.transform_color(AmbientPixelColorAttrRed, AmbientPixelColorAttrBlue, 5, 1);
+	delay(1000);
 }
