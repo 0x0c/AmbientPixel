@@ -79,7 +79,7 @@ namespace AmbientPixel
 			return (uint8_t)(this->type << 5 | this->length);
 		}
 
-		static uint8_t parseType(uint8_t data) {
+		static uint8_t parse_type(uint8_t data) {
 			return data >> 5;
 		}
 	};
@@ -224,7 +224,7 @@ namespace AmbientPixel
 				}
 			}
 			else if (this->state == Pixel::Waiting) {
-				this->_operation((Packet::Type)Packet::parseType(this->_receive()));
+				this->_operation((Packet::Type)Packet::parse_type(this->_receive()));
 			}
 			else if (this->state == Pixel::Receiving) {
 
