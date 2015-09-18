@@ -7,6 +7,7 @@
 //
 
 #import "APPMPatternCollectionViewController.h"
+#import "APPMPatternCollectionCell.h"
 
 @interface APPMPatternCollectionViewController ()
 
@@ -16,21 +17,22 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
-    // Do any additional setup after loading the view.
+- (void)viewDidLoad
+{
+	[super viewDidLoad];
+	[self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([APPMPatternCollectionCell class]) bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
+	
+	self.collectionView.delaysContentTouches = NO;
+	UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+	layout.minimumLineSpacing = 4.0;
+	layout.minimumInteritemSpacing = 5.0;
+	layout.itemSize = CGSizeMake(CGRectGetWidth(self.view.frame) / 2.0 - 11.0, 150);
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)didReceiveMemoryWarning
+{
+	[super didReceiveMemoryWarning];
+	// Dispose of any resources that can be recreated.
 }
 
 /*
@@ -45,23 +47,23 @@ static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark <UICollectionViewDataSource>
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete method implementation -- Return the number of sections
-    return 0;
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+	return 1;
 }
 
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete method implementation -- Return the number of items in the section
-    return 0;
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+	return 5;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell
-    
-    return cell;
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+	APPMPatternCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+	// Configure the cell
+	
+	return cell;
 }
 
 #pragma mark <UICollectionViewDelegate>
@@ -94,5 +96,32 @@ static NSString * const reuseIdentifier = @"Cell";
 	
 }
 */
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+	return UIEdgeInsetsMake(8, 8, 8, 8);
+}
+
+- (void)collectionView:(UICollectionView *)colView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+	UICollectionViewCell *cell = [colView cellForItemAtIndexPath:indexPath];
+	[UIView animateWithDuration:0.25 animations:^{
+		cell.alpha = 0.7;
+	}];
+	[UIView animateWithDuration:0.25 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveLinear animations:^{
+		cell.transform = CGAffineTransformMakeScale(0.95, 0.95);
+	} completion:nil];
+}
+
+- (void)collectionView:(UICollectionView *)colView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+	UICollectionViewCell *cell = [colView cellForItemAtIndexPath:indexPath];
+	[UIView animateWithDuration:0.25 animations:^{
+		cell.alpha = 1;
+	}];
+	[UIView animateWithDuration:0.25 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveLinear animations:^{
+		cell.transform = CGAffineTransformMakeScale(1, 1);
+	} completion:nil];
+}
 
 @end

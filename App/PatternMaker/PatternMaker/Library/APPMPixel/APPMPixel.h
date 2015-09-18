@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "APPMPacket.h"
 
 @interface APPMPixel : NSObject
+
+- (void)connectWithName:(NSString *)name completionHandler:(void (^)())handler;
+- (void)send:(APPMPacket *)packet;
 
 @end

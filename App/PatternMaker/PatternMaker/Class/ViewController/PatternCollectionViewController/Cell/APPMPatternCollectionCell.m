@@ -10,8 +10,12 @@
 
 @implementation APPMPatternCollectionCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+	// Initialization code
+	self.layer.cornerRadius = 8;
+	self.layer.borderColor = [UIColor lightGrayColor].CGColor;
+	self.layer.borderWidth = 1;
 }
 
 @end

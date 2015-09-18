@@ -10,4 +10,7 @@
 
 @interface APPMPatternCollectionCell : UICollectionViewCell
 
+@property (strong, nonatomic) IBOutlet UIImageView *thumbnailImageView;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+
 @end
