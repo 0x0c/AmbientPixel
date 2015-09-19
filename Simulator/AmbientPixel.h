@@ -55,6 +55,7 @@ namespace AmbientPixel
 		void set_pixel(VirtualPixel *pixel, int position);
 		void send(uint8_t port_no, AmbientPixel::Packet *packet);
 		uint8_t receive(uint8_t port_no);
+		void dump();
 
 		// LEDを点灯させる
 		void change_led(uint8_t flag, uint8_t color);

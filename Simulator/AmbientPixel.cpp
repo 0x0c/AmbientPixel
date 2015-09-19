@@ -46,8 +46,21 @@ namespace AmbientPixel
 		std::cout << "received flag :" + this->flag + ", color :" + this->color << std::endl;
 	}
 
-	void dump() {
-		std::cout << "device id :" + this->device_id + ", flag :" + this->flag + ", color :" + this->color + ", port_0 : " + this->port_0->device_id + ", port_1 : " + this->port_1->device_id + ", port_2 : " + this->port_2->device_id << std::endl;	
+	void dump(int indentation) {
+		std::string indent = new std::string;
+		for (int i = 0; i < indentation; ++i) {
+			indent += '\t';
+		}
+		std::cout << indent + "device id :" + this->device_id + ", flag :" + this->flag + ", color :" + this->color << std::endl;
+		if (this->port_0 != NULL) {
+			this->port_0->dump(indentation + 1);
+		}
+		if (this->port_1 != NULL) {
+			this->port_1->dump(++indentation + 1);
+		}
+		if (this->port_2 != NULL) {
+			this->port_2->dump(++indentation + 1);
+		}
 	}
 
 	// -------------------------- Packet --------------------------
