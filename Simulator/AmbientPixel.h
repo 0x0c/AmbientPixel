@@ -1,39 +1,18 @@
 #pragma once
 
-#include <StandardCplusplus.h>
-#include <system_configuration.h>
-#include <unwind-cxx.h>
-#include <utility.h>
 #include <vector>
-#include <skInfraredCOM.h>
-#include <Adafruit_NeoPixel.h>
 
 namespace AmbientPixel
 {
-	struct ColorAttr
-	{
-		uint8_t red;
-		uint8_t green;
-		uint8_t blue;
-	};
-
-#define AmbientPixelColorAttrRed	{100, 0, 0}
-#define AmbientPixelColorAttrGreen	{0, 100, 0}
-#define AmbientPixelColorAttrBlue	{0, 0, 100}
-#define AmbientPixelColorAttrOrange	{100, 50, 0}
-#define AmbientPixelColorAttrYellow	{100, 100, 0}
-#define AmbientPixelColorAttrPerple	{100, 0, 100}
-#define AmbientPixelColorAttrIndigo	{0, 50, 100}
-#define AmbientPixelColorAttrWhite	{100, 100, 100}
-
 	class Packet;
-	class Pixel
+	class VirtualPixel
 	{
 	private:
-		// フルカラーLED制御用変数
-		Adafruit_NeoPixel led;
 		// 送信・受信ポート
-		std::vector<skInfraredCOM *> ports;
+		VirtualPixel *port_0;
+		VirtualPixel *port_1;
+		VirtualPixel *port_2;
+
 		// 自分のデバイスID
 		uint8_t device_id;
 		// 頂点数
@@ -70,6 +49,7 @@ namespace AmbientPixel
 		};
 
 		Pixel(uint8_t device_id, uint8_t number_of_vertex);
+		void set_pixel(VirtualPixel *pixel, int position);
 		void send(uint8_t port_no, AmbientPixel::Packet *packet);
 		uint8_t receive(uint8_t port_no);
 

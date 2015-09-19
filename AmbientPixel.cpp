@@ -12,6 +12,7 @@ namespace AmbientPixel
 		this->led = Adafruit_NeoPixel(1, 13, NEO_GRB + NEO_KHZ800);
 		this->led.setBrightness(200);
 	}
+	
 	void Pixel::send(uint8_t port_no, AmbientPixel::Packet *packet) {
 		this->ports[port_no]->Send(port_no, (unsigned char)packet->data());
 	}
