@@ -17,6 +17,9 @@ namespace AmbientPixel
 		uint8_t device_id;
 		// 頂点数
 		uint8_t number_of_vertex;
+
+		uint8_t flag;
+		uint8_t color;
 	public:
 		struct Flag {
 			enum {
@@ -55,8 +58,6 @@ namespace AmbientPixel
 
 		// LEDを点灯させる
 		void change_led(uint8_t flag, uint8_t color);
-		// パケットをフォワードする
-		void forward(uint8_t port_no, AmbientPixel::Packet *p);
 	};
 
 	class Packet

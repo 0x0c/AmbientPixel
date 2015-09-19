@@ -36,10 +36,18 @@ namespace AmbientPixel
 
 	void VirtualPixel::receive(uint8_t data) {
 		std::cout << "received data :" + data << std::endl;
+		// TODO: パケット受信時の処理を書く。
+		// LEDを駆動させるときはchange_ledメソッドを用いる。
 	}
 
 	void VirtualPixel::change_led(uint8_t flag, uint8_t color) {
-		std::cout << "received flag :" + flag + ", color :" + color << std::endl;
+		this->flag = flag;
+		this->color = color;
+		std::cout << "received flag :" + this->flag + ", color :" + this->color << std::endl;
+	}
+
+	void dump() {
+		std::cout << "device id :" + this->device_id + ", flag :" + this->flag + ", color :" + this->color + ", port_0 : " + this->port_0->device_id + ", port_1 : " + this->port_1->device_id + ", port_2 : " + this->port_2->device_id << std::endl;	
 	}
 
 	// -------------------------- Packet --------------------------
