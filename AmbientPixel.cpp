@@ -26,12 +26,6 @@ namespace AmbientPixel
 
 	}
 
-	// TODO:
-	// パケットをフォワードする
-	void Pixel::forward(uint8_t port_no, AmbientPixel::Packet *p) {
-		// パケットをport_noの辺からデータを送信する
-	}
-
 	// -------------------------- Packet --------------------------
 	Packet::Packet(uint8_t device_id, uint8_t flag, uint8_t color) {
 		this->device_id = device_id;
