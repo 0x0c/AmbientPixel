@@ -25,4 +25,3 @@ void loop()
 		pixel->perform();
 	}
 }
-

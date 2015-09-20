@@ -30,11 +30,13 @@
 		E949D2751BAC17A700DDE189 /* APPMPatternCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E949D2731BAC17A700DDE189 /* APPMPatternCollectionCell.xib */; };
 		E99E73381B8785CF00E92F21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E99E73371B8785CF00E92F21 /* main.m */; };
 		E99E733B1B8785CF00E92F21 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E99E733A1B8785CF00E92F21 /* AppDelegate.m */; };
-		E99E733E1B8785CF00E92F21 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E99E733D1B8785CF00E92F21 /* ViewController.m */; };
 		E99E73411B8785CF00E92F21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E99E733F1B8785CF00E92F21 /* Main.storyboard */; };
 		E99E73431B8785CF00E92F21 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E99E73421B8785CF00E92F21 /* Images.xcassets */; };
 		E99E73461B8785CF00E92F21 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E99E73441B8785CF00E92F21 /* LaunchScreen.xib */; };
 		E99E73521B8785CF00E92F21 /* PatternMakerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E99E73511B8785CF00E92F21 /* PatternMakerTests.m */; };
+		E9C849BE1BAF1B6A00366674 /* APPMHousingAPIGateway.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C849B81BAF1B6A00366674 /* APPMHousingAPIGateway.m */; };
+		E9C849BF1BAF1B6A00366674 /* HousingApiConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C849BC1BAF1B6A00366674 /* HousingApiConstant.m */; };
+		E9C849C01BAF1B6A00366674 /* libHousingApi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C849BD1BAF1B6A00366674 /* libHousingApi.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,14 +101,18 @@
 		E99E73371B8785CF00E92F21 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E99E73391B8785CF00E92F21 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E99E733A1B8785CF00E92F21 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E99E733C1B8785CF00E92F21 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		E99E733D1B8785CF00E92F21 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E99E73401B8785CF00E92F21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E99E73421B8785CF00E92F21 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E99E73451B8785CF00E92F21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		E99E734B1B8785CF00E92F21 /* PatternMakerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PatternMakerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E99E73501B8785CF00E92F21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E99E73511B8785CF00E92F21 /* PatternMakerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PatternMakerTests.m; sourceTree = "<group>"; };
+		E9C849B71BAF1B6A00366674 /* APPMHousingAPIGateway.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPMHousingAPIGateway.h; sourceTree = "<group>"; };
+		E9C849B81BAF1B6A00366674 /* APPMHousingAPIGateway.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPMHousingAPIGateway.m; sourceTree = "<group>"; };
+		E9C849BA1BAF1B6A00366674 /* HousingApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HousingApi.h; sourceTree = "<group>"; };
+		E9C849BB1BAF1B6A00366674 /* HousingApiConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HousingApiConstant.h; sourceTree = "<group>"; };
+		E9C849BC1BAF1B6A00366674 /* HousingApiConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HousingApiConstant.m; sourceTree = "<group>"; };
+		E9C849BD1BAF1B6A00366674 /* libHousingApi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libHousingApi.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9C849C01BAF1B6A00366674 /* libHousingApi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,8 +279,6 @@
 			children = (
 				E99E73391B8785CF00E92F21 /* AppDelegate.h */,
 				E99E733A1B8785CF00E92F21 /* AppDelegate.m */,
-				E99E733C1B8785CF00E92F21 /* ViewController.h */,
-				E99E733D1B8785CF00E92F21 /* ViewController.m */,
 				E9E4D0B51BAA00F2006C96A1 /* Class */,
 				E9E4D0B81BAA00F2006C96A1 /* Library */,
 				E9E4D0B91BAA00F2006C96A1 /* Resource */,
@@ -311,6 +316,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E9C849B61BAF1B6A00366674 /* APPMHousingAPIGateway */ = {
+			isa = PBXGroup;
+			children = (
+				E9C849B71BAF1B6A00366674 /* APPMHousingAPIGateway.h */,
+				E9C849B81BAF1B6A00366674 /* APPMHousingAPIGateway.m */,
+			);
+			path = APPMHousingAPIGateway;
+			sourceTree = "<group>";
+		};
+		E9C849B91BAF1B6A00366674 /* HousingApiLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				E9C849BA1BAF1B6A00366674 /* HousingApi.h */,
+				E9C849BB1BAF1B6A00366674 /* HousingApiConstant.h */,
+				E9C849BC1BAF1B6A00366674 /* HousingApiConstant.m */,
+				E9C849BD1BAF1B6A00366674 /* libHousingApi.a */,
+			);
+			path = HousingApiLibrary;
+			sourceTree = "<group>";
+		};
 		E9E4D0B51BAA00F2006C96A1 /* Class */ = {
 			isa = PBXGroup;
 			children = (
@@ -339,6 +364,8 @@
 		E9E4D0B81BAA00F2006C96A1 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				E9C849B61BAF1B6A00366674 /* APPMHousingAPIGateway */,
+				E9C849B91BAF1B6A00366674 /* HousingApiLibrary */,
 				E949D2311BAC115A00DDE189 /* Konashi */,
 				E949D22D1BAC10DF00DDE189 /* APPMPixel */,
 			);
@@ -453,9 +480,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9C849BF1BAF1B6A00366674 /* HousingApiConstant.m in Sources */,
 				E949D25F1BAC115A00DDE189 /* KNSCentralManager+UI.m in Sources */,
 				E949D2631BAC115A00DDE189 /* Konashi+JavaScriptBindings.m in Sources */,
-				E99E733E1B8785CF00E92F21 /* ViewController.m in Sources */,
 				E949D22B1BAC0DE900DDE189 /* APPMPacket.m in Sources */,
 				E949D2741BAC17A700DDE189 /* APPMPatternCollectionCell.m in Sources */,
 				E949D2641BAC115A00DDE189 /* KNSKonashiPeripheralImpl.m in Sources */,
@@ -474,6 +501,7 @@
 				E99E73381B8785CF00E92F21 /* main.m in Sources */,
 				E949D2601BAC115A00DDE189 /* Konashi+ACDrive.m in Sources */,
 				E949D2621BAC115A00DDE189 /* Konashi+Grove.m in Sources */,
+				E9C849BE1BAF1B6A00366674 /* APPMHousingAPIGateway.m in Sources */,
 				E949D2611BAC115A00DDE189 /* Konashi+ADC.m in Sources */,
 				E949D25E1BAC115A00DDE189 /* CBUUID+Konashi.m in Sources */,
 			);
@@ -605,6 +633,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PatternMaker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PatternMaker/Library/HousingApiLibrary",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -615,6 +647,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PatternMaker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/PatternMaker/Library/HousingApiLibrary",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

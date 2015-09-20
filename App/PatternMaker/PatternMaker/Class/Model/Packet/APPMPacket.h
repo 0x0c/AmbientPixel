@@ -11,8 +11,8 @@
 typedef NS_OPTIONS(UInt8, APPMPatternFlag) {
 	APPMPatternFlagGlow = 0b00000000,
 	APPMPatternFlagBlink = 0b00001000,
-//	0b00010000 は未定義
-	APPMPatternFlagTurnOff = 0b00011000,
+	APPMPatternFlagTurnOff = 0b00010000,
+	APPMPatternFlagControl = 0b00011000,
 };
 
 typedef NS_ENUM(UInt8, APPMPatternColor) {

@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>FA55CF8C-739C-472A-9BAB-DECFBD8A9E22</string>
 	<key>IDESourceControlProjectName</key>
-	<string>PatternMaker</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>13B0C11DE7F36EA3D72B20EFABEF6D029E30D86D</key>
 		<string>github.com:0x0c/AmbientPixel.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>App/PatternMaker/PatternMaker.xcodeproj</string>
+	<string>App/PatternMaker/PatternMaker.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>13B0C11DE7F36EA3D72B20EFABEF6D029E30D86D</key>
