@@ -49,7 +49,7 @@ namespace AmbientPixel
 	void VirtualPixel::change_led(int flag, int color) {
 		this->flag = flag;
 		this->color = color;
-		std::cout << "received flag :" << this->flag << ", color :" << this->color << std::endl;
+		std::cout << "change_led flag :" << this->flag_str(this->flag) << ", color :" << this->color_str(this->color) << std::endl;
 	}
 
 	void VirtualPixel::dump_pixel(std::string indentation) {
