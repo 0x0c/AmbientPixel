@@ -7,19 +7,14 @@ namespace AmbientPixel
 	class Packet;
 	class VirtualPixel
 	{
-	private:
-		// 送信・受信ポート
-		VirtualPixel *port_0;
-		VirtualPixel *port_1;
-		VirtualPixel *port_2;
-
+	protected:
 		// 自分のデバイスID
-		uint8_t device_id;
+		int device_id;
 		// 頂点数
-		uint8_t number_of_vertex;
+		int number_of_vertex;
 
-		uint8_t flag;
-		uint8_t color;
+		int flag;
+		int color;
 	public:
 		struct Flag {
 			enum {
@@ -51,28 +46,33 @@ namespace AmbientPixel
 			};
 		};
 
-		Pixel(uint8_t device_id, uint8_t number_of_vertex);
-		void set_pixel(VirtualPixel *pixel, int position);
-		void send(uint8_t port_no, AmbientPixel::Packet *packet);
-		uint8_t receive(uint8_t port_no);
-		void dump();
+		// 送信・受信ポート
+		VirtualPixel *port_0;
+		VirtualPixel *port_1;
+		VirtualPixel *port_2;
+
+		VirtualPixel(int device_id, int number_of_vertex);
+		void send(int port_no, AmbientPixel::Packet *packet);
+		void receive(int port_no);
+		void dump_pixel(std::string indentation);
+		void dump_network(std::string indentation = "");
 
 		// LEDを点灯させる
-		void change_led(uint8_t flag, uint8_t color);
+		void change_led(int flag, int color);
 	};
 
 	class Packet
 	{
 	public:
 		// 送信先デバイスID
-		uint8_t device_id;
+		int device_id;
 		// LEDの動作フラグ
-		uint8_t flag;
+		int flag;
 		// LEDの色
-		uint8_t color;
+		int color;
 
-		Packet(uint8_t device_id, uint8_t flag, uint8_t color);
+		Packet(int device_id, int flag, int color);
 		// 1byteのパケットデータを取得する
-		uint8_t data();
+		int data();
 	};
 }
