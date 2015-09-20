@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_OPTIONS(UInt8, APPMPatternFlag) {
-	APPMPatternFlagGlow = 0b00000000,
-	APPMPatternFlagBlink = 0b00001000,
-	APPMPatternFlagTurnOff = 0b00010000,
+typedef NS_ENUM(UInt8, APPMPatternFlag) {
+	APPMPatternFlagTurnOff = 0b00000000,
+	APPMPatternFlagGlow = 0b00001000,
+	APPMPatternFlagBlink = 0b00010000,
 	APPMPatternFlagControl = 0b00011000,
 };
 

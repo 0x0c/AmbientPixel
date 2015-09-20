@@ -6,7 +6,8 @@
 #include <Adafruit_NeoPixel.h>
 #include <AmbientPixel.h>
 
-AmbientPixel::Pixel *pixel;
+uint8_t device_id = 0x00;
+AmbientPixel::Pixel pixel(device_id, AmbientPixel::Pixel::Vertex::Triangle);
 void setup()
 {
 	// put your setup code here, to run once:
@@ -15,13 +16,5 @@ void setup()
 
 void loop()
 {
-	if(pixel == NULL){
-		if(Serial.available()){
-		    uint8_t device_id = Serial.read();
-		    pixel = new AmbientPixel::Pixel(device_id, AmbientPixel::Pixel::Vertex::Triangle);
-		}
-	}
-	else {
-		pixel->perform();
-	}
+
 }

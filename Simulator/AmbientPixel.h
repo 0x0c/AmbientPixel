@@ -18,10 +18,10 @@ namespace AmbientPixel
 	public:
 		struct Flag {
 			enum {
-				Glow	= 0b00000000,
-				Blink 	= 0b00001000,
-				TurnOff = 0b00010000,
-				//	0b00011000 はControlパケット
+				TurnOff	= 0b00000000,
+				Glow 	= 0b00001000,
+				Blink = 0b00010000,
+				Control = 0b00011000,
 			};
 		};
 		struct Color {
@@ -51,11 +51,13 @@ namespace AmbientPixel
 		VirtualPixel *port_1;
 		VirtualPixel *port_2;
 
-		VirtualPixel(int device_id, int number_of_vertex);
+		VirtualPixel(int number_of_vertex);
 		void send(int port_no, AmbientPixel::Packet *packet);
 		void receive(int port_no);
 		void dump_pixel(std::string indentation);
 		void dump_network(std::string indentation = "");
+		std::string flag_str(int flag);
+		std::string color_str(int flag);
 
 		// LEDを点灯させる
 		void change_led(int flag, int color);
