@@ -34,10 +34,6 @@ namespace AmbientPixel
 		Adafruit_NeoPixel led;
 		// 送信・受信ポート
 		std::vector<skInfraredCOM *> ports;
-		// 自分のデバイスID
-		uint8_t device_id;
-		// 頂点数
-		uint8_t number_of_vertex;
 	public:
 		struct Flag {
 			enum {
@@ -68,11 +64,16 @@ namespace AmbientPixel
 				// Hexagon = 6,
 			};
 		};
+		
+		// 自分のデバイスID
+		uint8_t device_id;
+		// 頂点数
+		uint8_t number_of_vertex;
 
 		Pixel(uint8_t number_of_vertex);
-		void send(uint8_t port_no, AmbientPixel::Packet *packet);
-		uint8_t receive(uint8_t port_no);
-
+		void send(uint8_t port_no, uint8_t packet);
+		void receive(uint8_t data);
+		uint8_t watch(uint8_t port_no);
 		// LEDを点灯させる
 		void change_led(uint8_t flag, uint8_t color);
 		// パケットをフォワードする
@@ -82,15 +83,7 @@ namespace AmbientPixel
 	class Packet
 	{
 	public:
-		// 送信先デバイスID
-		uint8_t device_id;
-		// LEDの動作フラグ
-		uint8_t flag;
-		// LEDの色
-		uint8_t color;
-
-		Packet(uint8_t device_id, uint8_t flag, uint8_t color);
-		// 1byteのパケットデータを取得する
-		uint8_t data();
+		// 1byteのパケットデータを生成する
+		static uint8_t packet_data(uint8_t device_id, uint8_t flag, uint8_t color);
 	};
 }

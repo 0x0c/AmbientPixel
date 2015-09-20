@@ -6,7 +6,11 @@
 #include <Adafruit_NeoPixel.h>
 #include <AmbientPixel.h>
 
-AmbientPixel::Pixel pixel(AmbientPixel::Pixel::Vertex::Triangle);
+using namespace AmbientPixel;
+
+#define MASTER 1
+Pixel pixel(AmbientPixel::Pixel::Vertex::Triangle);
+
 void setup()
 {
 	// put your setup code here, to run once:
@@ -15,6 +19,19 @@ void setup()
 
 void loop()
 {
-	delay(1000);
+#ifdef MASTER
+	if(Serial.available()){
+		// アプリからパケットを受信
+	    char data = Serial.read();
+	    pixel.receive(data);
+	}
+#endif
+	for(int i = 0; i < pixel.number_of_vertex; i++){
+		// 各ポートを監視する
+		uint8_t data = pixel.watch(i);
+		if(data != 0){
+		    pixel.receive(data);
+		}
+	}
 }
 

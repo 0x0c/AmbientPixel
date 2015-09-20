@@ -53,7 +53,7 @@ namespace AmbientPixel
 
 		VirtualPixel(int number_of_vertex);
 		void send(int port_no, AmbientPixel::Packet *packet);
-		void receive(int port_no);
+		void receive(int data);
 		void dump_pixel(std::string indentation);
 		void dump_network(std::string indentation = "");
 		static std::string flag_str(int flag);
