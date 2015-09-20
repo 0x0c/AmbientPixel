@@ -7,7 +7,7 @@ namespace AmbientPixel
 		for (uint8_t i = 0; i < number_of_vertex; ++i) {
 			this->ports.push_back(new skInfraredCOM(i * 2, i * 2 + 1));
 		}
-		this->device_id = device_id;
+		this->device_id = 0;
 		this->number_of_vertex = number_of_vertex;
 		this->led = Adafruit_NeoPixel(1, 13, NEO_GRB + NEO_KHZ800);
 		this->led.setBrightness(200);
