@@ -6,8 +6,7 @@
 #include <Adafruit_NeoPixel.h>
 #include <AmbientPixel.h>
 
-uint8_t device_id = 0x00;
-AmbientPixel::Pixel pixel(device_id, AmbientPixel::Pixel::Vertex::Triangle);
+AmbientPixel::Pixel pixel(AmbientPixel::Pixel::Vertex::Triangle);
 void setup()
 {
 	// put your setup code here, to run once:
@@ -16,5 +15,6 @@ void setup()
 
 void loop()
 {
-
+	delay(1000);
 }
+

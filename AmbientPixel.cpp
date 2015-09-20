@@ -3,7 +3,7 @@
 namespace AmbientPixel
 {
 	// -------------------------- Pixel --------------------------
-	Pixel::Pixel(uint8_t device_id, uint8_t number_of_vertex) {
+	Pixel::Pixel(uint8_t number_of_vertex) {
 		for (uint8_t i = 0; i < number_of_vertex; ++i) {
 			this->ports.push_back(new skInfraredCOM(i * 2, i * 2 + 1));
 		}

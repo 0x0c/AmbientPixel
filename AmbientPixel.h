@@ -69,7 +69,7 @@ namespace AmbientPixel
 			};
 		};
 
-		Pixel(uint8_t device_id, uint8_t number_of_vertex);
+		Pixel(uint8_t number_of_vertex);
 		void send(uint8_t port_no, AmbientPixel::Packet *packet);
 		uint8_t receive(uint8_t port_no);
 
