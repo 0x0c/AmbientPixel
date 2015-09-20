@@ -13,7 +13,6 @@ void test()
 	// 5.再度ネットワーク全体の状態を表示する。
 
 	// 1の例
-	std::cout << "<Step 1> Start" << std::endl;
 	VirtualPixel *master = new VirtualPixel(VirtualPixel::Vertex::Triangle);
 	VirtualPixel *slave0 = new VirtualPixel(VirtualPixel::Vertex::Triangle);
 	master->port_0 = slave0;
@@ -21,25 +20,15 @@ void test()
 	master->port_1 = slave1;
 	VirtualPixel *slave2 = new VirtualPixel(VirtualPixel::Vertex::Triangle);
 	master->port_2 = slave2;
-	std::cout << "<Step 1> Done" << std::endl;
 
 	// ここで2を行う
-	std::cout << "<Step 2> Start" << std::endl;
-	std::cout << "<Step 2> Done" << std::endl;
-
+	
 	// 3の例
-	std::cout << "<Step 3> Start" << std::endl;
 	master->dump_network();
-	std::cout << "<Step 3> Done" << std::endl;
 
 	// 4, 5の例
-	std::cout << "<Step 4> Start" << std::endl;
 	master->change_led(VirtualPixel::Flag::Glow, VirtualPixel::Color::Red);
-	std::cout << "<Step 4> Done" << std::endl;
-
-	std::cout << "<Step 5> Start" << std::endl;
 	master->dump_network();
-	std::cout << "<Step 5> Done" << std::endl;
 }
 
 int main(int argc, char const *argv[])
