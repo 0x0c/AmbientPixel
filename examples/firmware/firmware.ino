@@ -8,6 +8,7 @@
 
 using namespace AmbientPixel;
 
+// Slaveの時は0にする
 #define MASTER 1
 Pixel pixel(AmbientPixel::Pixel::Vertex::Triangle);
 
