@@ -20,7 +20,7 @@ namespace AmbientPixel
 			enum {
 				TurnOff	= 0b00000000,
 				Glow 	= 0b00001000,
-				Blink = 0b00010000,
+				Blink 	= 0b00010000,
 				Control = 0b00011000,
 			};
 		};
@@ -56,8 +56,8 @@ namespace AmbientPixel
 		void receive(int port_no);
 		void dump_pixel(std::string indentation);
 		void dump_network(std::string indentation = "");
-		std::string flag_str(int flag);
-		std::string color_str(int flag);
+		static std::string flag_str(int flag);
+		static std::string color_str(int flag);
 
 		// LEDを点灯させる
 		void change_led(int flag, int color);
@@ -76,5 +76,7 @@ namespace AmbientPixel
 		Packet(int device_id, int flag, int color);
 		// 1byteのパケットデータを取得する
 		int data();
+
+		void dump();
 	};
 }
