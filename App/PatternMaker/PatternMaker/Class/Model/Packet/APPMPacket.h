@@ -17,8 +17,8 @@ typedef NS_ENUM(UInt8, APPMPatternFlag) {
 
 typedef NS_ENUM(UInt8, APPMPatternColor) {
 	APPMPatternColorRed = 0b00000000,
-	APPMPatternColorBlue = 0b00000001,
-	APPMPatternColorGreen = 0b00000010,
+	APPMPatternColorGreen = 0b00000001,
+	APPMPatternColorBlue = 0b00000010,
 	APPMPatternColorOrange = 0b00000011,
 	APPMPatternColorYellow = 0b00000100,
 	APPMPatternColorPurple = 0b00000101,

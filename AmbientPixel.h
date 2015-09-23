@@ -10,21 +10,14 @@
 
 namespace AmbientPixel
 {
-	struct Color
+	class ColorAttr
 	{
+	public:
 		uint8_t red;
 		uint8_t green;
 		uint8_t blue;
+		ColorAttr(uint8_t red, uint8_t green, uint8_t blue);
 	};
-
-#define AmbientPixelColorAttrRed	{100, 0, 0}
-#define AmbientPixelColorAttrGreen	{0, 100, 0}
-#define AmbientPixelColorAttrBlue	{0, 0, 100}
-#define AmbientPixelColorAttrOrange	{100, 50, 0}
-#define AmbientPixelColorAttrYellow	{100, 100, 0}
-#define AmbientPixelColorAttrPerple	{100, 0, 100}
-#define AmbientPixelColorAttrIndigo	{0, 50, 100}
-#define AmbientPixelColorAttrWhite	{100, 100, 100}
 
 	class Packet;
 	class Pixel
@@ -34,6 +27,9 @@ namespace AmbientPixel
 		Adafruit_NeoPixel led;
 		// 送信・受信ポート
 		std::vector<skInfraredCOM *> ports;
+
+		AmbientPixel::ColorAttr color_at_index(uint8_t index);
+		bool configured;
 	public:
 		struct Flag {
 			enum {
@@ -41,14 +37,21 @@ namespace AmbientPixel
 				Blink 	= 0b00001000,
 				TurnOff = 0b00010000,
 				Control = 0b00011000
-				//	0b00011000 はControlパケット
 			};
 		};
+
+		struct ControlFlag {
+			enum {
+				Network	= 0b00000000,
+				Reset	= 0b00000001,
+			};
+		};
+
 		struct Color {
 			enum {
 				Red 	= 0b00000000,
-				Blue 	= 0b00000001,
-				Green 	= 0b00000010,
+				Green 	= 0b00000001,
+				Blue	= 0b00000010,
 				Orange 	= 0b00000011,
 				Yellow 	= 0b00000100,
 				Purple 	= 0b00000101,
@@ -73,11 +76,12 @@ namespace AmbientPixel
 
 		Pixel(uint8_t number_of_vertex);
 		// 指定したポートにパケットを送信する
-		void send(uint8_t port_no, AmbientPixel::Packet *packet);
+		void send(uint8_t port_no, uint8_t packet);
+			void receive(uint8_t data);
 		// ポートを監視する
 		uint8_t watch(uint8_t port_no);
 		// LEDを点灯させる
-		void change_led(uint8_t flag, AmbientPixel::Color color);
+		void change_led(uint8_t flag, AmbientPixel::ColorAttr color);
 	};
 
 	class Packet

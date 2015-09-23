@@ -33,8 +33,8 @@ NWパケット（後述）によって設定されるデバイス固有のID。
 - Pattern ID
 	- 点灯する色を示す。
 		- 000...Red
-		- 001...Blue
-		- 010...Green
+		- 001...Green
+		- 010...Blue
 		- 011...Orange
 		- 100...Yellow
 		- 101...Purple
@@ -56,13 +56,13 @@ Controlパケットの形式は次のとおりである。
 
 ````
 |-----3bit------|--2bit--|-----3bit------|
-|---Device ID---|--Flag--|--Control bit--|
+|---Device ID---|--Flag--|--Control flag--|
 ````
 
 ControlパケットはFlagビットが常に`11`となる。
-また、Control bitに応じてパケットの種類が異なる。（他のビットパターンは予約）
+また、Control flagに応じてパケットの種類が異なる。（他のビットパターンは予約）
 
-- Control bit
+- Control flag
 	- 000...NWパケット
 	- 001...RSTパケット
 
