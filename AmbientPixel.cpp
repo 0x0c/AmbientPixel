@@ -13,21 +13,20 @@ namespace AmbientPixel
 		this->led.setBrightness(200);
 	}
 	
-	void Pixel::send(uint8_t port_no, uint8_t packet) {
-		this->ports[port_no]->Send(port_no, (unsigned char)packet);
+	void Pixel::send(uint8_t port_no, AmbientPixel::Packet *packet) {
+		this->ports[port_no]->Send(port_no, (unsigned char)packet->packet_data());
 	}
 
 	void Pixel::receive(uint8_t data) {
-		// TODO: 受診時の処理の実装
+		// TODO: 受信時の処理の実装
 	}
 
 	uint8_t Pixel::watch(uint8_t port_no) {
 		return this->ports[port_no]->Recive(this->device_id);
 	}
 
-	// TODO:
-	// LEDを点灯させる
-	void Pixel::change_led(uint8_t flag, uint8_t color) {
+	// TODO: LEDを点灯させる
+	void Pixel::change_led(uint8_t flag, AmbientPixel::Color color) {
 
 	}
 

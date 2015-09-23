@@ -7,31 +7,53 @@
 //
 
 #import "APPMProgressPatternViewController.h"
+#import "AppDelegate.h"
+#import "APPMPixel.h"
+#import "APPMHousingAPIGateway.h"
 
-@interface APPMProgressPatternViewController ()
+@interface APPMProgressPatternViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
+
+@property (strong, nonatomic) IBOutlet UIPickerView *pickerView;
 
 @end
 
 @implementation APPMProgressPatternViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+static NSArray *pickerTitles;
+
+- (void)viewDidLoad
+{
+	[super viewDidLoad];
+	self.title = @"Progress";
+	pickerTitles = @[@"水の使用量",
+				  @"ガスの使用量",
+				  @"蓄電池残量"];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - UIPickerViewDelegate
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+	return 1;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+	return pickerTitles[row];
 }
-*/
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+	NSLog(@"%@", pickerTitles[row]);
+}
+
+#pragma mark - UIPickerViewDataSource
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+	return pickerTitles.count;
+}
+
+#pragma mark - 
 
 @end

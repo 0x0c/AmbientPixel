@@ -7,7 +7,10 @@
 //
 
 #import "APPMPatternCollectionViewController.h"
+#import "FontAwesomeKit.h"
+#import "APPMProgressPatternViewController.h"
 #import "APPMPatternCollectionCell.h"
+#import "APPMSettingViewController.h"
 
 @interface APPMPatternCollectionViewController ()
 
@@ -20,13 +23,18 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	self.title = @"PatternMaker";
 	[self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([APPMPatternCollectionCell class]) bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
 	
+	self.collectionView.backgroundColor = [UIColor colorWithRed:0.9866 green:0.9773 blue:0.996 alpha:1.0];
 	self.collectionView.delaysContentTouches = NO;
 	UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
 	layout.minimumLineSpacing = 4.0;
 	layout.minimumInteritemSpacing = 5.0;
 	layout.itemSize = CGSizeMake(CGRectGetWidth(self.view.frame) / 2.0 - 11.0, 150);
+	
+	UIBarButtonItem *settingButton = [[UIBarButtonItem alloc] initWithTitle:@"Setting" style:UIBarButtonItemStylePlain target:self action:@selector(showSettingViewController:)];
+	self.navigationItem.rightBarButtonItem = settingButton;
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,51 +63,30 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-	return 5;
+	return 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 	APPMPatternCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
 	// Configure the cell
+	cell.thumbnailImageView.image = [[FAKFontAwesome dashboardIconWithSize:CGRectGetWidth(self.view.frame) / 8] imageWithSize:CGSizeMake(CGRectGetWidth(self.view.frame) / 4, CGRectGetWidth(self.view.frame) / 4)];
+	cell.titleLabel.text = @"Dashboard";
 	
 	return cell;
 }
 
 #pragma mark <UICollectionViewDelegate>
 
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
-}
-*/
-
-/*
-// Uncomment this method to specify if the specified item should be selected
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
-
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
-}
-*/
-
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
 	return UIEdgeInsetsMake(8, 8, 8, 8);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+	APPMProgressPatternViewController *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([APPMProgressPatternViewController class])];
+	[self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void)collectionView:(UICollectionView *)colView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
@@ -122,6 +109,15 @@ static NSString * const reuseIdentifier = @"Cell";
 	[UIView animateWithDuration:0.25 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveLinear animations:^{
 		cell.transform = CGAffineTransformMakeScale(1, 1);
 	} completion:nil];
+}
+
+#pragma mark -
+
+- (void)showSettingViewController:(id)sender
+{
+	APPMSettingViewController *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([APPMSettingViewController class])];
+	UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+	[self presentViewController:navigationController animated:YES completion:nil];
 }
 
 @end

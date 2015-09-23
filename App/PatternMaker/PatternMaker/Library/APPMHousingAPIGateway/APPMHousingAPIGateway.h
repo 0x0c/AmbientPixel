@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HousingApi.h"
 
 @interface APPMHousingAPIGateway : NSObject
+
+@property (nonatomic, strong) NSString *ipAddress;
+@property (nonatomic, strong) NSString *port;
+
++ (instancetype)sharedInstance;
+- (HousingApi *)sendCommand:(NSString *)command timeoutInterval:(NSTimeInterval)timeoutInterval error:(NSError **)error;
 
 @end

@@ -4,6 +4,9 @@
 target 'PatternMaker' do
 
 pod 'konashi-ios-sdk'
+pod 'JTProgressHUD'
+pod 'JGProgressHUD'
+pod 'FontAwesomeKit'
 
 end
 

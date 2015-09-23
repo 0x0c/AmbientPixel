@@ -13,12 +13,14 @@
 		E949D26F1BAC177D00DDE189 /* APPMPatternCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E949D26E1BAC177D00DDE189 /* APPMPatternCollectionViewController.m */; };
 		E949D2741BAC17A700DDE189 /* APPMPatternCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E949D2721BAC17A700DDE189 /* APPMPatternCollectionCell.m */; };
 		E949D2751BAC17A700DDE189 /* APPMPatternCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E949D2731BAC17A700DDE189 /* APPMPatternCollectionCell.xib */; };
+		E960A1A81BB2C05000F65980 /* APPMProgressPatternViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E960A1A71BB2C05000F65980 /* APPMProgressPatternViewController.m */; };
 		E99E73381B8785CF00E92F21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E99E73371B8785CF00E92F21 /* main.m */; };
 		E99E733B1B8785CF00E92F21 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E99E733A1B8785CF00E92F21 /* AppDelegate.m */; };
 		E99E73411B8785CF00E92F21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E99E733F1B8785CF00E92F21 /* Main.storyboard */; };
 		E99E73431B8785CF00E92F21 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E99E73421B8785CF00E92F21 /* Images.xcassets */; };
 		E99E73461B8785CF00E92F21 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E99E73441B8785CF00E92F21 /* LaunchScreen.xib */; };
 		E99E73521B8785CF00E92F21 /* PatternMakerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E99E73511B8785CF00E92F21 /* PatternMakerTests.m */; };
+		E9B057791BB2B52B00476249 /* APPMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B057781BB2B52B00476249 /* APPMSettingViewController.m */; };
 		E9C849BE1BAF1B6A00366674 /* APPMHousingAPIGateway.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C849B81BAF1B6A00366674 /* APPMHousingAPIGateway.m */; };
 		E9C849C01BAF1B6A00366674 /* libHousingApi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C849BD1BAF1B6A00366674 /* libHousingApi.a */; };
 /* End PBXBuildFile section */
@@ -46,6 +48,8 @@
 		E949D2711BAC17A700DDE189 /* APPMPatternCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPMPatternCollectionCell.h; sourceTree = "<group>"; };
 		E949D2721BAC17A700DDE189 /* APPMPatternCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPMPatternCollectionCell.m; sourceTree = "<group>"; };
 		E949D2731BAC17A700DDE189 /* APPMPatternCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APPMPatternCollectionCell.xib; sourceTree = "<group>"; };
+		E960A1A61BB2C05000F65980 /* APPMProgressPatternViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPMProgressPatternViewController.h; sourceTree = "<group>"; };
+		E960A1A71BB2C05000F65980 /* APPMProgressPatternViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPMProgressPatternViewController.m; sourceTree = "<group>"; };
 		E99E73321B8785CF00E92F21 /* PatternMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PatternMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E99E73361B8785CF00E92F21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E99E73371B8785CF00E92F21 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -57,6 +61,9 @@
 		E99E734B1B8785CF00E92F21 /* PatternMakerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PatternMakerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E99E73501B8785CF00E92F21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E99E73511B8785CF00E92F21 /* PatternMakerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PatternMakerTests.m; sourceTree = "<group>"; };
+		E9B057771BB2B52B00476249 /* APPMSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPMSettingViewController.h; sourceTree = "<group>"; };
+		E9B057781BB2B52B00476249 /* APPMSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPMSettingViewController.m; sourceTree = "<group>"; };
+		E9B0577A1BB2B68B00476249 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		E9C849B71BAF1B6A00366674 /* APPMHousingAPIGateway.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPMHousingAPIGateway.h; sourceTree = "<group>"; };
 		E9C849B81BAF1B6A00366674 /* APPMHousingAPIGateway.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPMHousingAPIGateway.m; sourceTree = "<group>"; };
 		E9C849BA1BAF1B6A00366674 /* HousingApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HousingApi.h; sourceTree = "<group>"; };
@@ -139,6 +146,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		E960A1A51BB2C05000F65980 /* ProgressPatternViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E960A1A61BB2C05000F65980 /* APPMProgressPatternViewController.h */,
+				E960A1A71BB2C05000F65980 /* APPMProgressPatternViewController.m */,
+			);
+			path = ProgressPatternViewController;
+			sourceTree = "<group>";
+		};
 		E99E73291B8785CF00E92F21 = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +178,7 @@
 		E99E73341B8785CF00E92F21 /* PatternMaker */ = {
 			isa = PBXGroup;
 			children = (
+				E9B0577A1BB2B68B00476249 /* Constant.h */,
 				E99E73391B8785CF00E92F21 /* AppDelegate.h */,
 				E99E733A1B8785CF00E92F21 /* AppDelegate.m */,
 				E9E4D0B51BAA00F2006C96A1 /* Class */,
@@ -199,6 +216,15 @@
 				E99E73501B8785CF00E92F21 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E9B057761BB2B51900476249 /* SettingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E9B057771BB2B52B00476249 /* APPMSettingViewController.h */,
+				E9B057781BB2B52B00476249 /* APPMSettingViewController.m */,
+			);
+			path = SettingViewController;
 			sourceTree = "<group>";
 		};
 		E9C849B61BAF1B6A00366674 /* APPMHousingAPIGateway */ = {
@@ -240,6 +266,8 @@
 		E9E4D0B71BAA00F2006C96A1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E960A1A51BB2C05000F65980 /* ProgressPatternViewController */,
+				E9B057761BB2B51900476249 /* SettingViewController */,
 				E949D26C1BAC177200DDE189 /* PatternCollectionViewController */,
 			);
 			path = ViewController;
@@ -398,7 +426,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E960A1A81BB2C05000F65980 /* APPMProgressPatternViewController.m in Sources */,
 				E949D22B1BAC0DE900DDE189 /* APPMPacket.m in Sources */,
+				E9B057791BB2B52B00476249 /* APPMSettingViewController.m in Sources */,
 				E949D2741BAC17A700DDE189 /* APPMPatternCollectionCell.m in Sources */,
 				E99E733B1B8785CF00E92F21 /* AppDelegate.m in Sources */,
 				E949D2301BAC10E400DDE189 /* APPMPixel.m in Sources */,

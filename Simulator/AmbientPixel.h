@@ -52,15 +52,18 @@ namespace AmbientPixel
 		VirtualPixel *port_2;
 
 		VirtualPixel(int number_of_vertex);
+		// 指定のポートにパケットを送信する
 		void send(int port_no, AmbientPixel::Packet *packet);
+		// データを受信する
 		void receive(int data);
+		// LEDを点灯させる
+		void change_led(int flag, int color);
+
+		// Debug
 		void dump_pixel(std::string indentation);
 		void dump_network(std::string indentation = "");
 		static std::string flag_str(int flag);
 		static std::string color_str(int flag);
-
-		// LEDを点灯させる
-		void change_led(int flag, int color);
 	};
 
 	class Packet
@@ -75,8 +78,9 @@ namespace AmbientPixel
 
 		Packet(int device_id, int flag, int color);
 		// 1byteのパケットデータを取得する
-		int data();
-
+		int packet_data();
+		
+		// Debug
 		void dump();
 	};
 }

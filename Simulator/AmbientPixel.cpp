@@ -33,15 +33,15 @@ namespace AmbientPixel
 		}
 
 		if (p) {
-			p->receive((int)packet->data());
+			p->receive((int)packet->packet_data());
 		}
 		else {
-			std::cout << "Send failed. (port : " << port_no << ")" << std::endl;
+			std::cout << ">> " << "Send failed. (port : " << port_no << ")" << std::endl;
 		}
 	}
 
 	void VirtualPixel::receive(int data) {
-		std::cout << "received data :" << data << std::endl;
+		std::cout << ">> " << "received data : " << data << std::endl;
 		// TODO: パケット受信時の処理を書く。
 		// LEDを駆動させるときはchange_ledメソッドを用いる。
 	}
@@ -49,11 +49,11 @@ namespace AmbientPixel
 	void VirtualPixel::change_led(int flag, int color) {
 		this->flag = flag;
 		this->color = color;
-		std::cout << "change_led flag :" << VirtualPixel::flag_str(this->flag) << ", color :" << VirtualPixel::color_str(this->color) << std::endl;
+		std::cout << ">> " << "change_led flag : " << VirtualPixel::flag_str(this->flag) << ", color : " << VirtualPixel::color_str(this->color) << std::endl;
 	}
 
 	void VirtualPixel::dump_pixel(std::string indentation) {
-		std::cout << indentation << "device id :" << this->device_id << ", flag :" << VirtualPixel::flag_str(this->flag) << ", color :" << VirtualPixel::color_str(this->color) << std::endl;
+		std::cout << indentation << "device id : " << this->device_id << ", flag : " << VirtualPixel::flag_str(this->flag) << ", color : " << VirtualPixel::color_str(this->color) << std::endl;
 	}
 
 	void VirtualPixel::dump_network(std::string indentation) {
@@ -141,11 +141,11 @@ namespace AmbientPixel
 	};
 
 	// 1byteのパケットデータを取得する
-	int Packet::data() {
+	int Packet::packet_data() {
 		return this->device_id | this-> flag | this->color;
 	}
 
 	void Packet::dump() {
-		std::cout << "device id :" << this->device_id << ", flag :" << VirtualPixel::flag_str(this->flag) << ", color :" << VirtualPixel::color_str(this->color);
+		std::cout << "device id : " << this->device_id << ", flag : " << VirtualPixel::flag_str(this->flag) << ", color : " << VirtualPixel::color_str(this->color);
 	}
 };

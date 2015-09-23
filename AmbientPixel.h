@@ -10,7 +10,7 @@
 
 namespace AmbientPixel
 {
-	struct ColorAttr
+	struct Color
 	{
 		uint8_t red;
 		uint8_t green;
@@ -40,6 +40,7 @@ namespace AmbientPixel
 				Glow	= 0b00000000,
 				Blink 	= 0b00001000,
 				TurnOff = 0b00010000,
+				Control = 0b00011000
 				//	0b00011000 はControlパケット
 			};
 		};
@@ -71,13 +72,12 @@ namespace AmbientPixel
 		uint8_t number_of_vertex;
 
 		Pixel(uint8_t number_of_vertex);
-		void send(uint8_t port_no, uint8_t packet);
-		void receive(uint8_t data);
+		// 指定したポートにパケットを送信する
+		void send(uint8_t port_no, AmbientPixel::Packet *packet);
+		// ポートを監視する
 		uint8_t watch(uint8_t port_no);
 		// LEDを点灯させる
-		void change_led(uint8_t flag, uint8_t color);
-		// パケットをフォワードする
-		void forward(uint8_t port_no, AmbientPixel::Packet *p);
+		void change_led(uint8_t flag, AmbientPixel::Color color);
 	};
 
 	class Packet

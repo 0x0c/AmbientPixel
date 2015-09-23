@@ -38,7 +38,7 @@
                 <outlet property="thumbnailImageView" destination="isr-Ss-Dkx" id="5u9-qf-FTj"/>
                 <outlet property="titleLabel" destination="2JG-aW-JSs" id="bf7-5d-yLY"/>
             </connections>
-            <point key="canvasLocation" x="171" y="173.5"/>
+            <point key="canvasLocation" x="171" y="203.5"/>
         </collectionViewCell>
     </objects>
 </document>
