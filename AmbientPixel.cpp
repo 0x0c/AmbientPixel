@@ -1,7 +1,7 @@
 #include "AmbientPixel.h"
 
 #ifndef AmbientPixel_Define
-#define ap_BitCompare(a, b) (a & b) == a
+#define ap_bit_compare(a, b) (a & b) == a
 #endif
 
 namespace AmbientPixel
@@ -45,45 +45,48 @@ namespace AmbientPixel
 	void Pixel::receive(uint8_t data) {
 		// TODO: 受信時の処理の実装
 		// Flagに応じて分岐する
-		if (ap_BitCompare(data, AmbientPixel::Pixel::Flag::Control)) {
-			if (ap_BitCompare(data, AmbientPixel::Pixel::ControlFlag::Network)) {
+		if (ap_bit_compare(data, AmbientPixel::Pixel::Flag::Control)) {
+			if (ap_bit_compare(data, AmbientPixel::Pixel::ControlFlag::Network)) {
 				// NWパケット
 				if (this->configured == false) {
 					this->configured = true;
 					this->device_id = (uint8_t)(data >> 5);
-					// TODO: フォワードする
 					// TODO: Acceptする
+
+					if (this->device_id < 7) {
+						// TODO: Device IDを+1してフォワードする
+					}
 				}
 				else {
 					// TODO: Denyする
 				}
 			}
-			else if (ap_BitCompare(data, AmbientPixel::Pixel::ControlFlag::Reset)) {
+			else if (ap_bit_compare(data, AmbientPixel::Pixel::ControlFlag::Reset)) {
 				// RSTパケット
 				this->configured = false;
 				this->device_id = 0;
 				// TODO: 隣接デバイスIDをクリアする
 				// TODO: フォワードする
 			}
-			else if (ap_BitCompare(data, AmbientPixel::Pixel::ControlFlag::Accept)) {
+			else if (ap_bit_compare(data, AmbientPixel::Pixel::ControlFlag::Accept)) {
 				// ACCパケット
 				// TODO: 隣接デバイスIDを登録
 			}
-			else if (ap_BitCompare(data, AmbientPixel::Pixel::ControlFlag::Deny)) {
+			else if (ap_bit_compare(data, AmbientPixel::Pixel::ControlFlag::Deny)) {
 				// DNYパケット
 			}
 		}
 		else  {
 			if ((uint8_t)(data >> 5) == this->device_id) {
 				// 自分宛てのパケット
-				if (ap_BitCompare(data, AmbientPixel::Pixel::Flag::TurnOff)) {
+				if (ap_bit_compare(data, AmbientPixel::Pixel::Flag::TurnOff)) {
 					// TODO: 消灯
 				}
 				else {
-					if (ap_BitCompare(data, AmbientPixel::Pixel::Flag::Glow)) {
+					if (ap_bit_compare(data, AmbientPixel::Pixel::Flag::Glow)) {
 						// TODO: グロー
 					}
-					else if (ap_BitCompare(data, AmbientPixel::Pixel::Flag::Blink)) {
+					else if (ap_bit_compare(data, AmbientPixel::Pixel::Flag::Blink)) {
 						// TODO: 点滅
 					}
 				}
@@ -109,25 +112,25 @@ namespace AmbientPixel
 	// Private
 	AmbientPixel::ColorAttr Pixel::color_at_index(uint8_t index) {
 		AmbientPixel::ColorAttr color(100, 0, 0); // Red
-		if (ap_BitCompare(index, AmbientPixel::Pixel::Color::Green)) {
+		if (ap_bit_compare(index, AmbientPixel::Pixel::Color::Green)) {
 			color = AmbientPixel::ColorAttr(0, 100, 0);
 		}
-		else if (ap_BitCompare(index, AmbientPixel::Pixel::Color::Blue)) {
+		else if (ap_bit_compare(index, AmbientPixel::Pixel::Color::Blue)) {
 			color = AmbientPixel::ColorAttr(0, 0, 100);	
 		}
-		else if (ap_BitCompare(index, AmbientPixel::Pixel::Color::Orange)) {
+		else if (ap_bit_compare(index, AmbientPixel::Pixel::Color::Orange)) {
 			color = AmbientPixel::ColorAttr(100, 50, 0);
 		}
-		else if (ap_BitCompare(index, AmbientPixel::Pixel::Color::Yellow)) {
+		else if (ap_bit_compare(index, AmbientPixel::Pixel::Color::Yellow)) {
 			color = AmbientPixel::ColorAttr(100, 100, 0);
 		}
-		else if (ap_BitCompare(index, AmbientPixel::Pixel::Color::Purple)) {
+		else if (ap_bit_compare(index, AmbientPixel::Pixel::Color::Purple)) {
 			color = AmbientPixel::ColorAttr(100, 0, 100);
 		}
-		else if (ap_BitCompare(index, AmbientPixel::Pixel::Color::Indigo)) {
+		else if (ap_bit_compare(index, AmbientPixel::Pixel::Color::Indigo)) {
 			color = AmbientPixel::ColorAttr(0, 50, 100);
 		}
-		else if (ap_BitCompare(index, AmbientPixel::Pixel::Color::White)) {
+		else if (ap_bit_compare(index, AmbientPixel::Pixel::Color::White)) {
 			color = AmbientPixel::ColorAttr(100, 100, 100);
 		}
 
