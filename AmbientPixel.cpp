@@ -13,6 +13,12 @@ namespace AmbientPixel
 		this->blue = blue;
 	}
 
+	// -------------------------- Port --------------------------
+	Port::Port(skInfraredCOM *com, uint8_t adjacent_device_id) {
+		this->com = com;
+		this->adjacent_device_id = adjacent_device_id;
+	}
+
 	// -------------------------- Pixel --------------------------
 	Pixel::Pixel(uint8_t number_of_vertex) {
 		// for (uint8_t i = 0; i < number_of_vertex; ++i) {
@@ -20,9 +26,9 @@ namespace AmbientPixel
 		// }
 
 		// プロトタイプ2号のピン配置
-		this->ports.push_back(new skInfraredCOM(2, 11));
-		this->ports.push_back(new skInfraredCOM(3, 12));
-		this->ports.push_back(new skInfraredCOM(4, 13));
+		this->ports.push_back(Port(new skInfraredCOM(2, 11), 0));
+		this->ports.push_back(Port(new skInfraredCOM(3, 12), 0));
+		this->ports.push_back(Port(new skInfraredCOM(3, 12), 0));
 
 		this->configured = false;
 		this->device_id = 0;
@@ -32,7 +38,8 @@ namespace AmbientPixel
 	}
 	
 	void Pixel::send(uint8_t port_no, uint8_t packet) {
-		this->ports[port_no]->Send(port_no, (unsigned char)packet);
+		Port p = this->ports[port_no];
+		p.com->Send(port_no, (unsigned char)packet);
 	}
 
 	void Pixel::receive(uint8_t data) {
@@ -45,32 +52,52 @@ namespace AmbientPixel
 					this->configured = true;
 					this->device_id = (uint8_t)(data >> 5);
 					// TODO: フォワードする
+					// TODO: Acceptする
+				}
+				else {
+					// TODO: Denyする
 				}
 			}
 			else if (ap_BitCompare(data, AmbientPixel::Pixel::ControlFlag::Reset)) {
 				// RSTパケット
 				this->configured = false;
 				this->device_id = 0;
+				// TODO: 隣接デバイスIDをクリアする
 				// TODO: フォワードする
+			}
+			else if (ap_BitCompare(data, AmbientPixel::Pixel::ControlFlag::Accept)) {
+				// ACCパケット
+				// TODO: 隣接デバイスIDを登録
+			}
+			else if (ap_BitCompare(data, AmbientPixel::Pixel::ControlFlag::Deny)) {
+				// DNYパケット
 			}
 		}
 		else  {
-			if (ap_BitCompare(data, AmbientPixel::Pixel::Flag::TurnOff)) {
-				// TODO: 消灯
+			if ((uint8_t)(data >> 5) == this->device_id) {
+				// 自分宛てのパケット
+				if (ap_BitCompare(data, AmbientPixel::Pixel::Flag::TurnOff)) {
+					// TODO: 消灯
+				}
+				else {
+					if (ap_BitCompare(data, AmbientPixel::Pixel::Flag::Glow)) {
+						// TODO: グロー
+					}
+					else if (ap_BitCompare(data, AmbientPixel::Pixel::Flag::Blink)) {
+						// TODO: 点滅
+					}
+				}
 			}
 			else {
-				if (ap_BitCompare(data, AmbientPixel::Pixel::Flag::Glow)) {
-					// TODO: グロー
-				}
-				else if (ap_BitCompare(data, AmbientPixel::Pixel::Flag::Blink)) {
-					// TODO: 点滅
-				}
+				// 自分宛てでないパケット
+				// TODO: 隣接するデバイスIDが大きいポートからフォワードする
 			}
 		}
 	}
 
 	uint8_t Pixel::watch(uint8_t port_no) {
-		return this->ports[port_no]->Recive(this->device_id);
+		Port p = this->ports[port_no];
+		return p.com->Recive(this->device_id);
 	}
 
 	// TODO: LEDを点灯させる

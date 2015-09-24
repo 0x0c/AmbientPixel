@@ -19,6 +19,15 @@ namespace AmbientPixel
 		ColorAttr(uint8_t red, uint8_t green, uint8_t blue);
 	};
 
+	class Port
+	{
+	public:
+		Port(skInfraredCOM *com, uint8_t adjacent_device_id);
+		
+		skInfraredCOM *com;
+		uint8_t adjacent_device_id;
+	};
+
 	class Packet;
 	class Pixel
 	{
@@ -26,9 +35,9 @@ namespace AmbientPixel
 		// フルカラーLED制御用変数
 		Adafruit_NeoPixel led;
 		// 送信・受信ポート
-		std::vector<skInfraredCOM *> ports;
+		std::vector<Port> ports;
 		bool configured;
-		
+
 		AmbientPixel::ColorAttr color_at_index(uint8_t index);
 	public:
 		struct Flag {
@@ -44,6 +53,8 @@ namespace AmbientPixel
 			enum {
 				Network	= 0b00000000,
 				Reset	= 0b00000001,
+				Accept	= 0b00000010,
+				Deny	= 0b00000011
 			};
 		};
 
