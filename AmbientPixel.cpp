@@ -15,13 +15,19 @@ namespace AmbientPixel
 
 	// -------------------------- Pixel --------------------------
 	Pixel::Pixel(uint8_t number_of_vertex) {
-		for (uint8_t i = 0; i < number_of_vertex; ++i) {
-			this->ports.push_back(new skInfraredCOM(i * 2, i * 2 + 1));
-		}
+		// for (uint8_t i = 0; i < number_of_vertex; ++i) {
+		// 	this->ports.push_back(new skInfraredCOM(0, 0));
+		// }
+
+		// プロトタイプ2号のピン配置
+		this->ports.push_back(new skInfraredCOM(2, 11));
+		this->ports.push_back(new skInfraredCOM(3, 12));
+		this->ports.push_back(new skInfraredCOM(4, 13));
+
 		this->configured = false;
 		this->device_id = 0;
 		this->number_of_vertex = number_of_vertex;
-		this->led = Adafruit_NeoPixel(1, 13, NEO_GRB + NEO_KHZ800);
+		this->led = Adafruit_NeoPixel(1, 10, NEO_GRB + NEO_KHZ800);
 		this->led.setBrightness(200);
 	}
 	
@@ -44,18 +50,20 @@ namespace AmbientPixel
 			else if (ap_BitCompare(data, AmbientPixel::Pixel::ControlFlag::Reset)) {
 				// RSTパケット
 				this->configured = false;
+				this->device_id = 0;
+				// TODO: フォワードする
 			}
 		}
 		else  {
 			if (ap_BitCompare(data, AmbientPixel::Pixel::Flag::TurnOff)) {
-				// 消灯
+				// TODO: 消灯
 			}
 			else {
 				if (ap_BitCompare(data, AmbientPixel::Pixel::Flag::Glow)) {
-					// グロー
+					// TODO: グロー
 				}
 				else if (ap_BitCompare(data, AmbientPixel::Pixel::Flag::Blink)) {
-					// 点滅
+					// TODO: 点滅
 				}
 			}
 		}

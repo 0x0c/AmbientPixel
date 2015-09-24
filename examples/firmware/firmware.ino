@@ -23,8 +23,8 @@ void loop()
 #ifdef MASTER
 	if(Serial.available()){
 		// アプリからパケットを受信
-	    char data = Serial.read();
-	    pixel.receive(data);
+		char data = Serial.read();
+		pixel.receive(data);
 	}
 #endif
 	for(int i = 0; i < pixel.number_of_vertex; i++){
@@ -35,4 +35,3 @@ void loop()
 		}
 	}
 }
-
