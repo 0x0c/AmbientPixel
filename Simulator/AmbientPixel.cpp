@@ -110,7 +110,7 @@ namespace AmbientPixel
 				std::cout << ">> " << this->device_id << " : Packet destination" << std::endl;
 				if (ap_bit_compare_flag(data, AmbientPixel::Pixel::Flag::TurnOff)) {
 					// 消灯
-					this->change_led(Pixel::Flag::TurnOff, Pixel::Color::Red);
+					this->change_led(Pixel::Flag::TurnOff, this->color);
 				}
 				else {
 					if (ap_bit_compare_flag(data, AmbientPixel::Pixel::Flag::Glow)) {

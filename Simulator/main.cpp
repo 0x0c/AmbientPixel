@@ -5,13 +5,6 @@ using namespace AmbientPixel;
 
 void test()
 {
-	// TODO:
-	// 1.Pixelの形に対応するように、Pixelインスタンスを生成する。
-	// 2.生成したインスタンスにMasterからNWパケットを送信する。
-	// 3.ネットワーク全体の状態（Device IDが幾つになったか、LEDの状態はどうなっているか）を表示する。dump_networkメソッドをMasterのPixelで呼び出す。
-	// 4.適当にPatternパケットを流してLEDの状態を変化させる。
-	// 5.再度ネットワーク全体の状態を表示する。
-
 	Pixel *master = new Pixel(Pixel::Vertex::Triangle);
 	Pixel *slave0 = new Pixel(Pixel::Vertex::Triangle);
 	master->port_0 = slave0;
@@ -21,7 +14,6 @@ void test()
 	Pixel *slave2 = new Pixel(Pixel::Vertex::Triangle);
 	slave1->port_2 = slave2;
 
-	// ここで2を行う
 	std::cout << "---NW Packet test---" << std::endl;
 	Packet p0 = Packet(0b00100000, Pixel::Flag::Control, Pixel::ControlFlag::Network);
 	Packet p1 = Packet(0b01000000, Pixel::Flag::Control, Pixel::ControlFlag::Network);
@@ -30,17 +22,26 @@ void test()
 	master->send(0, &p0);
 	master->send(1, &p1);
 	master->send(2, &p2);
-	
-	// 3の例
+
 	master->dump_network();
 	master->dump_clear();
 
-	// 4, 5の例
+	// LEDの状態がきちんと変更されるかテスト
 	std::cout << "---Change LED test---" << std::endl;
 	master->change_led(Pixel::Flag::Glow, Pixel::Color::Red);
 	master->dump_network();
 	master->dump_clear();
+	master->change_led(Pixel::Flag::Glow, Pixel::Color::Green);
+	master->dump_network();
+	master->dump_clear();
+	master->change_led(Pixel::Flag::Blink, Pixel::Color::Blue);
+	master->dump_network();
+	master->dump_clear();
+	master->change_led(Pixel::Flag::TurnOff, Pixel::Color::Red);
+	master->dump_network();
+	master->dump_clear();
 
+	// パターンがきちんと伝搬されるかテスト
 	std::cout << "---Pattern Packet test---" << std::endl;
 	Packet p = Packet(0b01100000, Pixel::Flag::Glow, Pixel::Color::Red);
 	master->send(0, &p);
