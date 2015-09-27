@@ -5,13 +5,14 @@
 namespace AmbientPixel
 {
 	class Packet;
-	class VirtualPixel
+	class Pixel
 	{
 	protected:
 		// 自分のデバイスID
 		int device_id;
 		// 頂点数
 		int number_of_vertex;
+		bool configured;
 
 		int flag;
 		int color;
@@ -24,6 +25,16 @@ namespace AmbientPixel
 				Control = 0b00011000,
 			};
 		};
+		
+		struct ControlFlag {
+			enum {
+				Network	= 0b00000000,
+				Reset	= 0b00000001,
+				Accept	= 0b00000010,
+				Deny	= 0b00000011
+			};
+		};
+
 		struct Color {
 			enum {
 				Red 	= 0b00000000,
@@ -47,19 +58,20 @@ namespace AmbientPixel
 		};
 
 		// 送信・受信ポート
-		VirtualPixel *port_0;
-		VirtualPixel *port_1;
-		VirtualPixel *port_2;
+		Pixel *port_0;
+		Pixel *port_1;
+		Pixel *port_2;
 
-		VirtualPixel(int number_of_vertex);
+		Pixel(int number_of_vertex);
 		// 指定のポートにパケットを送信する
 		void send(int port_no, AmbientPixel::Packet *packet);
 		// データを受信する
-		void receive(int data);
+		void receive(int port_no, int data);
 		// LEDを点灯させる
 		void change_led(int flag, int color);
 
 		// Debug
+		Pixel* pixel_for_index(int port_no);
 		void dump_pixel(std::string indentation);
 		void dump_network(std::string indentation = "");
 		static std::string flag_str(int flag);

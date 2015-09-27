@@ -88,7 +88,7 @@ namespace AmbientPixel
 		Pixel(uint8_t number_of_vertex);
 		// 指定したポートにパケットを送信する
 		void send(uint8_t port_no, uint8_t packet);
-		void receive(uint8_t data);
+		void receive(uint8_t port_no, uint8_t data);
 		// ポートを監視する
 		uint8_t watch(uint8_t port_no);
 		// LEDを点灯させる

@@ -31,7 +31,7 @@ void loop()
 		// 各ポートを監視する
 		uint8_t data = pixel.watch(i);
 		if(data != 0){
-		    pixel.receive(data);
+		    pixel.receive(i, data);
 		}
 	}
 }

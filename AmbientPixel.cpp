@@ -1,7 +1,7 @@
 #include "AmbientPixel.h"
 
 #ifndef AmbientPixel_Define
-#define ap_bit_compare(a, b) (a & b) == a
+#define ap_bit_compare(a, b) (a & b) == b
 #endif
 
 namespace AmbientPixel
@@ -42,7 +42,7 @@ namespace AmbientPixel
 		p.com->Send(port_no, (unsigned char)packet);
 	}
 
-	void Pixel::receive(uint8_t data) {
+	void Pixel::receive(uint8_t port_no, uint8_t data) {
 		// TODO: 受信時の処理の実装
 		// Flagに応じて分岐する
 		if (ap_bit_compare(data, AmbientPixel::Pixel::Flag::Control)) {
