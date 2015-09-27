@@ -47,8 +47,15 @@ void test()
 
 	// パターンがきちんと伝搬されるかテスト
 	std::cout << "--------Pattern Packet test--------" << std::endl;
-	Packet p = Packet(0b01100000, Pixel::Flag::Glow, Pixel::Color::Red);
-	master->send(0, &p);
+	Packet p3 = Packet(0b01100000, Pixel::Flag::Glow, Pixel::Color::Red);
+	master->send(0, &p3);
+	master->dump_network();
+	master->dump_clear();
+
+	// リセットパケットのテスト
+	std::cout << "--------Reset Packet test--------" << std::endl;
+	Packet p4 = Packet(0b00000000, Pixel::Flag::Control, Pixel::ControlFlag::Reset);
+	master->send(0, &p4);
 	master->dump_network();
 	master->dump_clear();
 }
