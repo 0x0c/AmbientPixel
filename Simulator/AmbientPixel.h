@@ -75,6 +75,7 @@ namespace AmbientPixel
 
 		// Debug
 		Pixel* pixel_for_index(int port_no);
+		int port_of_pixel(Pixel *p);
 		void dump_pixel(std::string indentation);
 		void dump_network(std::string indentation = "");
 		void dump_clear();

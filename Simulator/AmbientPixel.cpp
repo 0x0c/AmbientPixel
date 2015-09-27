@@ -165,6 +165,21 @@ namespace AmbientPixel
 		return p;
 	}
 
+	int Pixel::port_of_pixel(Pixel *p) {
+		int port_no = -1;
+		if (p == this->port_0) {
+			port_no = 0;
+		}
+		else if (p == this->port_1) {
+			port_no = 1;
+		}
+		else if (p == this->port_2) {
+			port_no = 2;
+		}
+
+		return port_no;
+	}
+
 	void Pixel::dump_pixel(std::string indentation) {
 		this->dumped = true;
 		std::cout << indentation << "device id : " << this->device_id << ", flag : " << Pixel::flag_str(this->flag) << ", color : " << Pixel::color_str(this->color) << std::endl;
