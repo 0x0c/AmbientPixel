@@ -66,9 +66,10 @@ namespace AmbientPixel
 					if (this->device_id < 7) {
 						// Device IDを+1してフォワードする
 						std::cout << ">> " << this->device_id << " : Forward" << std::endl;
-						Packet p = Packet((this->device_id + 1) << 5, Pixel::Flag::Control, Pixel::ControlFlag::Network);
-						this->send((port_no + 1) % 3, &p);
-						this->send((port_no + 2) % 3, &p);
+						Packet p0 = Packet((this->device_id + 1) << 5, Pixel::Flag::Control, Pixel::ControlFlag::Network);
+						Packet p1 = Packet((this->device_id + 2) << 5, Pixel::Flag::Control, Pixel::ControlFlag::Network);
+						this->send((port_no + 1) % 3, &p0);
+						this->send((port_no + 2) % 3, &p1);
 					}
 				}
 				else {
