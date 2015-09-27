@@ -15,12 +15,14 @@ void test()
 	Pixel *master = new Pixel(Pixel::Vertex::Triangle);
 	Pixel *slave0 = new Pixel(Pixel::Vertex::Triangle);
 	master->port_0 = slave0;
+	slave0->port_0 = master;
 	Pixel *slave1 = new Pixel(Pixel::Vertex::Triangle);
-	master->port_1 = slave1;
+	slave0->port_1 = slave1;
 	Pixel *slave2 = new Pixel(Pixel::Vertex::Triangle);
-	master->port_2 = slave2;
+	slave1->port_2 = slave2;
 
 	// ここで2を行う
+	std::cout << "---NW Packet test---" << std::endl;
 	Packet p0 = Packet(0b00100000, Pixel::Flag::Control, Pixel::ControlFlag::Network);
 	Packet p1 = Packet(0b01000000, Pixel::Flag::Control, Pixel::ControlFlag::Network);
 	Packet p2 = Packet(0b01100000, Pixel::Flag::Control, Pixel::ControlFlag::Network);
@@ -31,10 +33,19 @@ void test()
 	
 	// 3の例
 	master->dump_network();
+	master->dump_clear();
 
 	// 4, 5の例
-	// master->change_led(Pixel::Flag::Glow, Pixel::Color::Red);
-	// master->dump_network();
+	std::cout << "---Change LED test---" << std::endl;
+	master->change_led(Pixel::Flag::Glow, Pixel::Color::Red);
+	master->dump_network();
+	master->dump_clear();
+
+	std::cout << "---Pattern Packet test---" << std::endl;
+	Packet p = Packet(0b01100000, Pixel::Flag::Glow, Pixel::Color::Red);
+	master->send(0, &p);
+	master->dump_network();
+	master->dump_clear();
 }
 
 int main(int argc, char const *argv[])

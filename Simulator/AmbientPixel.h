@@ -16,6 +16,7 @@ namespace AmbientPixel
 
 		int flag;
 		int color;
+		bool dumped;
 	public:
 		struct Flag {
 			enum {
@@ -62,6 +63,8 @@ namespace AmbientPixel
 		Pixel *port_1;
 		Pixel *port_2;
 
+		int adjacent_device_id[3];
+
 		Pixel(int number_of_vertex);
 		// 指定のポートにパケットを送信する
 		void send(int port_no, AmbientPixel::Packet *packet);
@@ -74,6 +77,7 @@ namespace AmbientPixel
 		Pixel* pixel_for_index(int port_no);
 		void dump_pixel(std::string indentation);
 		void dump_network(std::string indentation = "");
+		void dump_clear();
 		static std::string flag_str(int flag);
 		static std::string color_str(int flag);
 	};
@@ -89,6 +93,7 @@ namespace AmbientPixel
 		int color;
 
 		Packet(int device_id, int flag, int color);
+		Packet(int bit);
 		// 1byteのパケットデータを取得する
 		int packet_data();
 		

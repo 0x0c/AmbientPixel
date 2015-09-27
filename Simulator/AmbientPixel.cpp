@@ -2,12 +2,29 @@
 #include <string>
 #include "AmbientPixel.h"
 
-#ifndef AmbientPixel_Define
-#define ap_bit_compare(a, b) (a & b) == b
-#endif
+// #ifndef AmbientPixel_Define
+// #define ap_bit_compare(a, b) (a & b) == b
+// #endif
 
 namespace AmbientPixel
 {
+	bool ap_bit_compare(int a, int b, int position, int length) {
+		unsigned char a_s = a << position;
+		unsigned char b_s = b << position;
+		a_s = a_s >> (8 - length);
+		b_s = b_s >> (8 - length);
+
+		return a_s == b_s;
+	}
+
+	bool ap_bit_compare_flag(int a, int b) {
+		return ap_bit_compare(a, b, 3, 2);
+	}
+
+	bool ap_bit_compare_control_flag(int a, int b) {
+		return ap_bit_compare(a, b, 5, 3);
+	}
+
 	// -------------------------- Pixel --------------------------
 	Pixel::Pixel(int number_of_vertex) {
 		this->number_of_vertex = number_of_vertex;
@@ -32,17 +49,17 @@ namespace AmbientPixel
 	void Pixel::receive(int port_no, int data) {
 		std::cout << ">> " << this->device_id << " : received data : " << static_cast<std::bitset<8> >(data) << std::endl;
 
-		// TODO: パケット受信時の処理を書く。
+		// パケット受信時の処理を書く。
 		// Flagに応じて分岐する
-		if (ap_bit_compare(data, AmbientPixel::Pixel::Flag::Control)) {
-			if (ap_bit_compare(data, AmbientPixel::Pixel::ControlFlag::Network)) {
+		if (ap_bit_compare_flag(data, AmbientPixel::Pixel::Flag::Control)) {
+			if (ap_bit_compare_control_flag(data, AmbientPixel::Pixel::ControlFlag::Network)) {
 				// NWパケット
 				if (this->configured == false) {
 					this->configured = true;
-					this->device_id = (uint8_t)(data >> 5);
+					this->device_id = (int)(data >> 5);
 					
 					// Acceptする
-					std::cout << ">> " << this->device_id << " : Accept" << std::endl;
+					std::cout << ">> " << this->device_id << " : Accept(" << this->device_id << ")" << std::endl;
 					Packet p = Packet(this->device_id << 5, Pixel::Flag::Control, Pixel::ControlFlag::Accept);
 					this->send(port_no, &p);
 
@@ -61,39 +78,63 @@ namespace AmbientPixel
 					this->send(port_no, &p);
 				}
 			}
-			else if (ap_bit_compare(data, AmbientPixel::Pixel::ControlFlag::Reset)) {
+			else if (ap_bit_compare_control_flag(data, AmbientPixel::Pixel::ControlFlag::Reset)) {
 				// RSTパケット
 				this->configured = false;
 				this->device_id = 0;
-				// TODO: 隣接デバイスIDをクリアする
-				// TODO: フォワードする
+				
+				// 隣接デバイスIDをクリアする
+				this->adjacent_device_id[0] = 0;
+				this->adjacent_device_id[1] = 0;
+				this->adjacent_device_id[2] = 0;
+
+				// フォワードする
+				std::cout << ">> " << this->device_id << " : Reset" << std::endl;
+				Packet p = Packet(0, Pixel::Flag::Control, Pixel::ControlFlag::Reset);
+				this->send((port_no + 1) % 3, &p);
+				this->send((port_no + 2) % 3, &p);
 			}
-			else if (ap_bit_compare(data, AmbientPixel::Pixel::ControlFlag::Accept)) {
+			else if (ap_bit_compare_control_flag(data, AmbientPixel::Pixel::ControlFlag::Accept)) {
 				// ACCパケット
-				// TODO: 隣接デバイスIDを登録
+				// 隣接デバイスIDを登録
+				this->adjacent_device_id[port_no] = (int)(data >> 5);
+				std::cout << ">> " << this->device_id << " : ACC : port(" << port_no << ") : adj_device_id(" << this->adjacent_device_id[port_no] << ")" << std::endl;
 			}
-			else if (ap_bit_compare(data, AmbientPixel::Pixel::ControlFlag::Deny)) {
+			else if (ap_bit_compare_control_flag(data, AmbientPixel::Pixel::ControlFlag::Deny)) {
 				// DNYパケット
 			}
 		}
 		else  {
 			if ((uint8_t)(data >> 5) == this->device_id) {
 				// 自分宛てのパケット
-				if (ap_bit_compare(data, AmbientPixel::Pixel::Flag::TurnOff)) {
-					// TODO: 消灯
+				std::cout << ">> " << this->device_id << " : Packet destination" << std::endl;
+				if (ap_bit_compare_flag(data, AmbientPixel::Pixel::Flag::TurnOff)) {
+					// 消灯
+					this->change_led(Pixel::Flag::TurnOff, Pixel::Color::Red);
 				}
 				else {
-					if (ap_bit_compare(data, AmbientPixel::Pixel::Flag::Glow)) {
-						// TODO: グロー
+					if (ap_bit_compare_flag(data, AmbientPixel::Pixel::Flag::Glow)) {
+						// グロー
+						this->change_led(Pixel::Flag::Glow, Pixel::Color::Red);
 					}
-					else if (ap_bit_compare(data, AmbientPixel::Pixel::Flag::Blink)) {
-						// TODO: 点滅
+					else if (ap_bit_compare_flag(data, AmbientPixel::Pixel::Flag::Blink)) {
+						// 点滅
+						this->change_led(Pixel::Flag::Blink, Pixel::Color::Red);
 					}
 				}
 			}
 			else {
 				// 自分宛てでないパケット
-				// TODO: 隣接するデバイスIDが大きいポートからフォワードする
+				// 隣接するデバイスIDが大きいポートからフォワードする
+				Packet p = Packet(data);
+				if (this->adjacent_device_id[(port_no + 1) % 3] < this->adjacent_device_id[(port_no + 2) % 3]) {
+					std::cout << ">> " << this->device_id << " : Forward to " << (port_no + 2) % 3 << std::endl;
+					this->send((port_no + 2) % 3, &p);
+				}
+				else {
+					std::cout << ">> " << this->device_id << " : Forward to port_" << (port_no + 1) % 3 << std::endl;
+					this->send((port_no + 1) % 3, &p);
+				}
 			}
 		}
 	}
@@ -125,19 +166,33 @@ namespace AmbientPixel
 	}
 
 	void Pixel::dump_pixel(std::string indentation) {
+		this->dumped = true;
 		std::cout << indentation << "device id : " << this->device_id << ", flag : " << Pixel::flag_str(this->flag) << ", color : " << Pixel::color_str(this->color) << std::endl;
 	}
 
 	void Pixel::dump_network(std::string indentation) {
 		this->dump_pixel(indentation);
-		if (this->port_0) {
+		if (this->port_0 && this->port_0->dumped == false) {
 			this->port_0->dump_network(indentation + '\t');
 		}
-		if (this->port_1) {
+		if (this->port_1 && this->port_1->dumped == false) {
 			this->port_1->dump_network(indentation + '\t');
 		}
-		if (this->port_2) {
+		if (this->port_2 && this->port_2->dumped == false) {
 			this->port_2->dump_network(indentation + '\t');
+		}
+	}
+
+	void Pixel::dump_clear() {
+		this->dumped = false;
+		if (this->port_0 && this->port_0->dumped == true) {
+			this->port_0->dump_clear();
+		}
+		if (this->port_1 && this->port_1->dumped == true) {
+			this->port_1->dump_clear();
+		}
+		if (this->port_2 && this->port_2->dumped == true) {
+			this->port_2->dump_clear();
 		}
 	}
 
@@ -210,6 +265,12 @@ namespace AmbientPixel
 		this->device_id = device_id;
 		this->flag = flag;
 		this->color = color;
+	};
+
+	Packet::Packet(int bit) {
+		this->device_id = bit >> 5;
+		this->flag = bit << 3 >> 6;
+		this->color = bit << 5 >> 5;
 	};
 
 	// 1byteのパケットデータを取得する
