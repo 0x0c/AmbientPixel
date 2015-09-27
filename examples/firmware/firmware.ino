@@ -24,7 +24,7 @@ void loop()
 	if(Serial.available()){
 		// アプリからパケットを受信
 		char data = Serial.read();
-		pixel.receive(data);
+		pixel.receive(0, data);
 	}
 #endif
 	for(int i = 0; i < pixel.number_of_vertex; i++){

@@ -42,7 +42,7 @@ namespace AmbientPixel
 			p->receive(port_no, (int)packet->packet_data());
 		}
 		else {
-			std::cout << ">> " << "Send failed. (port : " << port_no << ")" << std::endl;
+			std::cout << ">> " << this->device_id << " : Send failed. (port : " << port_no << ")" << std::endl;
 		}
 	}
 
@@ -128,11 +128,11 @@ namespace AmbientPixel
 				// 隣接するデバイスIDが大きいポートからフォワードする
 				Packet p = Packet(data);
 				if (this->adjacent_device_id[(port_no + 1) % 3] < this->adjacent_device_id[(port_no + 2) % 3]) {
-					std::cout << ">> " << this->device_id << " : Forward to " << (port_no + 2) % 3 << std::endl;
+					std::cout << ">> " << this->device_id << " : Forward to " << this->adjacent_device_id[(port_no + 2) % 3] << std::endl;
 					this->send((port_no + 2) % 3, &p);
 				}
 				else {
-					std::cout << ">> " << this->device_id << " : Forward to port_" << (port_no + 1) % 3 << std::endl;
+					std::cout << ">> " << this->device_id << " : Forward to " << this->adjacent_device_id[(port_no + 1) % 3] << std::endl;
 					this->send((port_no + 1) % 3, &p);
 				}
 			}
