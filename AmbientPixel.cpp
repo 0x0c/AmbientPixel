@@ -1,11 +1,13 @@
 #include "AmbientPixel.h"
 
-#define DEBUG 1
+#define DEBUG
 #ifdef DEBUG
-#define AP_DEBUG_LOG(x) Serial.println(x)
+#define AP_DEBUG_LOG(x) Serial.print(x)
+#define AP_DEBUG_LOG_LN(x) Serial.println(x)
 #define AP_DEBUG_LOG_FMT(x, y) Serial.println(x, y)
 #else
 #define AP_DEBUG_LOG(x)
+#define AP_DEBUG_LOG_LN(x)
 #define AP_DEBUG_LOG_FMT(x, y)
 #endif
 
@@ -55,7 +57,7 @@ namespace AmbientPixel
 		// プロトタイプ2号のピン配置
 		this->ports.push_back(Port(new skInfraredCOM(2, 11), 0));
 		this->ports.push_back(Port(new skInfraredCOM(3, 12), 0));
-		this->ports.push_back(Port(new skInfraredCOM(3, 12), 0));
+		this->ports.push_back(Port(new skInfraredCOM(4, 13), 0));
 
 		this->configured = false;
 		this->device_id = 0;
@@ -65,31 +67,34 @@ namespace AmbientPixel
 	}
 	
 	void Pixel::send(uint8_t port_no, uint8_t packet) {
-		AP_DEBUG_LOG("---");
-		AP_DEBUG_LOG("Send to port");
+		delay(50);
+		AP_DEBUG_LOG(">> Send to port : ");
 		AP_DEBUG_LOG(port_no);
+		AP_DEBUG_LOG(" , data : ");
 		AP_DEBUG_LOG_FMT(packet, BIN);
 		Port p = this->ports[port_no];
-		p.com->Send(0, (unsigned char)packet);
-		delay(10);
+		p.com->Send(255, packet);
+		delay(50);
 	}
 
 	void Pixel::receive(uint8_t port_no, uint8_t data) {
 		// 受信時の処理の実装
 		// Flagに応じて分岐する
-		AP_DEBUG_LOG("---");
-		AP_DEBUG_LOG("Receive from port");
+		AP_DEBUG_LOG_LN("---");
+		AP_DEBUG_LOG(">> Receive from port : ");
 		AP_DEBUG_LOG(port_no);
+		AP_DEBUG_LOG(", data : ");
+		AP_DEBUG_LOG_FMT(data, BIN);
 		if (ap_bit_compare_flag(data, AmbientPixel::Pixel::Flag::Control)) {
 			if (ap_bit_compare_control_flag(data, AmbientPixel::Pixel::ControlFlag::Network)) {
 				// NWパケット
-				AP_DEBUG_LOG("NW packet");
+				AP_DEBUG_LOG_LN(">> NW packet");
 				if (this->configured == false) {
 					// Acceptする
 					this->configured = true;
 					this->device_id = (uint8_t)(data >> 5);
-					AP_DEBUG_LOG("Accept");
-					AP_DEBUG_LOG(this->device_id);
+					AP_DEBUG_LOG(">> Accept : ");
+					AP_DEBUG_LOG_FMT(this->device_id, BIN);
 
 					uint8_t p = Packet::packet_data(this->device_id << 5, Pixel::Flag::Control, Pixel::ControlFlag::Accept);
 					this->send(port_no, p);
@@ -104,14 +109,14 @@ namespace AmbientPixel
 				}
 				else {
 					// Denyする
-					AP_DEBUG_LOG("Deny");
+					AP_DEBUG_LOG_LN(">> Deny");
 					uint8_t p = Packet::packet_data(this->device_id << 5, Pixel::Flag::Control, Pixel::ControlFlag::Deny);
 					this->send(port_no, p);
 				}
 			}
 			else if (ap_bit_compare_control_flag(data, AmbientPixel::Pixel::ControlFlag::Reset)) {
 				// RSTパケット
-				AP_DEBUG_LOG("RST packet");
+				AP_DEBUG_LOG_LN(">> RST packet");
 				this->configured = false;
 				this->device_id = 0;
 				
@@ -128,11 +133,12 @@ namespace AmbientPixel
 			else if (ap_bit_compare_control_flag(data, AmbientPixel::Pixel::ControlFlag::Accept)) {
 				// ACCパケット
 				// 隣接デバイスIDを登録
-				AP_DEBUG_LOG("Send ACC");
+				AP_DEBUG_LOG_LN(">> Receive ACC");
 				this->ports[port_no].adjacent_device_id = (uint8_t)(data >> 5);
 			}
 			else if (ap_bit_compare_control_flag(data, AmbientPixel::Pixel::ControlFlag::Deny)) {
 				// DNYパケット
+				AP_DEBUG_LOG_LN(">> Receive DNY");
 			}
 		}
 		else  {
@@ -143,11 +149,13 @@ namespace AmbientPixel
 			else {
 				// 自分宛てでないパケット
 				// 隣接するデバイスIDが大きいポートからフォワードする
-				AP_DEBUG_LOG("Forward");
+				AP_DEBUG_LOG(">> Forward to ");
 				if (this->ports[(port_no + 1) % 3].adjacent_device_id < this->ports[(port_no + 2) % 3].adjacent_device_id) {
+					AP_DEBUG_LOG_LN((port_no + 2) % 3);
 					this->send((port_no + 2) % 3, data);
 				}
 				else {
+					AP_DEBUG_LOG_LN((port_no + 1) % 3);
 					this->send((port_no + 1) % 3, data);
 				}
 			}
@@ -156,24 +164,25 @@ namespace AmbientPixel
 
 	uint8_t Pixel::watch(uint8_t port_no) {
 		Port p = this->ports[port_no];
-		return p.com->Recive(0);
+		uint8_t data = p.com->Recive(1);
+		return data;
 	}
 
 	// LEDを点灯させる
 	void Pixel::change_led(uint8_t flag, AmbientPixel::ColorAttr color) {
-		AP_DEBUG_LOG("Change LED");
+		AP_DEBUG_LOG(">> Change LED : ");
 		this->blink = false;
-		this->led.setBrightness(100);
 		if (ap_bit_compare_flag(flag, AmbientPixel::Pixel::Flag::TurnOff)) {
 			// 消灯
-			AP_DEBUG_LOG("Turn off");
+			AP_DEBUG_LOG_LN("Turn off");
 			this->led.setBrightness(0);
 		}
 		else {
+			this->led.setBrightness(100);
 			if (ap_bit_compare_flag(flag, AmbientPixel::Pixel::Flag::Glow)) {
 				// グロー
-				AP_DEBUG_LOG("Glow");
-				float duration = 1.0;
+				AP_DEBUG_LOG_LN("Glow");
+				float duration = 3.0;
 				float pt = duration / 255.0 * 1000;
 				float dr = (color.red - this->current_color.red) / 255.0;
 				float dg = (color.green - this->current_color.green) / 255.0;
@@ -188,16 +197,16 @@ namespace AmbientPixel
 					this->led.show();
 					delay(pt);
 				}
+				this->current_color = color;
 			}
 			else if (ap_bit_compare_flag(flag, AmbientPixel::Pixel::Flag::Blink)) {
 				// 点滅
-				AP_DEBUG_LOG("Blink");
+				AP_DEBUG_LOG_LN("Blink");
 				this->blink = true;
 				this->led.setPixelColor(0, color.red, color.green, color.blue);
 			}
 		}
 		this->led.show();
-		this->current_color = color;
 	}
 
 	// Private
