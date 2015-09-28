@@ -144,7 +144,7 @@ namespace AmbientPixel
 		else  {
 			if ((uint8_t)(data >> 5) == this->device_id) {
 				// 自分宛てのパケット
-				this->change_led(Pixel::Flag::Blink, this->color_at_index((data << 5) >> 5));
+				this->change_led(((data << 3) >> 6) << 3, this->color_at_index((data << 5) >> 5));
 			}
 			else {
 				// 自分宛てでないパケット
@@ -172,41 +172,47 @@ namespace AmbientPixel
 	void Pixel::change_led(uint8_t flag, AmbientPixel::ColorAttr color) {
 		AP_DEBUG_LOG(">> Change LED : ");
 		this->blink = false;
-		if (ap_bit_compare_flag(flag, AmbientPixel::Pixel::Flag::TurnOff)) {
+		if (flag == AmbientPixel::Pixel::Flag::TurnOff) {
 			// 消灯
 			AP_DEBUG_LOG_LN("Turn off");
-			this->led.setBrightness(0);
+			for(int i = 100; i >= 0; i--) {
+				this->led.setBrightness(i);
+				this->led.show();
+				delay(4);
+			}
 		}
 		else {
-			this->led.setBrightness(100);
-			if (ap_bit_compare_flag(flag, AmbientPixel::Pixel::Flag::Glow)) {
+			if (flag == AmbientPixel::Pixel::Flag::Glow) {
 				// グロー
 				AP_DEBUG_LOG_LN("Glow");
-				float duration = 3.0;
-				float pt = duration / 255.0 * 1000;
 				float dr = (color.red - this->current_color.red) / 255.0;
 				float dg = (color.green - this->current_color.green) / 255.0;
 				float db = (color.blue - this->current_color.blue) / 255.0;
-
-				for(uint8_t j = 0; j < 255; j++) {
-					float r = this->current_color.red + (dr * j);
-					float g = this->current_color.green + (dg * j);
-					float b = this->current_color.blue + (db * j);
-
+				for(int i = 0; i < 255; i++) {
+					float r = this->current_color.red + (dr * i);
+					float g = this->current_color.green + (dg * i);
+					float b = this->current_color.blue + (db * i);
 					this->led.setPixelColor(0, r, g, b);
 					this->led.show();
-					delay(pt);
+					delay(2);
 				}
+
 				this->current_color = color;
 			}
-			else if (ap_bit_compare_flag(flag, AmbientPixel::Pixel::Flag::Blink)) {
+			else if (flag == AmbientPixel::Pixel::Flag::Blink) {
 				// 点滅
 				AP_DEBUG_LOG_LN("Blink");
 				this->blink = true;
 				this->led.setPixelColor(0, color.red, color.green, color.blue);
+				this->led.show();
+				delay(500);
+				this->led.setBrightness(0);
+				this->led.show();
+				delay(500);
+				this->led.setBrightness(100);
+				this->led.show();
 			}
 		}
-		this->led.show();
 	}
 
 	// Private
