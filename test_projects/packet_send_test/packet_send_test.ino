@@ -8,8 +8,6 @@
 
 using namespace AmbientPixel;
 
-// Slaveの時は0にする
-#define MASTER 0
 Pixel pixel(AmbientPixel::Pixel::Vertex::Triangle);
 
 void setup()
@@ -20,13 +18,27 @@ void setup()
 
 void loop()
 {
-#ifdef MASTER
 	if(Serial.available()){
 		// アプリからパケットを受信
 		char data = Serial.read();
-		pixel.receive(0, data);
+		switch (data) {
+		    case 'a': {
+				Serial.println("NW");
+				pixel.send(0, Packet::packet_data(0b00100000, Pixel::Flag::Control, Pixel::ControlFlag::Network));
+				pixel.send(1, Packet::packet_data(0b01000000, Pixel::Flag::Control, Pixel::ControlFlag::Network));
+				pixel.send(2, Packet::packet_data(0b01100000, Pixel::Flag::Control, Pixel::ControlFlag::Network));
+		    }
+		      break;
+		    case 'b': {
+				Serial.println("Send Glow:Red");
+				pixel.send(0, Packet::packet_data(0b00100000, Pixel::Flag::Glow, Pixel::Color::Red));
+		    }
+		      break;
+		    default:
+		      break;
+		}
 	}
-#endif
+
 	for(int i = 0; i < pixel.number_of_vertex; i++){
 		// 各ポートを監視する
 		uint8_t data = pixel.watch(i);

@@ -16,19 +16,26 @@ namespace AmbientPixel
 		uint8_t red;
 		uint8_t green;
 		uint8_t blue;
+		ColorAttr();
 		ColorAttr(uint8_t red, uint8_t green, uint8_t blue);
 	};
 
 	class Port
 	{
 	public:
-		Port(skInfraredCOM *com, uint8_t adjacent_device_id);
-		
 		skInfraredCOM *com;
 		uint8_t adjacent_device_id;
+
+		Port(skInfraredCOM *com, uint8_t adjacent_device_id);
 	};
 
-	class Packet;
+	class Packet
+	{
+	public:
+		// 1byteのパケットデータを生成する
+		static uint8_t packet_data(uint8_t device_id, uint8_t flag, uint8_t color);
+	};
+
 	class Pixel
 	{
 	private:
@@ -37,6 +44,8 @@ namespace AmbientPixel
 		// 送信・受信ポート
 		std::vector<Port> ports;
 		bool configured;
+		bool blink;
+		AmbientPixel::ColorAttr current_color;
 
 		AmbientPixel::ColorAttr color_at_index(uint8_t index);
 	public:
@@ -93,12 +102,5 @@ namespace AmbientPixel
 		uint8_t watch(uint8_t port_no);
 		// LEDを点灯させる
 		void change_led(uint8_t flag, AmbientPixel::ColorAttr color);
-	};
-
-	class Packet
-	{
-	public:
-		// 1byteのパケットデータを生成する
-		static uint8_t packet_data(uint8_t device_id, uint8_t flag, uint8_t color);
 	};
 }
