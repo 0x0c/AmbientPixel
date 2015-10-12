@@ -8,6 +8,17 @@
 #include <skInfraredCOM.h>
 #include <Adafruit_NeoPixel.h>
 
+#define DEBUG
+#ifdef DEBUG
+#define AP_DEBUG_LOG(x) Serial.print(x)
+#define AP_DEBUG_LOG_LN(x) Serial.println(x)
+#define AP_DEBUG_LOG_FMT(x, y) Serial.println(x, y)
+#else
+#define AP_DEBUG_LOG(x)
+#define AP_DEBUG_LOG_LN(x)
+#define AP_DEBUG_LOG_FMT(x, y)
+#endif
+
 namespace AmbientPixel
 {
 	class ColorAttr
@@ -44,6 +55,7 @@ namespace AmbientPixel
 		// 送信・受信ポート
 		std::vector<Port> ports;
 		bool configured;
+		bool isMaster;
 		bool blink;
 		AmbientPixel::ColorAttr current_color;
 
@@ -102,5 +114,9 @@ namespace AmbientPixel
 		uint8_t watch(uint8_t port_no);
 		// LEDを点灯させる
 		void change_led(uint8_t flag, AmbientPixel::ColorAttr color);
+		void setMasterEnabled(bool enabled) {
+			this->configured = enabled;
+			this->isMaster = enabled;
+		};
 	};
 }

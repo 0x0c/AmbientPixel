@@ -8,6 +8,7 @@
 
 using namespace AmbientPixel;
 
+uint8_t device_id = 0b00000110; // 0b00000000 ~ 0b11100000まで上位3bitを使用
 Pixel pixel(AmbientPixel::Pixel::Vertex::Triangle);
 
 void setup()
@@ -15,19 +16,17 @@ void setup()
 	// put your setup code here, to run once:
 	Serial.begin(9600);
 	Serial.println("<<AmbientPixel Start>>");
+	pixel.device_id = device_id;
 }
 
+int cnt = 0;
 void loop()
 {
-	for(int i = 0; i < pixel.number_of_vertex; i++) {
-		// 各ポートを監視する
-		uint8_t data = pixel.watch(i);
-		if(data != 0) {
-			Serial.println(data, BIN);
-		    pixel.receive(i, data);
-		}
-		delay(50);
+	uint8_t data = pixel.watch(cnt);
+	if(data != 0) {
+	    pixel.receive(cnt, data);
 	}
+	cnt = (cnt + 1) % 3;
 }
 
 void serialEvent()
@@ -35,30 +34,49 @@ void serialEvent()
 	// アプリからパケットを受信
 	char data = Serial.read();
 	switch (data) {
-		case '1': {
+		case '-': {
 			pixel.send(0, Packet::packet_data(0b00000000, Pixel::Flag::Control, Pixel::ControlFlag::Reset));
+			pixel.send(1, Packet::packet_data(0b00000000, Pixel::Flag::Control, Pixel::ControlFlag::Reset));
+			pixel.send(2, Packet::packet_data(0b00000000, Pixel::Flag::Control, Pixel::ControlFlag::Reset));
 		}
 			break;
-		case 'a': {
+		case '=': {
 			pixel.send(0, Packet::packet_data(0b00100000, Pixel::Flag::Control, Pixel::ControlFlag::Network));
-			// pixel.send(1, Packet::packet_data(0b01000000, Pixel::Flag::Control, Pixel::ControlFlag::Network));
-			// pixel.send(2, Packet::packet_data(0b01100000, Pixel::Flag::Control, Pixel::ControlFlag::Network));
+			pixel.send(1, Packet::packet_data(0b01000000, Pixel::Flag::Control, Pixel::ControlFlag::Network));
+			pixel.send(2, Packet::packet_data(0b01100000, Pixel::Flag::Control, Pixel::ControlFlag::Network));
 		}
 			break;
-		case 'b': {
+		case '1': {
 			pixel.send(0, Packet::packet_data(0b00100000, Pixel::Flag::Glow, Pixel::Color::Red));
 		}
 			break;
-		case 'c': {
+		case '2': {
 			pixel.send(0, Packet::packet_data(0b00100000, Pixel::Flag::Glow, Pixel::Color::Green));
 		}
 			break;
-		case 'd': {
+		case '3': {
 			pixel.send(0, Packet::packet_data(0b00100000, Pixel::Flag::Glow, Pixel::Color::Blue));
 		}
 			break;
-		case 'e': {
+		case '4': {
 			pixel.send(0, Packet::packet_data(0b00100000, Pixel::Flag::TurnOff, NULL));
+		}
+			break;
+
+		case 'a': {
+			pixel.send(0, Packet::packet_data(0b01000000, Pixel::Flag::Glow, Pixel::Color::Red));
+		}
+			break;
+		case 'b': {
+			pixel.send(0, Packet::packet_data(0b01000000, Pixel::Flag::Glow, Pixel::Color::Green));
+		}
+			break;
+		case 'c': {
+			pixel.send(0, Packet::packet_data(0b01000000, Pixel::Flag::Glow, Pixel::Color::Blue));
+		}
+			break;
+		case 'd': {
+			pixel.send(0, Packet::packet_data(0b01000000, Pixel::Flag::TurnOff, NULL));
 		}
 			break;
 		default:
