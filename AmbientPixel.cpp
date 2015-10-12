@@ -234,9 +234,6 @@ namespace AmbientPixel
 		else if (ap_bit_compare_control_flag(index, AmbientPixel::Pixel::Color::Orange)) {
 			color = AmbientPixel::ColorAttr(100, 50, 0);
 		}
-		else if (ap_bit_compare_control_flag(index, AmbientPixel::Pixel::Color::Yellow)) {
-			color = AmbientPixel::ColorAttr(100, 100, 0);
-		}
 		else if (ap_bit_compare_control_flag(index, AmbientPixel::Pixel::Color::Purple)) {
 			color = AmbientPixel::ColorAttr(100, 0, 100);
 		}
