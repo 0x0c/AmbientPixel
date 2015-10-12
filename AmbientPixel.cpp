@@ -174,17 +174,21 @@ namespace AmbientPixel
 	void Pixel::change_led(uint8_t flag, AmbientPixel::ColorAttr color) {
 		AP_DEBUG_LOG(">> Change LED : ");
 		this->blink = false;
-		if (flag == AmbientPixel::Pixel::Flag::TurnOff) {
-			// 消灯
-			AP_DEBUG_LOG_LN("Turn off");
-			for(int i = 100; i >= 0; i--) {
-				this->led.setBrightness(i);
+		if(flag == AmbientPixel::Pixel::Flag::TurnOff) {
+			float dr = (color.red - this->current_color.red) / 255.0;
+			float dg = (color.green - this->current_color.green) / 255.0;
+			float db = (color.blue - this->current_color.blue) / 255.0;
+			for(int i = 0; i < 255; i++) {
+				float r = this->current_color.red + (dr * i);
+				float g = this->current_color.green + (dg * i);
+				float b = this->current_color.blue + (db * i);
+				this->led.setPixelColor(0, r, g, b);
 				this->led.show();
-				delay(2);
+				delay(4);
 			}
+			this->current_color = color;
 		}
 		else {
-			this->led.setBrightness(100);
 			if (flag == AmbientPixel::Pixel::Flag::Glow) {
 				// グロー
 				AP_DEBUG_LOG_LN("Glow");
@@ -197,7 +201,7 @@ namespace AmbientPixel
 					float b = this->current_color.blue + (db * i);
 					this->led.setPixelColor(0, r, g, b);
 					this->led.show();
-					delay(1);
+					delay(4);
 				}
 
 				this->current_color = color;

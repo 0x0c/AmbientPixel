@@ -174,52 +174,20 @@ namespace AmbientPixel
 		this->blink = false;
 
 		if(flag == AmbientPixel::Pixel::Flag::TurnOff) {
-
-		float dr = (color.red - this->current_color.red) / 255.0;
-				float dg = (color.green - this->current_color.green) / 255.0;
-				float db = (color.blue - this->current_color.blue) / 255.0;
-				for(int i = 0; i < 255; i++) {
-					float r = this->current_color.red + (dr * i);
-					float g = this->current_color.green + (dg * i);
-					float b = this->current_color.blue + (db * i);
-					this->led.setPixelColor(0, r, g, b);
-					this->led.show();
-					delay(20);
-				}
-
-				this->current_color = color;
-		}
-
-
-		/*if (flag == AmbientPixel::Pixel::Flag::TurnOff) {
-			// 消灯
-			AP_DEBUG_LOG_LN("Turn off");
-			for(int i = 100; i >= 0; i--) {
-				this->led.setBrightness(i);
+			float dr = (color.red - this->current_color.red) / 255.0;
+			float dg = (color.green - this->current_color.green) / 255.0;
+			float db = (color.blue - this->current_color.blue) / 255.0;
+			for(int i = 0; i < 255; i++) {
+				float r = this->current_color.red + (dr * i);
+				float g = this->current_color.green + (dg * i);
+				float b = this->current_color.blue + (db * i);
+				this->led.setPixelColor(0, r, g, b);
 				this->led.show();
 				delay(4);
 			}
-		}
-		*/
-		/*if (flag == AmbientPixel::Pixel::Flag::TurnOff) {
-			// 消灯
-			AP_DEBUG_LOG_LN("Turn off");
-			for(int i = 0; i < 255; i++) {
-				float r = this->current_color.red - 1;
-				float g = this->current_color.green - 1;
-				float b = this->current_color.blue - 1;
 
-				if(r < 0) r = 0;
-				if(g < 0) g = 0;
-				if(b < 0) b = 0;
-				this->led.setPixelColor(0, r, g, b);
-				this->led.show();
-				delay(20); 
-			}
-
-			this->current_color = color; //これでcurrent_colorが(0,0,0)になる？
+			this->current_color = color;
 		}
-		*/
 		else {
 			if (flag == AmbientPixel::Pixel::Flag::Glow) {
 				// グロー
@@ -233,7 +201,7 @@ namespace AmbientPixel
 					float b = this->current_color.blue + (db * i);
 					this->led.setPixelColor(0, r, g, b);
 					this->led.show();
-					delay(20);
+					delay(4);
 				}
 
 				this->current_color = color;

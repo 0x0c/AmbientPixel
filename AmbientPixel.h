@@ -85,10 +85,10 @@ namespace AmbientPixel
 				Green 	= 0b00000001,
 				Blue	= 0b00000010,
 				Orange 	= 0b00000011,
-				Yellow 	= 0b00000100,
 				Purple 	= 0b00000101,
 				Indigo 	= 0b00000110,
 				White 	= 0b00000111,
+				Off     = 0b00000100
 			};
 		};
 
