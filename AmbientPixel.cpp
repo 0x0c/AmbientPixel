@@ -226,7 +226,7 @@ namespace AmbientPixel
 	AmbientPixel::ColorAttr Pixel::color_at_index(uint8_t index) {
 		AmbientPixel::ColorAttr color(100, 0, 0); // Red
 		if (ap_bit_compare_control_flag(index, AmbientPixel::Pixel::Color::Green)) {
-			color = AmbientPixel::ColorAttr(0, 100, 0);
+			color = AmbientPixel::ColorAttr(0, 100, 0);//change_led()に使用
 		}
 		else if (ap_bit_compare_control_flag(index, AmbientPixel::Pixel::Color::Blue)) {
 			color = AmbientPixel::ColorAttr(0, 0, 100);	
@@ -246,6 +246,10 @@ namespace AmbientPixel
 		else if (ap_bit_compare_control_flag(index, AmbientPixel::Pixel::Color::White)) {
 			color = AmbientPixel::ColorAttr(100, 100, 100);
 		}
+		else if (ap_bit_compare_control_flag(index, AmbientPixel::Pixel::Color::Off)) {
+			color = AmbientPixel::ColorAttr(0, 0, 0);
+		}
+
 
 		return color;
 	}
