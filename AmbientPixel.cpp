@@ -44,7 +44,7 @@ namespace AmbientPixel
 
 	// -------------------------- Packet --------------------------
 	uint8_t Packet::packet_data(uint8_t device_id, uint8_t flag, uint8_t color) {
-		return device_id | flag | color;
+		return (device_id << 5) | flag | color;
 	}
 
 	// -------------------------- Pixel --------------------------

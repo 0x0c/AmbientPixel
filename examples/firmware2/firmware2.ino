@@ -32,64 +32,64 @@ void serialEvent()
 	char data = Serial.read();
 	switch (data) {
 		case 'r': {
-			pixel.send(0, Packet::packet_data(0b01000000, Pixel::Flag::Glow, Pixel::Color::Red));
-			pixel.send(0, Packet::packet_data(0b01100000, Pixel::Flag::Glow, Pixel::Color::Red));
-			pixel.send(0, Packet::packet_data(0b10000000, Pixel::Flag::Glow, Pixel::Color::Red));
+			pixel.send(0, Packet::packet_data(0b00000010, Pixel::Flag::Glow, Pixel::Color::Red));
+			pixel.send(0, Packet::packet_data(0b00000011, Pixel::Flag::Glow, Pixel::Color::Red));
+			pixel.send(0, Packet::packet_data(0b00000100, Pixel::Flag::Glow, Pixel::Color::Red));
 
 			//pixel.receive(0, Packet::packet_data(0b00100000, Pixel::Flag::Glow, Pixel::Color::Red));
 		}
 			break;
 		case 'g': {
-			pixel.send(0, Packet::packet_data(0b01000000, Pixel::Flag::Glow, Pixel::Color::Green));
-			pixel.send(0, Packet::packet_data(0b01100000, Pixel::Flag::Glow, Pixel::Color::Green));
-			pixel.send(0, Packet::packet_data(0b10000000, Pixel::Flag::Glow, Pixel::Color::Green));
+			pixel.send(0, Packet::packet_data(0b00000010, Pixel::Flag::Glow, Pixel::Color::Green));
+			pixel.send(0, Packet::packet_data(0b00000011, Pixel::Flag::Glow, Pixel::Color::Green));
+			pixel.send(0, Packet::packet_data(0b00000100, Pixel::Flag::Glow, Pixel::Color::Green));
 
 			//pixel.receive(0, Packet::packet_data(0b00100000, Pixel::Flag::Glow, Pixel::Color::Green));
 		}
 			break;
 		case 'b': {
-			pixel.send(0, Packet::packet_data(0b01000000, Pixel::Flag::Glow, Pixel::Color::Blue));
-			pixel.send(0, Packet::packet_data(0b01100000, Pixel::Flag::Glow, Pixel::Color::Blue));
-			pixel.send(0, Packet::packet_data(0b10000000, Pixel::Flag::Glow, Pixel::Color::Blue));
+			pixel.send(0, Packet::packet_data(0b00000010, Pixel::Flag::Glow, Pixel::Color::Blue));
+			pixel.send(0, Packet::packet_data(0b00000011, Pixel::Flag::Glow, Pixel::Color::Blue));
+			pixel.send(0, Packet::packet_data(0b00000100, Pixel::Flag::Glow, Pixel::Color::Blue));
 		}
 			break;
 		case 'o': {
-			pixel.send(0, Packet::packet_data(0b01000000, Pixel::Flag::TurnOff, Pixel::Color::Off));
-			pixel.send(0, Packet::packet_data(0b01100000, Pixel::Flag::TurnOff, Pixel::Color::Off));
-			pixel.send(0, Packet::packet_data(0b10000000, Pixel::Flag::TurnOff, Pixel::Color::Off));
+			pixel.send(0, Packet::packet_data(0b00000010, Pixel::Flag::TurnOff, Pixel::Color::Off));
+			pixel.send(0, Packet::packet_data(0b00000011, Pixel::Flag::TurnOff, Pixel::Color::Off));
+			pixel.send(0, Packet::packet_data(0b00000100, Pixel::Flag::TurnOff, Pixel::Color::Off));
 		}
 			break;
 		case 'R': {
-			pixel.send(0, Packet::packet_data(0b01000000, Pixel::Flag::Blink, Pixel::Color::Red));
-			pixel.send(0, Packet::packet_data(0b01100000, Pixel::Flag::Blink, Pixel::Color::Red));
-			pixel.send(0, Packet::packet_data(0b10000000, Pixel::Flag::Blink, Pixel::Color::Red));
+			pixel.send(0, Packet::packet_data(0b00000010, Pixel::Flag::Blink, Pixel::Color::Red));
+			pixel.send(0, Packet::packet_data(0b00000011, Pixel::Flag::Blink, Pixel::Color::Red));
+			pixel.send(0, Packet::packet_data(0b00000100, Pixel::Flag::Blink, Pixel::Color::Red));
 		}
 			break;
 		case 'G': {
-			pixel.send(0, Packet::packet_data(0b01000000, Pixel::Flag::Blink, Pixel::Color::Green));
-			pixel.send(0, Packet::packet_data(0b01100000, Pixel::Flag::Blink, Pixel::Color::Green));
-			pixel.send(0, Packet::packet_data(0b10000000, Pixel::Flag::Blink, Pixel::Color::Green));
+			pixel.send(0, Packet::packet_data(0b00000010, Pixel::Flag::Blink, Pixel::Color::Green));
+			pixel.send(0, Packet::packet_data(0b00000011, Pixel::Flag::Blink, Pixel::Color::Green));
+			pixel.send(0, Packet::packet_data(0b00000100, Pixel::Flag::Blink, Pixel::Color::Green));
 		}
 			break;
 		case 'B': {
-			pixel.send(0, Packet::packet_data(0b01000000, Pixel::Flag::Blink, Pixel::Color::Blue));
-			pixel.send(0, Packet::packet_data(0b01100000, Pixel::Flag::Blink, Pixel::Color::Blue));
-			pixel.send(0, Packet::packet_data(0b10000000, Pixel::Flag::Blink, Pixel::Color::Blue));
+			pixel.send(0, Packet::packet_data(0b00000010, Pixel::Flag::Blink, Pixel::Color::Blue));
+			pixel.send(0, Packet::packet_data(0b00000011, Pixel::Flag::Blink, Pixel::Color::Blue));
+			pixel.send(0, Packet::packet_data(0b00000100, Pixel::Flag::Blink, Pixel::Color::Blue));
 		}
 			break;
 		case '1': {
 			pixel.send(0, Packet::packet_data(0b00100000, Pixel::Flag::Blink, Pixel::Color::Purple));
 		}
 		case '2': {
-			pixel.send(0, Packet::packet_data(0b01000000, Pixel::Flag::Blink, Pixel::Color::Red));
+			pixel.send(0, Packet::packet_data(0b00000010, Pixel::Flag::Blink, Pixel::Color::Red));
 		}
 			break;
 		case '3': {
-			pixel.send(0, Packet::packet_data(0b01100000, Pixel::Flag::Blink, Pixel::Color::Green));
+			pixel.send(0, Packet::packet_data(0b00000011, Pixel::Flag::Blink, Pixel::Color::Green));
 		}
 			break;
 		case '4': {
-			pixel.send(0, Packet::packet_data(0b10000000, Pixel::Flag::Blink, Pixel::Color::Blue));
+			pixel.send(0, Packet::packet_data(0b00000100, Pixel::Flag::Blink, Pixel::Color::Blue));
 		}
 			break;
 		default:
