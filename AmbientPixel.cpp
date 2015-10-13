@@ -151,10 +151,10 @@ namespace AmbientPixel
 			else {
 				// 自分宛てでないパケット
 				// 隣接するデバイスIDが大きいポートからフォワードする
-				AP_DEBUG_LOG(">> Forward to ");
+				/*AP_DEBUG_LOG(">> Forward to ");
 				if (this->ports[(port_no + 1) % 3].adjacent_device_id < this->ports[(port_no + 2) % 3].adjacent_device_id) {
 					AP_DEBUG_LOG_LN((port_no + 2) % 3);
-					this->send((port_no + 2) % 3, data);
+					this->send((port_no + 2) % 3, data);*/
 				}
 				else {
 					AP_DEBUG_LOG_LN((port_no + 1) % 3);
