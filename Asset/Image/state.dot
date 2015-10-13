@@ -1,9 +1,0 @@
-digraph {
-	Waiting -> Receiving
-	Waiting -> Running
-	Running -> Waiting
-	Receiving -> Waiting
-	Waiting -> Interactive
-	Interactive -> Waiting
-	Running -> Interactive
-}
