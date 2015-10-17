@@ -149,6 +149,7 @@ namespace AmbientPixel
 				// 自分宛てのパケット
 				this->change_led(data & 0b00011000, this->color_at_index((data << 5) >> 5));
 			}
+			/*
 			else if (this->device_id == 0) {
 				// 自分宛てでないパケット
 				// // 隣接するデバイスIDが大きいポートからフォワードする
@@ -162,7 +163,10 @@ namespace AmbientPixel
 				// 	this->send((port_no + 1) % 3, data);
 				// }
 				this->send(0, data);
+				this->send(1, data);
+				this->send(2, data);
 			}
+			*/
 		}
 	}
 
