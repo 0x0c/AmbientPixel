@@ -58,6 +58,7 @@ namespace AmbientPixel
 		this->device_id = 0;
 		this->number_of_vertex = number_of_vertex;
 		this->led = Adafruit_NeoPixel(1, 10, NEO_GRB + NEO_KHZ800);
+		this->led.setBrightness(255);
 		this->led.begin();
 	}
 	
@@ -148,18 +149,19 @@ namespace AmbientPixel
 				// 自分宛てのパケット
 				this->change_led(data & 0b00011000, this->color_at_index((data << 5) >> 5));
 			}
-			else {
+			else if (this->device_id == 0) {
 				// 自分宛てでないパケット
-				// 隣接するデバイスIDが大きいポートからフォワードする
-				/*AP_DEBUG_LOG(">> Forward to ");
-				if (this->ports[(port_no + 1) % 3].adjacent_device_id < this->ports[(port_no + 2) % 3].adjacent_device_id) {
-					AP_DEBUG_LOG_LN((port_no + 2) % 3);
-					this->send((port_no + 2) % 3, data);*/
-				}
-				else {
-					AP_DEBUG_LOG_LN((port_no + 1) % 3);
-					this->send((port_no + 1) % 3, data);
-				}
+				// // 隣接するデバイスIDが大きいポートからフォワードする
+				AP_DEBUG_LOG(">> Forward to ");
+				// if (this->ports[(port_no + 1) % 3].adjacent_device_id < this->ports[(port_no + 2) % 3].adjacent_device_id) {
+				// 	AP_DEBUG_LOG_LN((port_no + 2) % 3);
+				// 	this->send((port_no + 2) % 3, data);
+				// }
+				// else {
+				// 	AP_DEBUG_LOG_LN((port_no + 1) % 3);
+				// 	this->send((port_no + 1) % 3, data);
+				// }
+				this->send(0, data);
 			}
 		}
 	}
@@ -184,7 +186,7 @@ namespace AmbientPixel
 				float b = this->current_color.blue + (db * i);
 				this->led.setPixelColor(0, r, g, b);
 				this->led.show();
-				delay(4);
+				delay(2);
 			}
 			this->current_color = color;
 		}
@@ -201,7 +203,7 @@ namespace AmbientPixel
 					float b = this->current_color.blue + (db * i);
 					this->led.setPixelColor(0, r, g, b);
 					this->led.show();
-					delay(4);
+					delay(2);
 				}
 
 				this->current_color = color;
