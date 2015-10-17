@@ -1,0 +1,7 @@
+{
+"CollectDataUnit": [
+ { "UnitPoint" : "201504010000","AvgValue" : "8" },
+{ "UnitPoint" : "201504010100","AvgValue" : "5" },
+{ "UnitPoint" : "201504010200","AvgValue" : "5" }
+]
+}

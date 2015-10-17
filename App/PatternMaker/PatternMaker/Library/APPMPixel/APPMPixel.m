@@ -33,7 +33,11 @@
 
 - (void)send:(APPMPacket *)packet
 {
-	[self.peripheral uartWriteData:packet.data];
+	// TODO:
+	// もしかしたらSleepする必要がある
+	if ([self.peripheral uartWriteData:packet.data] == KonashiResultFailure) {
+		NSLog(@"Send failed");
+	}
 }
 
 @end

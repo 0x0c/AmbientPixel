@@ -9,6 +9,7 @@
 #import "APPMPatternCollectionViewController.h"
 #import "FontAwesomeKit.h"
 #import "APPMProgressPatternViewController.h"
+#import "APPMTerminalViewController.h"
 #import "APPMPatternCollectionCell.h"
 #import "APPMSettingViewController.h"
 
@@ -63,15 +64,21 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-	return 1;
+	return 2;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 	APPMPatternCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
 	// Configure the cell
-	cell.thumbnailImageView.image = [[FAKFontAwesome dashboardIconWithSize:CGRectGetWidth(self.view.frame) / 8] imageWithSize:CGSizeMake(CGRectGetWidth(self.view.frame) / 4, CGRectGetWidth(self.view.frame) / 4)];
-	cell.titleLabel.text = @"Dashboard";
+	if (indexPath.row == 0) {
+		cell.thumbnailImageView.image = [[FAKFontAwesome dashboardIconWithSize:CGRectGetWidth(self.view.frame) / 8] imageWithSize:CGSizeMake(CGRectGetWidth(self.view.frame) / 4, CGRectGetWidth(self.view.frame) / 4)];
+		cell.titleLabel.text = @"Dashboard";
+	}
+	else {
+		cell.thumbnailImageView.image = [[FAKFontAwesome terminalIconWithSize:CGRectGetWidth(self.view.frame) / 8] imageWithSize:CGSizeMake(CGRectGetWidth(self.view.frame) / 4, CGRectGetWidth(self.view.frame) / 4)];
+		cell.titleLabel.text = @"Terminal";
+	}
 	
 	return cell;
 }
@@ -85,8 +92,14 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	APPMProgressPatternViewController *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([APPMProgressPatternViewController class])];
-	[self.navigationController pushViewController:viewController animated:YES];
+	if (indexPath.row == 0) {
+		APPMProgressPatternViewController *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([APPMProgressPatternViewController class])];
+		[self.navigationController pushViewController:viewController animated:YES];
+	}
+	else {
+		APPMTerminalViewController *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([APPMTerminalViewController class])];
+		[self.navigationController pushViewController:viewController animated:YES];	
+	}
 }
 
 - (void)collectionView:(UICollectionView *)colView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
@@ -96,7 +109,7 @@ static NSString * const reuseIdentifier = @"Cell";
 		cell.alpha = 0.7;
 	}];
 	[UIView animateWithDuration:0.25 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveLinear animations:^{
-		cell.transform = CGAffineTransformMakeScale(0.95, 0.95);
+		cell.transform = CGAffineTransformMakeScale(0.9, 0.9);
 	} completion:nil];
 }
 

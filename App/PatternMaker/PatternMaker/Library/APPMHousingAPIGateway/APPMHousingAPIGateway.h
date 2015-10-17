@@ -16,5 +16,6 @@
 
 + (instancetype)sharedInstance;
 - (HousingApi *)sendCommand:(NSString *)command timeoutInterval:(NSTimeInterval)timeoutInterval error:(NSError **)error;
+- (NSDictionary *)currentDataAvg:(BOOL)up;
 
 @end

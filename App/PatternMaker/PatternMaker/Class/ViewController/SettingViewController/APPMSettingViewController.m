@@ -27,6 +27,9 @@
 	self.ipAddressTextField.text = [[NSUserDefaults standardUserDefaults] stringForKey:kIpAddress];
 	self.portTextField.text = [[NSUserDefaults standardUserDefaults] stringForKey:kPort];
 	self.nameTextField.text = [[NSUserDefaults standardUserDefaults] stringForKey:kName];
+	if (self.nameTextField.text.length == 0) {
+		self.nameTextField.text = @"Koshian01-f010f5";
+	}
 	
 	UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
 	self.navigationItem.rightBarButtonItem = doneButton;
@@ -40,7 +43,7 @@
 	JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
 	HUD.textLabel.text = @"Saved";
 	HUD.position = JGProgressHUDPositionBottomCenter;
-	HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init]; //JGProgressHUDSuccessIndicatorView is also available
+	HUD.indicatorView = [JGProgressHUDSuccessIndicatorView new];
 	[HUD showInView:self.view];
 	[HUD dismissAfterDelay:3.0];
 }
@@ -53,7 +56,7 @@
 		JGProgressHUD *HUD2 = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
 		HUD2.textLabel.text = @"Connected";
 		HUD2.position = JGProgressHUDPositionBottomCenter;
-		HUD2.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init]; //JGProgressHUDSuccessIndicatorView is also available
+		HUD2.indicatorView = [JGProgressHUDSuccessIndicatorView new];
 		[HUD2 showInView:self.view];
 		[HUD2 dismissAfterDelay:3.0];
 		[JTProgressHUD hide];

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Ono.h"
 
 @interface AppDelegate ()
 
@@ -19,6 +20,7 @@
 {
 	// Override point for customization after application launch.
 	self.masterPixel = [APPMPixel new];
+	
 	return YES;
 }
 

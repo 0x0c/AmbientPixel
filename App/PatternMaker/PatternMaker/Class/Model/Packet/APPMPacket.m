@@ -21,8 +21,8 @@
 + (instancetype)packetWithDestination:(UInt8)destination flag:(APPMPatternFlag)flag color:(APPMPatternColor)color
 {
 	APPMPacket *packet = [APPMPacket new];
-	packet.destination = destination;
-	packet.flag = flag;
+	packet.destination = destination << 5;
+	packet.flag = flag << 3;
 	packet.color = color;
 	
 	return packet;
@@ -30,8 +30,7 @@
 
 - (NSData *)data
 {
-	UInt8 destinationBit = self.destination & 0b11100000;
-	Byte byte = (UInt8)(destinationBit | self.flag | self.color);
+	Byte byte = (UInt8)(self.destination | self.flag | self.color);
 	NSData *data = [NSData dataWithBytes:&byte length:1];
 	
 	return data;

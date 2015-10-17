@@ -14,6 +14,7 @@
 		E949D2741BAC17A700DDE189 /* APPMPatternCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E949D2721BAC17A700DDE189 /* APPMPatternCollectionCell.m */; };
 		E949D2751BAC17A700DDE189 /* APPMPatternCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E949D2731BAC17A700DDE189 /* APPMPatternCollectionCell.xib */; };
 		E960A1A81BB2C05000F65980 /* APPMProgressPatternViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E960A1A71BB2C05000F65980 /* APPMProgressPatternViewController.m */; };
+		E96D33D21BC0CF84008504ED /* APPMWeatherPatternViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E96D33D11BC0CF84008504ED /* APPMWeatherPatternViewController.m */; settings = {ASSET_TAGS = (); }; };
 		E99E73381B8785CF00E92F21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E99E73371B8785CF00E92F21 /* main.m */; };
 		E99E733B1B8785CF00E92F21 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E99E733A1B8785CF00E92F21 /* AppDelegate.m */; };
 		E99E73411B8785CF00E92F21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E99E733F1B8785CF00E92F21 /* Main.storyboard */; };
@@ -23,6 +24,10 @@
 		E9B057791BB2B52B00476249 /* APPMSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B057781BB2B52B00476249 /* APPMSettingViewController.m */; };
 		E9C849BE1BAF1B6A00366674 /* APPMHousingAPIGateway.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C849B81BAF1B6A00366674 /* APPMHousingAPIGateway.m */; };
 		E9C849C01BAF1B6A00366674 /* libHousingApi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C849BD1BAF1B6A00366674 /* libHousingApi.a */; };
+		E9DAE3F71BD20BB8001A3573 /* current.txt in Resources */ = {isa = PBXBuildFile; fileRef = E9DAE3F41BD20BB8001A3573 /* current.txt */; settings = {ASSET_TAGS = (); }; };
+		E9DAE3F81BD20BB8001A3573 /* current.xml in Resources */ = {isa = PBXBuildFile; fileRef = E9DAE3F61BD20BB8001A3573 /* current.xml */; settings = {ASSET_TAGS = (); }; };
+		E9DAE3FB1BD21218001A3573 /* current_down.txt in Resources */ = {isa = PBXBuildFile; fileRef = E9DAE3FA1BD21218001A3573 /* current_down.txt */; settings = {ASSET_TAGS = (); }; };
+		E9DAE3FF1BD21548001A3573 /* APPMTerminalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DAE3FE1BD21548001A3573 /* APPMTerminalViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +55,8 @@
 		E949D2731BAC17A700DDE189 /* APPMPatternCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APPMPatternCollectionCell.xib; sourceTree = "<group>"; };
 		E960A1A61BB2C05000F65980 /* APPMProgressPatternViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPMProgressPatternViewController.h; sourceTree = "<group>"; };
 		E960A1A71BB2C05000F65980 /* APPMProgressPatternViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPMProgressPatternViewController.m; sourceTree = "<group>"; };
+		E96D33D01BC0CF84008504ED /* APPMWeatherPatternViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPMWeatherPatternViewController.h; sourceTree = "<group>"; };
+		E96D33D11BC0CF84008504ED /* APPMWeatherPatternViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPMWeatherPatternViewController.m; sourceTree = "<group>"; };
 		E99E73321B8785CF00E92F21 /* PatternMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PatternMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E99E73361B8785CF00E92F21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E99E73371B8785CF00E92F21 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -69,6 +76,11 @@
 		E9C849BA1BAF1B6A00366674 /* HousingApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HousingApi.h; sourceTree = "<group>"; };
 		E9C849BB1BAF1B6A00366674 /* HousingApiConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HousingApiConstant.h; sourceTree = "<group>"; };
 		E9C849BD1BAF1B6A00366674 /* libHousingApi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libHousingApi.a; sourceTree = "<group>"; };
+		E9DAE3F41BD20BB8001A3573 /* current.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = current.txt; sourceTree = "<group>"; };
+		E9DAE3F61BD20BB8001A3573 /* current.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = current.xml; sourceTree = "<group>"; };
+		E9DAE3FA1BD21218001A3573 /* current_down.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = current_down.txt; sourceTree = "<group>"; };
+		E9DAE3FD1BD21548001A3573 /* APPMTerminalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPMTerminalViewController.h; sourceTree = "<group>"; };
+		E9DAE3FE1BD21548001A3573 /* APPMTerminalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPMTerminalViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +165,15 @@
 				E960A1A71BB2C05000F65980 /* APPMProgressPatternViewController.m */,
 			);
 			path = ProgressPatternViewController;
+			sourceTree = "<group>";
+		};
+		E96D33CF1BC0CF6C008504ED /* WeatherPatternViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E96D33D01BC0CF84008504ED /* APPMWeatherPatternViewController.h */,
+				E96D33D11BC0CF84008504ED /* APPMWeatherPatternViewController.m */,
+			);
+			path = WeatherPatternViewController;
 			sourceTree = "<group>";
 		};
 		E99E73291B8785CF00E92F21 = {
@@ -246,6 +267,56 @@
 			path = HousingApiLibrary;
 			sourceTree = "<group>";
 		};
+		E9DAE3F11BD20BB8001A3573 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				E9DAE3F21BD20BB8001A3573 /* CollectDataAvg */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		E9DAE3F21BD20BB8001A3573 /* CollectDataAvg */ = {
+			isa = PBXGroup;
+			children = (
+				E9DAE3F31BD20BB8001A3573 /* json */,
+				E9DAE3F51BD20BB8001A3573 /* xml */,
+			);
+			path = CollectDataAvg;
+			sourceTree = "<group>";
+		};
+		E9DAE3F31BD20BB8001A3573 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				E9DAE3FA1BD21218001A3573 /* current_down.txt */,
+				E9DAE3F41BD20BB8001A3573 /* current.txt */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
+		E9DAE3F51BD20BB8001A3573 /* xml */ = {
+			isa = PBXGroup;
+			children = (
+				E9DAE3F61BD20BB8001A3573 /* current.xml */,
+			);
+			path = xml;
+			sourceTree = "<group>";
+		};
+		E9DAE3F91BD20F74001A3573 /* CollectDataAvgViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CollectDataAvgViewController;
+			sourceTree = "<group>";
+		};
+		E9DAE3FC1BD21540001A3573 /* TerminalViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E9DAE3FD1BD21548001A3573 /* APPMTerminalViewController.h */,
+				E9DAE3FE1BD21548001A3573 /* APPMTerminalViewController.m */,
+			);
+			path = TerminalViewController;
+			sourceTree = "<group>";
+		};
 		E9E4D0B51BAA00F2006C96A1 /* Class */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +337,9 @@
 		E9E4D0B71BAA00F2006C96A1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E9DAE3FC1BD21540001A3573 /* TerminalViewController */,
+				E9DAE3F91BD20F74001A3573 /* CollectDataAvgViewController */,
+				E96D33CF1BC0CF6C008504ED /* WeatherPatternViewController */,
 				E960A1A51BB2C05000F65980 /* ProgressPatternViewController */,
 				E9B057761BB2B51900476249 /* SettingViewController */,
 				E949D26C1BAC177200DDE189 /* PatternCollectionViewController */,
@@ -286,6 +360,7 @@
 		E9E4D0B91BAA00F2006C96A1 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				E9DAE3F11BD20BB8001A3573 /* API */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -302,6 +377,7 @@
 				E99E732F1B8785CF00E92F21 /* Frameworks */,
 				E99E73301B8785CF00E92F21 /* Resources */,
 				108FDB4E83708A410222DC32 /* Copy Pods Resources */,
+				26B706C1A7C033A8B397E5E4 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -336,7 +412,7 @@
 		E99E732A1B8785CF00E92F21 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Akira Matsuda";
 				TargetAttributes = {
 					E99E73311B8785CF00E92F21 = {
@@ -372,10 +448,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9DAE3F71BD20BB8001A3573 /* current.txt in Resources */,
 				E99E73411B8785CF00E92F21 /* Main.storyboard in Resources */,
 				E99E73461B8785CF00E92F21 /* LaunchScreen.xib in Resources */,
+				E9DAE3FB1BD21218001A3573 /* current_down.txt in Resources */,
 				E949D2751BAC17A700DDE189 /* APPMPatternCollectionCell.xib in Resources */,
 				E99E73431B8785CF00E92F21 /* Images.xcassets in Resources */,
+				E9DAE3F81BD20BB8001A3573 /* current.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +483,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PatternMaker/Pods-PatternMaker-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		26B706C1A7C033A8B397E5E4 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PatternMaker/Pods-PatternMaker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C8FC6F6115E101591D09CE05 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -426,7 +520,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E96D33D21BC0CF84008504ED /* APPMWeatherPatternViewController.m in Sources */,
 				E960A1A81BB2C05000F65980 /* APPMProgressPatternViewController.m in Sources */,
+				E9DAE3FF1BD21548001A3573 /* APPMTerminalViewController.m in Sources */,
 				E949D22B1BAC0DE900DDE189 /* APPMPacket.m in Sources */,
 				E9B057791BB2B52B00476249 /* APPMSettingViewController.m in Sources */,
 				E949D2741BAC17A700DDE189 /* APPMPatternCollectionCell.m in Sources */,
@@ -497,6 +593,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -563,12 +660,14 @@
 			baseConfigurationReference = 0BEE3BB05493C5EDD31EB9CF /* Pods-PatternMaker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = PatternMaker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PatternMaker/Library/HousingApiLibrary",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.akira.matsuda.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -578,12 +677,14 @@
 			baseConfigurationReference = D3B8A3466FCD7BBF2F66BA1A /* Pods-PatternMaker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = PatternMaker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PatternMaker/Library/HousingApiLibrary",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.akira.matsuda.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -602,6 +703,7 @@
 				);
 				INFOPLIST_FILE = PatternMakerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.akira.matsuda.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PatternMaker.app/PatternMaker";
 			};
@@ -617,6 +719,7 @@
 				);
 				INFOPLIST_FILE = PatternMakerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.akira.matsuda.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PatternMaker.app/PatternMaker";
 			};

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CollectDataAvg>
+  <CollectDataUnit>
+    <UnitPoint>201504010000</UnitPoint>
+    <AvgValue>8</AvgValue>
+  </CollectDataUnit>
+  <CollectDataUnit>
+    <UnitPoint>201504010100</UnitPoint>
+    <AvgValue>5</AvgValue>
+  </CollectDataUnit>
+  <CollectDataUnit>
+    <UnitPoint>201504010200</UnitPoint>
+    <AvgValue>5</AvgValue>
+  </CollectDataUnit>
+</CollectDataAvg>

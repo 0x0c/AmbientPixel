@@ -7,6 +7,7 @@ pod 'konashi-ios-sdk'
 pod 'JTProgressHUD'
 pod 'JGProgressHUD'
 pod 'FontAwesomeKit'
+pod 'Ono'
 
 end
 

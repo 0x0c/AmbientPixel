@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(UInt8, APPMPatternFlag) {
-	APPMPatternFlagTurnOff = 0b00000000,
-	APPMPatternFlagGlow = 0b00001000,
-	APPMPatternFlagBlink = 0b00010000,
+	APPMPatternFlagGlow = 0b00000000,
+	APPMPatternFlagBlink = 0b00001000,
+	APPMPatternFlagTurnOff = 0b00010000,
 	APPMPatternFlagControl = 0b00011000,
 };
 
@@ -20,10 +20,10 @@ typedef NS_ENUM(UInt8, APPMPatternColor) {
 	APPMPatternColorGreen = 0b00000001,
 	APPMPatternColorBlue = 0b00000010,
 	APPMPatternColorOrange = 0b00000011,
-	APPMPatternColorYellow = 0b00000100,
-	APPMPatternColorPurple = 0b00000101,
-	APPMPatternColorIndigo = 0b00000110,
-	APPMPatternColorWhite = 0b00000111,
+	APPMPatternColorPurple = 0b00000100,
+	APPMPatternColorIndigo = 0b00000101,
+	APPMPatternColorWhite = 0b00000110,
+	APPMPatternColorOff = 0b00000111,
 };
 
 @interface APPMPacket : NSObject
