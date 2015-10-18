@@ -81,92 +81,17 @@ namespace AmbientPixel
 		AP_DEBUG_LOG(port_no);
 		AP_DEBUG_LOG(", data : ");
 		AP_DEBUG_LOG_FMT(data, BIN);
-		if (ap_bit_compare_flag(data, AmbientPixel::Pixel::Flag::Control)) {
-			if (ap_bit_compare_control_flag(data, AmbientPixel::Pixel::ControlFlag::Network)) {
-				// NWパケット
-				if (this->configured == false) {
-					// Acceptする
-					this->configured = true;
-					this->device_id = (uint8_t)(data >> 5);
-
-					if (this->device_id < 7) {
-						// Device IDを+1してフォワードする
-						uint8_t p0 = Packet::packet_data((this->device_id + 1) << 5, Pixel::Flag::Control, Pixel::ControlFlag::Network);
-						uint8_t p1 = Packet::packet_data((this->device_id + 2) << 5, Pixel::Flag::Control, Pixel::ControlFlag::Network);
-						this->send((port_no + 1) % 3, p0);
-						this->send((port_no + 2) % 3, p1);
-					}
-					AP_DEBUG_LOG(">> Accept : ");
-					AP_DEBUG_LOG_FMT(this->device_id, BIN);
-					this->change_led(AmbientPixel::Pixel::Flag::Glow, this->color_at_index(AmbientPixel::Pixel::Color::White));
-					uint8_t p = Packet::packet_data(this->device_id << 5, Pixel::Flag::Control, Pixel::ControlFlag::Accept);
-					this->send(port_no, p);
-				}
-				// else {
-				// 	// Denyする
-				// 	AP_DEBUG_LOG_LN(">> Deny");
-				// 	uint8_t p = Packet::packet_data(this->device_id << 5, Pixel::Flag::Control, Pixel::ControlFlag::Deny);
-				// 	this->send(port_no, p);
-				// }
-			}
-			else if (ap_bit_compare_control_flag(data, AmbientPixel::Pixel::ControlFlag::Reset)) {
-				// RSTパケット
-				AP_DEBUG_LOG_LN(">> RST packet");
-				this->change_led(AmbientPixel::Pixel::Flag::TurnOff, this->color_at_index(NULL));
-				this->configured = false;
-				this->device_id = 0;
-				
-				// 隣接デバイスIDをクリアする
-				this->ports[0].adjacent_device_id = 0;
-				this->ports[1].adjacent_device_id = 0;
-				this->ports[2].adjacent_device_id = 0;
-
-				if (this->isMaster == false) {
-					// フォワードする
-					uint8_t p0 = Packet::packet_data(this->ports[(port_no + 1) % 3].adjacent_device_id, Pixel::Flag::Control, Pixel::ControlFlag::Reset);
-					uint8_t p1 = Packet::packet_data(this->ports[(port_no + 2) % 3].adjacent_device_id, Pixel::Flag::Control, Pixel::ControlFlag::Reset);
-					this->send((port_no + 1) % 3, p0);
-					this->send((port_no + 2) % 3, p1);
-				}
-				else {
-					this->configured = true;
-				}
-			}
-			else if (ap_bit_compare_control_flag(data, AmbientPixel::Pixel::ControlFlag::Accept)) {
-				// ACCパケット
-				// 隣接デバイスIDを登録
-				AP_DEBUG_LOG_LN(">> Receive ACC");
-				this->ports[port_no].adjacent_device_id = (uint8_t)(data >> 5);
-				this->change_led(AmbientPixel::Pixel::Flag::Glow, this->color_at_index(AmbientPixel::Pixel::Color::Orange));
-			}
-			else if (ap_bit_compare_control_flag(data, AmbientPixel::Pixel::ControlFlag::Deny)) {
-				// DNYパケット
-				AP_DEBUG_LOG_LN(">> Receive DNY");
-			}
+		if ((uint8_t)(data >> 5) == this->device_id) {
+			// 自分宛てのパケット
+			this->change_led(data & 0b00011000, this->color_at_index((data << 5) >> 5));
 		}
-		else  {
-			if ((uint8_t)(data >> 5) == this->device_id) {
-				// 自分宛てのパケット
-				this->change_led(data & 0b00011000, this->color_at_index((data << 5) >> 5));
-			}
-			/*
-			else if (this->device_id == 0) {
-				// 自分宛てでないパケット
-				// // 隣接するデバイスIDが大きいポートからフォワードする
-				AP_DEBUG_LOG(">> Forward to ");
-				// if (this->ports[(port_no + 1) % 3].adjacent_device_id < this->ports[(port_no + 2) % 3].adjacent_device_id) {
-				// 	AP_DEBUG_LOG_LN((port_no + 2) % 3);
-				// 	this->send((port_no + 2) % 3, data);
-				// }
-				// else {
-				// 	AP_DEBUG_LOG_LN((port_no + 1) % 3);
-				// 	this->send((port_no + 1) % 3, data);
-				// }
-				this->send(0, data);
-				this->send(1, data);
-				this->send(2, data);
-			}
-			*/
+		else if (this->device_id == 0) {
+			// 自分宛てでないパケット
+			// フォワードする
+			AP_DEBUG_LOG(">> Forward to ");
+			this->send(0, data);
+			this->send(1, data);
+			this->send(2, data);
 		}
 	}
 
@@ -190,7 +115,7 @@ namespace AmbientPixel
 				float b = this->current_color.blue + (db * i);
 				this->led.setPixelColor(0, r, g, b);
 				this->led.show();
-				delay(2);
+				delay(1);
 			}
 			this->current_color = color;
 		}
@@ -207,7 +132,7 @@ namespace AmbientPixel
 					float b = this->current_color.blue + (db * i);
 					this->led.setPixelColor(0, r, g, b);
 					this->led.show();
-					delay(2);
+					delay(1);
 				}
 
 				this->current_color = color;

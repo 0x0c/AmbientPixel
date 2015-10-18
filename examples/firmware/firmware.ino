@@ -37,7 +37,6 @@ void loop()
 			digitalWrite(13, HIGH);
 			delay(20);
 			digitalWrite(13, LOW);
-
 		}
 		cnt = (cnt + 1) % 2;
 	}
