@@ -28,6 +28,7 @@
 		E9DAE3F81BD20BB8001A3573 /* current.xml in Resources */ = {isa = PBXBuildFile; fileRef = E9DAE3F61BD20BB8001A3573 /* current.xml */; settings = {ASSET_TAGS = (); }; };
 		E9DAE3FB1BD21218001A3573 /* current_down.txt in Resources */ = {isa = PBXBuildFile; fileRef = E9DAE3FA1BD21218001A3573 /* current_down.txt */; settings = {ASSET_TAGS = (); }; };
 		E9DAE3FF1BD21548001A3573 /* APPMTerminalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DAE3FE1BD21548001A3573 /* APPMTerminalViewController.m */; settings = {ASSET_TAGS = (); }; };
+		E9DC798B1BD5991300C1E428 /* APPMCollectDataAvgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DC798A1BD5991300C1E428 /* APPMCollectDataAvgViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,8 @@
 		E9DAE3FA1BD21218001A3573 /* current_down.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = current_down.txt; sourceTree = "<group>"; };
 		E9DAE3FD1BD21548001A3573 /* APPMTerminalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPMTerminalViewController.h; sourceTree = "<group>"; };
 		E9DAE3FE1BD21548001A3573 /* APPMTerminalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPMTerminalViewController.m; sourceTree = "<group>"; };
+		E9DC79891BD5991300C1E428 /* APPMCollectDataAvgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPMCollectDataAvgViewController.h; sourceTree = "<group>"; };
+		E9DC798A1BD5991300C1E428 /* APPMCollectDataAvgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPMCollectDataAvgViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,6 +307,8 @@
 		E9DAE3F91BD20F74001A3573 /* CollectDataAvgViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E9DC79891BD5991300C1E428 /* APPMCollectDataAvgViewController.h */,
+				E9DC798A1BD5991300C1E428 /* APPMCollectDataAvgViewController.m */,
 			);
 			path = CollectDataAvgViewController;
 			sourceTree = "<group>";
@@ -524,6 +529,7 @@
 				E960A1A81BB2C05000F65980 /* APPMProgressPatternViewController.m in Sources */,
 				E9DAE3FF1BD21548001A3573 /* APPMTerminalViewController.m in Sources */,
 				E949D22B1BAC0DE900DDE189 /* APPMPacket.m in Sources */,
+				E9DC798B1BD5991300C1E428 /* APPMCollectDataAvgViewController.m in Sources */,
 				E9B057791BB2B52B00476249 /* APPMSettingViewController.m in Sources */,
 				E949D2741BAC17A700DDE189 /* APPMPatternCollectionCell.m in Sources */,
 				E99E733B1B8785CF00E92F21 /* AppDelegate.m in Sources */,

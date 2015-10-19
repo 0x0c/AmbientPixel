@@ -11,6 +11,7 @@
 #import "APPMProgressPatternViewController.h"
 #import "APPMTerminalViewController.h"
 #import "APPMPatternCollectionCell.h"
+#import "APPMCollectDataAvgViewController.h"
 #import "APPMSettingViewController.h"
 
 @interface APPMPatternCollectionViewController ()
@@ -64,7 +65,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-	return 2;
+	return 3;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -72,12 +73,16 @@ static NSString * const reuseIdentifier = @"Cell";
 	APPMPatternCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
 	// Configure the cell
 	if (indexPath.row == 0) {
-		cell.thumbnailImageView.image = [[FAKFontAwesome dashboardIconWithSize:CGRectGetWidth(self.view.frame) / 8] imageWithSize:CGSizeMake(CGRectGetWidth(self.view.frame) / 4, CGRectGetWidth(self.view.frame) / 4)];
-		cell.titleLabel.text = @"Dashboard";
+		cell.thumbnailImageView.image = [[FAKFontAwesome barChartIconWithSize:CGRectGetWidth(self.view.frame) / 8] imageWithSize:CGSizeMake(CGRectGetWidth(self.view.frame) / 4, CGRectGetWidth(self.view.frame) / 4)];
+		cell.titleLabel.text = @"Bar";
+	}
+	else if (indexPath.row == 1) {
+		cell.thumbnailImageView.image = [[FAKFontAwesome sortIconWithSize:CGRectGetWidth(self.view.frame) / 8] imageWithSize:CGSizeMake(CGRectGetWidth(self.view.frame) / 4, CGRectGetWidth(self.view.frame) / 4)];
+		cell.titleLabel.text = @"Current Avg";
 	}
 	else {
-		cell.thumbnailImageView.image = [[FAKFontAwesome terminalIconWithSize:CGRectGetWidth(self.view.frame) / 8] imageWithSize:CGSizeMake(CGRectGetWidth(self.view.frame) / 4, CGRectGetWidth(self.view.frame) / 4)];
-		cell.titleLabel.text = @"Terminal";
+		cell.thumbnailImageView.image = [[FAKFontAwesome gearIconWithSize:CGRectGetWidth(self.view.frame) / 8] imageWithSize:CGSizeMake(CGRectGetWidth(self.view.frame) / 4, CGRectGetWidth(self.view.frame) / 4)];
+		cell.titleLabel.text = @"Manual";
 	}
 	
 	return cell;
@@ -94,6 +99,10 @@ static NSString * const reuseIdentifier = @"Cell";
 {
 	if (indexPath.row == 0) {
 		APPMProgressPatternViewController *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([APPMProgressPatternViewController class])];
+		[self.navigationController pushViewController:viewController animated:YES];
+	}
+	else if (indexPath.row == 1) {
+		APPMCollectDataAvgViewController *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([APPMCollectDataAvgViewController class])];
 		[self.navigationController pushViewController:viewController animated:YES];
 	}
 	else {

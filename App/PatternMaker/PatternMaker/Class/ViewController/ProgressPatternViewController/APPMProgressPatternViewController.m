@@ -20,9 +20,9 @@ typedef NS_ENUM(NSUInteger, APPMProgressPatternMode) {
 @interface APPMProgressPatternViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UIPickerView *pickerView;
-@property (nonatomic, strong) NSTimer *requestTimer;
 @property (nonatomic, assign) APPMPatternColor color;
 @property (nonatomic, assign) APPMProgressPatternMode mode;
+@property (strong, nonatomic) IBOutlet UITextView *logView;
 
 @end
 
@@ -38,15 +38,11 @@ static NSArray<NSString *> *commands;
 	pickerTitles = @[@"水の使用量",
 				  @"ガスの使用量",
 				  @"蓄電池残量"];
-	commands = @[@"/smart/history?type=get&key=waterConsumption&target=2014121530",
-			   @"/smart/history?type=get&key=gasConsumption&target=2014121530",
+	commands = @[@"/smart/history?type=get&key=waterConsumption&target=20141215",
+			   @"/smart/history?type=get&key=gasConsumption&target=201412",
 			   @"/smart/rest/request?deviceid=lite.battery_1_1&type=get&key=soc"];
-	self.mode = APPMProgressPatternModeBattery;
-}
-
-- (void)dealloc
-{
-	[self.requestTimer invalidate];
+	self.mode = APPMProgressPatternModeWater;
+	self.color = APPMPatternColorBlue;
 }
 
 #pragma mark - UIPickerViewDelegate
@@ -91,13 +87,9 @@ static NSArray<NSString *> *commands;
 
 #pragma mark - 
 
-- (void)scheduleAPIRequest
+- (IBAction)start:(id)sender
 {
-	if (self.requestTimer) {
-		[self.requestTimer invalidate];
-	}
-	// 30分間隔
-	self.requestTimer = [NSTimer scheduledTimerWithTimeInterval:60 * 30 target:self selector:@selector(readData) userInfo:nil repeats:YES];
+	[self readData];
 }
 
 - (void)readData
@@ -108,39 +100,43 @@ static NSArray<NSString *> *commands;
 		// pixelの表示を更新
 		AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 		APPMPixel *master = delegate.masterPixel;
+		NSInteger value = 0;
 		switch (self.mode) {
 			case APPMProgressPatternModeWater: {
-				NSArray *data = [result getResponseData:kLocalElementResultset,
-							  kLocalElementDataSet, kLocalElementData, nil];
+				NSArray *data = [result getResponseData:kLocalElementResultset, kLocalElementDataSet, kLocalElementData, nil];
 				NSDictionary *d = data.lastObject;
-				NSInteger value = [d[kLocalElementValue] integerValue] / 100;
-				for (UInt8 i = 0; i < value; i++) {
-					[master send:[APPMPacket packetWithDestination:i flag:APPMPatternFlagGlow color:self.color]];
-				}
+				value = [d[kLocalElementValue] integerValue] / 50;
+				self.logView.text = [data description];
 				break;
 			}
 			case APPMProgressPatternModeGas: {
-				NSArray *data = [result getResponseData:kLocalElementResultset,
-								  kLocalElementDataSet, kLocalElementData, nil];
+				NSArray *data = [result getResponseData:kLocalElementResultset, kLocalElementDataSet, kLocalElementData, nil];
 				NSDictionary *d = data.lastObject;
-				NSInteger value = [d[kLocalElementValue] integerValue] / 100;
-				for (UInt8 i = 0; i < value; i++) {
-					[master send:[APPMPacket packetWithDestination:i flag:APPMPatternFlagGlow color:self.color]];
-				}
+				value = [d[kLocalElementValue] integerValue] / 100;
+				self.logView.text = [data description];
 				break;
 			}
 			case APPMProgressPatternModeBattery: {
-				NSDictionary *data = [result getResponseData:kLocalElementResultset,
-								  kLocalElementDataSet, kLocalElementData, nil];
-				NSInteger value = [data[kLocalElementValue] integerValue] / 100;
-				for (UInt8 i = 0; i < value; i++) {
-					[master send:[APPMPacket packetWithDestination:i flag:APPMPatternFlagGlow color:self.color]];
-				}
+				NSDictionary *data = [result getResponseData:kLocalElementResultset, kLocalElementDataSet, kLocalElementData, nil];
+				value = [data[kLocalElementValue] integerValue] / 100;
+				self.logView.text = [data description];
 				break;
 			}
 			default: {
 				break;
 			}
+		}
+		// 4, 5, 0, 1, 2, 3
+		NSArray *indexes = @[@(4), @(5), @(0), @(1), @(2), @(3)];
+		NSLog(@"%ld", (long)value);
+		value = MIN(8 , value);
+		for (NSInteger idx = 0; idx < value; idx++) {
+			NSNumber *i = indexes[idx];
+			[master send:[APPMPacket packetWithDestination:i.integerValue flag:APPMPatternFlagGlow color:self.color]];
+		}
+		for (NSInteger idx = value; idx < 8 - value; idx++) {
+			NSNumber *i = indexes[idx];
+			[master send:[APPMPacket packetWithDestination:i.integerValue flag:APPMPatternFlagGlow color:APPMPatternColorOff]];
 		}
 	}
 }

@@ -27,13 +27,15 @@
 	HousingApi *housingApi = [HousingApi new];
 	//IPアドレス、ポート番号、コマンドを渡すと、ライブラリ内でHTTPリクエストを生成して送信し、応答メッセージを解析する。
 	//戻り値には解析後の応答メッセージが格納されている。
-	BOOL connectResulst = [housingApi sendCommand:self.ipAddress port:self.port command:command timeoutInterval:timeoutInterval error:error];
+	NSError *e = nil;
+	BOOL connectResulst = [housingApi sendCommand:self.ipAddress port:self.port command:command timeoutInterval:timeoutInterval error:&e];
 	if (connectResulst) {
 		//応答メッセージから瞬時電力値を取得する
 		//<result>タグの情報を取得します。　引数には、<result>タグまでのXMLタグを全て指定します。「resultset」「result」を設定しています。
 		[housingApi getResponseResult:kLocalElementResultset, kLocalElementResult, nil];
 	}
 	else {
+		NSLog(@"%@", [NSString stringWithFormat:@"%@ : %@\n%@ : %@", kLocalElementResult, @"false", @"エラー内容", e.userInfo[NSLocalizedDescriptionKey]]);
 		*error = [NSError errorWithDomain:@"Connection error" code:-1 userInfo:nil];
 	}
 	

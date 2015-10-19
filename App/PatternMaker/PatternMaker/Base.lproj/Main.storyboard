@@ -33,6 +33,93 @@
             </objects>
             <point key="canvasLocation" x="1730" y="232"/>
         </scene>
+        <!--Collect Data Avg View Controller-->
+        <scene sceneID="6yh-lG-E4r">
+            <objects>
+                <viewController storyboardIdentifier="APPMCollectDataAvgViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5OW-0C-pUg" customClass="APPMCollectDataAvgViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DaA-5o-kel"/>
+                        <viewControllerLayoutGuide type="bottom" id="vex-Ar-ehi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BEP-80-Ll0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wrU-n1-aif">
+                                <rect key="frame" x="20" y="539" width="560" height="41"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137383460999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="YPd-Pn-5cl"/>
+                                </constraints>
+                                <state key="normal" title="Start">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="start:" destination="5OW-0C-pUg" eventType="touchUpInside" id="mXL-HM-TT2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yin-2P-FnO">
+                                <rect key="frame" x="20" y="28" width="560" height="41"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.9686274528503418" green="0.19215686619281769" blue="0.30196079611778259" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="pei-8U-dGv"/>
+                                </constraints>
+                                <state key="normal" title="電力データ平均値情報1">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="avg1:" destination="5OW-0C-pUg" eventType="touchUpInside" id="dau-nn-r56"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4R-4a-SBk">
+                                <rect key="frame" x="20" y="77" width="560" height="41"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.9686274528503418" green="0.19215686619281769" blue="0.30196079611778259" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="kw7-P0-Kva"/>
+                                </constraints>
+                                <state key="normal" title="電力データ平均値情報2">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="avg2:" destination="5OW-0C-pUg" eventType="touchUpInside" id="zUF-ID-led"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qcl-E5-UTk">
+                                <rect key="frame" x="20" y="126" width="560" height="405"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yin-2P-FnO" firstAttribute="trailing" secondItem="BEP-80-Ll0" secondAttribute="trailingMargin" id="1X6-MY-p3P"/>
+                            <constraint firstItem="wrU-n1-aif" firstAttribute="trailing" secondItem="BEP-80-Ll0" secondAttribute="trailingMargin" id="5nX-MN-LOE"/>
+                            <constraint firstItem="yin-2P-FnO" firstAttribute="leading" secondItem="BEP-80-Ll0" secondAttribute="leadingMargin" id="6dE-ts-uZ8"/>
+                            <constraint firstItem="vex-Ar-ehi" firstAttribute="top" secondItem="wrU-n1-aif" secondAttribute="bottom" constant="20" id="ICZ-qo-LGj"/>
+                            <constraint firstItem="yin-2P-FnO" firstAttribute="top" secondItem="DaA-5o-kel" secondAttribute="bottom" constant="8" id="Z9S-Wh-gK9"/>
+                            <constraint firstItem="wrU-n1-aif" firstAttribute="leading" secondItem="BEP-80-Ll0" secondAttribute="leadingMargin" id="auT-0e-U77"/>
+                            <constraint firstItem="J4R-4a-SBk" firstAttribute="trailing" secondItem="BEP-80-Ll0" secondAttribute="trailingMargin" id="ckj-en-BGU"/>
+                            <constraint firstItem="qcl-E5-UTk" firstAttribute="leading" secondItem="BEP-80-Ll0" secondAttribute="leadingMargin" id="dBB-YF-TbQ"/>
+                            <constraint firstItem="wrU-n1-aif" firstAttribute="top" secondItem="qcl-E5-UTk" secondAttribute="bottom" constant="8" id="feq-t9-TTk"/>
+                            <constraint firstItem="qcl-E5-UTk" firstAttribute="top" secondItem="J4R-4a-SBk" secondAttribute="bottom" constant="8" id="gCA-F7-8ua"/>
+                            <constraint firstItem="qcl-E5-UTk" firstAttribute="trailing" secondItem="BEP-80-Ll0" secondAttribute="trailingMargin" id="nAh-1f-ibb"/>
+                            <constraint firstItem="J4R-4a-SBk" firstAttribute="top" secondItem="yin-2P-FnO" secondAttribute="bottom" constant="8" id="vVF-uu-qhR"/>
+                            <constraint firstItem="J4R-4a-SBk" firstAttribute="leading" secondItem="BEP-80-Ll0" secondAttribute="leadingMargin" id="woq-YS-zq1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="logView" destination="qcl-E5-UTk" id="kig-3O-l27"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aI6-oQ-nKl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2401" y="-450"/>
+        </scene>
         <!--Weather Pattern View Controller-->
         <scene sceneID="qnh-K9-mpQ">
             <objects>
@@ -94,7 +181,7 @@
                                 <animations/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="41" id="igT-mC-BBe"/>
+                                    <constraint firstAttribute="height" constant="41" id="buv-Es-Rsx"/>
                                 </constraints>
                                 <state key="normal" title="Start">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -105,42 +192,45 @@
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="start:" destination="SVg-k3-jKv" eventType="touchUpInside" id="eIf-88-eLu"/>
+                                </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="通信ログ" translatesAutoresizingMaskIntoConstraints="NO" id="iDb-9c-gYu">
-                                <rect key="frame" x="20" y="198" width="560" height="333"/>
-                                <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZG-tI-ZHt">
-                                <rect key="frame" x="20" y="28" width="560" height="162"/>
+                                <rect key="frame" x="20" y="28" width="560" height="216"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="162" id="w7H-jl-3q4"/>
+                                    <constraint firstAttribute="height" constant="216" id="XFe-NR-4Pd"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="SVg-k3-jKv" id="0eO-sv-IJQ"/>
                                     <outlet property="delegate" destination="SVg-k3-jKv" id="wcD-CK-JMt"/>
                                 </connections>
                             </pickerView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bDc-Sl-kr4">
+                                <rect key="frame" x="20" y="252" width="560" height="279"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0z2-wt-EaZ" firstAttribute="trailing" secondItem="u4P-Dx-PKI" secondAttribute="trailingMargin" id="B0r-Ge-aTj"/>
-                            <constraint firstItem="iDb-9c-gYu" firstAttribute="trailing" secondItem="u4P-Dx-PKI" secondAttribute="trailingMargin" id="IbO-JN-l9u"/>
-                            <constraint firstItem="sZG-tI-ZHt" firstAttribute="trailing" secondItem="u4P-Dx-PKI" secondAttribute="trailingMargin" id="L17-bl-TvH"/>
-                            <constraint firstItem="sZG-tI-ZHt" firstAttribute="top" secondItem="kgt-vh-09Y" secondAttribute="bottom" constant="8" id="RZW-XK-tyi"/>
-                            <constraint firstItem="0z2-wt-EaZ" firstAttribute="leading" secondItem="u4P-Dx-PKI" secondAttribute="leadingMargin" id="U2v-sh-mMD"/>
-                            <constraint firstItem="iDb-9c-gYu" firstAttribute="leading" secondItem="u4P-Dx-PKI" secondAttribute="leadingMargin" id="WGX-T6-I2g"/>
-                            <constraint firstItem="sZG-tI-ZHt" firstAttribute="leading" secondItem="u4P-Dx-PKI" secondAttribute="leadingMargin" id="aUb-t7-d1n"/>
-                            <constraint firstItem="0z2-wt-EaZ" firstAttribute="top" secondItem="iDb-9c-gYu" secondAttribute="bottom" constant="8" id="hZN-Kn-1y2"/>
-                            <constraint firstItem="iDb-9c-gYu" firstAttribute="top" secondItem="sZG-tI-ZHt" secondAttribute="bottom" constant="8" id="odD-P9-vXX"/>
-                            <constraint firstItem="NdU-eL-Olu" firstAttribute="top" secondItem="0z2-wt-EaZ" secondAttribute="bottom" constant="20" id="qMW-1v-cfn"/>
+                            <constraint firstItem="sZG-tI-ZHt" firstAttribute="leading" secondItem="u4P-Dx-PKI" secondAttribute="leadingMargin" id="2ec-uP-WAy"/>
+                            <constraint firstItem="bDc-Sl-kr4" firstAttribute="leading" secondItem="u4P-Dx-PKI" secondAttribute="leadingMargin" id="F3q-MT-mEu"/>
+                            <constraint firstItem="bDc-Sl-kr4" firstAttribute="top" secondItem="sZG-tI-ZHt" secondAttribute="bottom" constant="8" id="IZr-j5-MeI"/>
+                            <constraint firstItem="sZG-tI-ZHt" firstAttribute="top" secondItem="kgt-vh-09Y" secondAttribute="bottom" constant="8" id="Kxb-Qn-8p2"/>
+                            <constraint firstItem="bDc-Sl-kr4" firstAttribute="trailing" secondItem="u4P-Dx-PKI" secondAttribute="trailingMargin" id="SLW-6H-ws2"/>
+                            <constraint firstItem="0z2-wt-EaZ" firstAttribute="top" secondItem="bDc-Sl-kr4" secondAttribute="bottom" constant="8" id="Soo-aH-zuy"/>
+                            <constraint firstItem="sZG-tI-ZHt" firstAttribute="trailing" secondItem="u4P-Dx-PKI" secondAttribute="trailingMargin" id="eLe-CA-f0u"/>
+                            <constraint firstItem="NdU-eL-Olu" firstAttribute="top" secondItem="0z2-wt-EaZ" secondAttribute="bottom" constant="20" id="fEl-dZ-n4I"/>
+                            <constraint firstItem="0z2-wt-EaZ" firstAttribute="trailing" secondItem="u4P-Dx-PKI" secondAttribute="trailingMargin" id="kUU-0f-eUh"/>
+                            <constraint firstItem="0z2-wt-EaZ" firstAttribute="leading" secondItem="u4P-Dx-PKI" secondAttribute="leadingMargin" id="v5N-Xh-IDI"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="logView" destination="bDc-Sl-kr4" id="liP-37-ZVD"/>
                         <outlet property="pickerView" destination="sZG-tI-ZHt" id="FHO-oS-2N6"/>
                     </connections>
                 </viewController>
@@ -263,7 +353,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bn7-Cu-8g0">
-                                <rect key="frame" x="20" y="20" width="560" height="511"/>
+                                <rect key="frame" x="20" y="20" width="560" height="216"/>
                                 <animations/>
                                 <connections>
                                     <outlet property="dataSource" destination="z3a-bi-bfy" id="xVl-c8-OgK"/>
@@ -293,7 +383,6 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="uCr-g3-mRO" firstAttribute="top" secondItem="Bn7-Cu-8g0" secondAttribute="bottom" constant="8" id="4Kc-tp-hqe"/>
                             <constraint firstItem="Bn7-Cu-8g0" firstAttribute="leading" secondItem="qgb-z7-UrF" secondAttribute="leadingMargin" id="Q0w-rY-Wwz"/>
                             <constraint firstItem="uCr-g3-mRO" firstAttribute="leading" secondItem="qgb-z7-UrF" secondAttribute="leadingMargin" id="dY9-tA-h3j"/>
                             <constraint firstItem="Bn7-Cu-8g0" firstAttribute="top" secondItem="BHH-4c-rw6" secondAttribute="bottom" id="fmh-r0-0Zf"/>

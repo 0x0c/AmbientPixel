@@ -13,6 +13,7 @@
 #import "Constant.h"
 #import "JGProgressHUD.h"
 #import "JTProgressHUD.h"
+#import "APPMHousingAPIGateway.h"
 
 @interface APPMSettingViewController ()
 
@@ -46,6 +47,8 @@
 	HUD.indicatorView = [JGProgressHUDSuccessIndicatorView new];
 	[HUD showInView:self.view];
 	[HUD dismissAfterDelay:3.0];
+	[APPMHousingAPIGateway sharedInstance].ipAddress = [[NSUserDefaults standardUserDefaults] stringForKey:kIpAddress];
+	[APPMHousingAPIGateway sharedInstance].port = [[NSUserDefaults standardUserDefaults] stringForKey:kPort];
 }
 
 - (IBAction)connect:(id)sender

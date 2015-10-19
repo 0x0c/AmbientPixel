@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "Ono.h"
+#import "APPMHousingAPIGateway.h"
+#import "Constant.h"
 
 @interface AppDelegate ()
 
@@ -20,6 +22,8 @@
 {
 	// Override point for customization after application launch.
 	self.masterPixel = [APPMPixel new];
+	[APPMHousingAPIGateway sharedInstance].ipAddress = [[NSUserDefaults standardUserDefaults] stringForKey:kIpAddress];
+	[APPMHousingAPIGateway sharedInstance].port = [[NSUserDefaults standardUserDefaults] stringForKey:kPort];
 	
 	return YES;
 }
