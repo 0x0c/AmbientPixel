@@ -8,7 +8,7 @@
 
 using namespace AmbientPixel;
 
-uint8_t device_id = 4; // 0b00000000 ~ 0b00000111まで上位3bitを使用
+uint8_t device_id = 2; // 0b00000000 ~ 0b00000111まで上位3bitを使用
 
 Pixel pixel(AmbientPixel::Pixel::Vertex::Triangle);
 
@@ -21,15 +21,19 @@ void setup()
 	pinMode(13, OUTPUT);
 	for(int i = 0; i < pixel.device_id; i++){
 		digitalWrite(13, HIGH);
-		delay(100);
+		delay(200);
 		digitalWrite(13, LOW);
-		delay(100);
+		delay(200);
 	}
 }
 
 int cnt = 0;
 void loop()
 {
+	digitalWrite(13, HIGH);
+	delay(20);
+	digitalWrite(13, LOW);
+	delay(20);
 	if(pixel.device_id > 0){
 		uint8_t data = pixel.watch(cnt);
 		if(data != 0) {
@@ -37,14 +41,23 @@ void loop()
 			digitalWrite(13, HIGH);
 			delay(20);
 			digitalWrite(13, LOW);
+			delay(320);
 		}
-		cnt = (cnt + 1) % 2;
+		// cnt = (cnt + 1) % 2;
 	}
 }
 
 void serialEvent()
 {
 	char data = Serial.read();
-	pixel.receive(0, data);
-	Serial.flush();
+	if((uint8_t)(data >> 5) > 0){
+		pixel.send(0, data);
+		delay(300);
+		pixel.send(1, data);
+		delay(300);
+		pixel.send(2, data);
+	}
+	else {
+		pixel.receive(0, data);
+	}
 }

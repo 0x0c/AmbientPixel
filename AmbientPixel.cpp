@@ -69,7 +69,7 @@ namespace AmbientPixel
 		AP_DEBUG_LOG(" , data : ");
 		AP_DEBUG_LOG_FMT(packet, BIN);
 		Port p = this->ports[port_no];
-		p.com->Send(255, packet);
+		p.com->Send((uint8_t)(packet >> 5), packet);
 		delay(50);
 	}
 
@@ -81,23 +81,12 @@ namespace AmbientPixel
 		AP_DEBUG_LOG(port_no);
 		AP_DEBUG_LOG(", data : ");
 		AP_DEBUG_LOG_FMT(data, BIN);
-		if ((uint8_t)(data >> 5) == this->device_id) {
-			// 自分宛てのパケット
-			this->change_led(data & 0b00011000, this->color_at_index((data << 5) >> 5));
-		}
-		else if (this->device_id == 0) {
-			// 自分宛てでないパケット
-			// フォワードする
-			AP_DEBUG_LOG(">> Forward to ");
-			this->send(0, data);
-			this->send(1, data);
-			this->send(2, data);
-		}
+		this->change_led(data & 0b00011000, this->color_at_index((data << 5) >> 5));
 	}
 
 	uint8_t Pixel::watch(uint8_t port_no) {
 		Port p = this->ports[port_no];
-		uint8_t data = p.com->Recive(255);
+		uint8_t data = p.com->Recive(this->device_id);
 		return data;
 	}
 

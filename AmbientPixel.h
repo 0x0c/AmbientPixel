@@ -8,6 +8,7 @@
 #include <skInfraredCOM.h>
 #include <Adafruit_NeoPixel.h>
 
+#define DEBUG 1
 #ifdef DEBUG
 #define AP_DEBUG_LOG(x) Serial.print(x)
 #define AP_DEBUG_LOG_LN(x) Serial.println(x)
