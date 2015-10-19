@@ -2,7 +2,7 @@
 SmartPixelはすでに同じ名前のサービスがあったのでAmbientPixelに改名
 ピクセルのメタファを持ち合わせる三角形のデバイス
 
-**Specification Version : 0.0.1**
+**Specification Version : 0.0.2**
 
 ## Requirements
 
@@ -15,8 +15,8 @@ SmartPixelはすでに同じ名前のサービスがあったのでAmbientPixel�
 
 - C++拡張
 	- [StandardCplusplus](https://github.com/0x0c/StandardCplusplus)
-- 赤外線通信ライブラリ
-	- [skInfraredCOM](http://www.geocities.jp/zattouka/GarageHouse/micon/InfraredCOM/InfraredCOM.htm)
+- 赤外線通信ライブラリ（修正版）
+	- [skInfraredCOM](https://github.com/0x0c/skInfraredCOM)
 - フルカラーLED制御ライブラリ
 	- [Adafruit_NeoPixel](https://github.com/adafruit/Adafruit_NeoPixel)
 	
@@ -66,25 +66,7 @@ Arduino Pro Mini 3.3V 8MHzとArduino Pro Mini 5.0V 16MHzが混在。もしかし
 
 ### 伝搬アルゴリズム
 
-`Docs/markdown/Packet.md`を参照
-
-受け取ったら2つのポートへとりあえずフォワードする。
-	
-## スケジュール
-- 筐体実装
-	- 8/17〜8/30(予備：8/30〜9/11)
-	- 回路設計完了（8/22）
-- 組み込みプログラム実装
-	- 8/17〜9/11(予備：9/4〜9/18)
-- アプリ実装
-	- 8/21〜9/11(予備：9/11〜9/25)
-- APIつなぎ込み
-	- 9/11〜10/2(予備：10/2〜10/13)
-- 全体つなぎ込み
-	- 10/2〜10/13
-
-- P板.com基板到着 9/1
-	- 増産はSwitch Science PCBでやりたい
+ブロードキャストし、デバイスIDが一致するデバイスが受理する
 
 ## デモアプリケーション
 
