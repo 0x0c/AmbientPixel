@@ -128,13 +128,13 @@ static NSArray<NSString *> *commands;
 		}
 		// 4, 5, 0, 1, 2, 3
 		NSArray *indexes = @[@(4), @(5), @(0), @(1), @(2), @(3)];
+		value = MIN(5 , value);
 		NSLog(@"%ld", (long)value);
-		value = MIN(8 , value);
 		for (NSInteger idx = 0; idx < value; idx++) {
 			NSNumber *i = indexes[idx];
 			[master send:[APPMPacket packetWithDestination:i.integerValue flag:APPMPatternFlagGlow color:self.color]];
 		}
-		for (NSInteger idx = value; idx < 8 - value; idx++) {
+		for (NSInteger idx = value; idx < 5 - value; idx++) {
 			NSNumber *i = indexes[idx];
 			[master send:[APPMPacket packetWithDestination:i.integerValue flag:APPMPatternFlagGlow color:APPMPatternColorOff]];
 		}
