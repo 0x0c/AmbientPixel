@@ -1,6 +1,8 @@
 # AmbientPixel a.k.a SmartPixel
 
-ピクセルのメタファを持ち合わせる三角形のデバイス
+ピクセルのメタファを持ち合わせる三角形のデバイス。
+
+ディスプレイのピクセルを一つ一つ取り出し、再構成することであなただけの情報提示装置として振る舞います。
 
 ![](https://raw.githubusercontent.com/0x0c/AmbientPixel/master/Asset/Image/DSC04137.jpg)
 
