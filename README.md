@@ -1,8 +1,8 @@
 # AmbientPixel a.k.a SmartPixel
-SmartPixelはすでに同じ名前のサービスがあったのでAmbientPixelに改名
+
 ピクセルのメタファを持ち合わせる三角形のデバイス
 
-**Specification Version : 0.0.2**
+![](https://raw.githubusercontent.com/0x0c/AmbientPixel/master/Asset/Image/DSC04137.jpg)
 
 ## Requirements
 
@@ -67,7 +67,3 @@ Arduino Pro Mini 3.3V 8MHzとArduino Pro Mini 5.0V 16MHzが混在。もしかし
 ### 伝搬アルゴリズム
 
 ブロードキャストし、デバイスIDが一致するデバイスが受理する
-
-## デモアプリケーション
-
-`Docs/markdown/Examples.md`を参照
