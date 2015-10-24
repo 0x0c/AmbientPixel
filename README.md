@@ -71,3 +71,8 @@ Arduino Pro Mini 3.3V 8MHzとArduino Pro Mini 5.0V 16MHzが混在。もしかし
 ### 伝搬アルゴリズム
 
 ブロードキャストし、デバイスIDが一致するデバイスが受理する
+
+
+## License
+
+GNU General Public License
