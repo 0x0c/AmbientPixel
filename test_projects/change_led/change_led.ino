@@ -38,7 +38,7 @@ void loop()
      unsigned char data;        // 受信した通知情報データ
 
      MyDeviceNo = 0x0a;
-     data= Infrared.Recive(MyDeviceNo); // 受信する
+     data= Infrared.Receive(MyDeviceNo); // 受信する
      if (data!= 0) {
           Serial.println(data, DEC) ;     // データを受信したのでＩＤＥに送信する
           // 受信したKeyNoに応じて色を変える

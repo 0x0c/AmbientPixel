@@ -16,7 +16,7 @@ void setup()
 }
 void loop()
 {
-	data= Infrared.Recive(0x0a);
+	data= Infrared.Receive(0x0a);
 	if (data!= 0) {
 		Serial.println(data, DEC);
 		switch(data % 3) {

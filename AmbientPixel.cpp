@@ -86,7 +86,7 @@ namespace AmbientPixel
 
 	uint8_t Pixel::watch(uint8_t port_no) {
 		Port p = this->ports[port_no];
-		uint8_t data = p.com->Recive(this->device_id);
+		uint8_t data = p.com->Receive(this->device_id);
 		return data;
 	}
 

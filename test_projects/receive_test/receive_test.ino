@@ -11,7 +11,7 @@ void setup()
 
 void loop()
 {
-	unsigned char data = Infrared.Recive(0x0a);
+	unsigned char data = Infrared.Receive(0x0a);
 	if (data!= 0) {
 		Serial.println(data, DEC);
 		switch(data % 3) {

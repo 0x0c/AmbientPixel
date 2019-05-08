@@ -137,7 +137,7 @@ namespace AmbientPixel
 		uint8_t _receive() {
 			// TODO:
 			// 受信したデータを_operationに応じてステートマシンを動かす
-			// return this->ir_port->Recive(this->device_id);
+			// return this->ir_port->Receive(this->device_id);
 			return 0;
 		}
 
